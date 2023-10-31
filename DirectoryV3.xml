@@ -8,4 +8,6 @@
      <tree path="/lib/http/http_api.dart" title="api"/>
      <tree path="/lib/http/net.dart" title="统一引用"/>
      <tree path="/pubspec.yaml" title="依赖管理"/>
+     <tree path="/lib/pages/Settings" title="设置"/>
+     <tree path="/lib/pages/Widget" title="组件"/>
  </trees>

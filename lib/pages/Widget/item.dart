@@ -166,8 +166,10 @@ class _itemState extends State<item> {
                                   softWrap: true,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: getStyle(Colors.black, 15.0,
-                                      bold: true))),
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold
+                                  ))),
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.only(left: 5),
