@@ -6,7 +6,7 @@ import 'package:item_news/pages/App.dart';
 
 void main() {
   runApp(const MyApp());
-  SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+  SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
   );
