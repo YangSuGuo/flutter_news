@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/lib/pages" title="页面"/>
+     <tree path="/lib/http" title="请求"/>
+     <tree path="/lib/http/dio_utils.dart" title="dio封装"/>
+     <tree path="/lib/http/error_handle.dart" title="错误封装"/>
+     <tree path="/lib/http/base_entity.dart" title="格式统一"/>
+     <tree path="/lib/http/http_api.dart" title="api"/>
+     <tree path="/lib/http/net.dart" title="统一引用"/>
+     <tree path="/pubspec.yaml" title="依赖管理"/>
+ </trees>

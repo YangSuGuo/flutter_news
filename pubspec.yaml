@@ -1,0 +1,44 @@
+name: item_news
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # icon图标
+  cupertino_icons: ^1.0.2
+  # 屏幕适配
+  flutter_screenutil: ^5.9.0
+  # 网络请求
+  dio: ^5.3.2
+  # 状态，路由，依赖管理
+  get: ^4.6.6
+  # 数据库
+  sqflite: ^2.3.0
+  # 持久化
+  shared_preferences: ^2.2.2
+  # 刷新
+  easy_refresh: ^3.3.2+1
+  # 轮播
+  card_swiper: ^3.0.1
+  # url跳转
+  url_launcher: ^6.1.14
+  # 视差
+  flutter_tilt: ^2.0.10
+  # 时间日期
+  intl: ^0.18.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
