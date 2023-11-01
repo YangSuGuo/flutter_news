@@ -10,4 +10,8 @@
      <tree path="/pubspec.yaml" title="依赖管理"/>
      <tree path="/lib/pages/Settings" title="设置"/>
      <tree path="/lib/pages/Widget" title="组件"/>
- </trees>
+     <tree path="/lib/pages/Widget/item.dart" title="列表"/>
+    <tree path="/lib/pages/Widget/PhotoViewSimpleScreen.dart" title="预览"/>
+    <tree path="/lib/db" title="数据库"/>
+    <tree path="/lib/pages/App.dart" title="应用主页"/>
+</trees>

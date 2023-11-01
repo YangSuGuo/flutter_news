@@ -57,7 +57,7 @@ class _itemState extends State<item> {
   }
 
   // 过去的知乎日报
-  // bug 在新旧交替时，可能会出现数据加载重复的问题【原因可能是数据没更新，或者时间没更新】
+  // bug 在新旧交替时，可能会出现数据加载重复的问题【原因可能是数据没更新，或者初始时间没更新】
   Future<List<Map<String, dynamic>>> _getOldList(DateTime date, int i) async {
     try {
       final formattedDate = DateFormat('yyyyMMdd').format(date);
@@ -65,6 +65,7 @@ class _itemState extends State<item> {
           .get(HttpApi.zhihu_oldList + '$formattedDate');
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
+
         final List<Map<String, dynamic>> items =
             data['stories'].cast<Map<String, dynamic>>();
         day = i++;
@@ -148,12 +149,7 @@ class _itemState extends State<item> {
             Expanded(
               child: SizedBox(
                   height: 108,
-                  child: Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    elevation: 0.0,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                    child: Padding(
+                  child: Padding(
                       padding: const EdgeInsets.only(top: 2, left: 3, right: 5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,22 +163,21 @@ class _itemState extends State<item> {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold
-                                  ))),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold))),
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.only(left: 5),
                               child: Text(item['hint'],
                                   softWrap: true,
                                   maxLines: 3,
-                                  style: getStyle(Colors.grey, 13.0)),
+                                  style: const TextStyle(color: Colors.grey,fontSize: 13.0)),
                             ),
                           ),
                         ],
                       ),
                     ),
-                  )),
+                  ),
             ),
             if (item['images'] != null && item['images'].isNotEmpty)
               Card(
@@ -194,19 +189,11 @@ class _itemState extends State<item> {
                   placeholder: 'assets/image/loading.gif',
                   image: item['images'][0],
                   fit: BoxFit.cover,
-                  width: 100,
-                  height: 100,
+                  width: 80,
+                  height: 80,
                 ),
               ),
           ],
         ));
-  }
-
-// 字体样式
-  TextStyle getStyle(Color color, double fontSize, {bool bold = false}) {
-    return TextStyle(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: bold ? FontWeight.bold : FontWeight.normal);
   }
 }

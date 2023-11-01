@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:item_news/pages/Widget/item.dart';
+
+import 'Settings/settings.dart';
 
 class app extends StatefulWidget {
   const app({super.key});
@@ -68,6 +71,7 @@ class _appState extends State<app> {
             child: IconButton(
               onPressed: () {
                 print('设置');
+                Get.to(const settings());
               },
               icon: const Icon(Icons.settings, size: 26),
               tooltip: '设置',
