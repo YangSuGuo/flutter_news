@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 ///白天模式
 ThemeData lightTheme = ThemeData.light().copyWith(
-  primaryColor: Colors.blue,
+  primaryColor: Colors.white,
   splashColor: Colors.white12,
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.dark,

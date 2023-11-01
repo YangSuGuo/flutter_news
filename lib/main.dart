@@ -29,6 +29,8 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeData.dark(),
             themeMode: ThemeMode.light,
             initialRoute: "/",
+            defaultTransition: Transition.cupertino,
+            transitionDuration: const Duration(milliseconds: 450),
             home: const app(),
             debugShowCheckedModeBanner: false,
           );
