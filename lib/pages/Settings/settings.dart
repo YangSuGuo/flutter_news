@@ -31,16 +31,13 @@ class _settingsState extends State<settings> {
       body: Settings(),
     );
   }
-
+  /// 标题栏
   AppBar _buildAppBar() {
     return AppBar(
       centerTitle: true,
       automaticallyImplyLeading: true,
       elevation: 0,
-      title: const Text(
-        '设置',
-        style: TextStyle(),
-      ),
+      title: const Text('设置'),
       backgroundColor:
           _value ? const Color.fromRGBO(48, 48, 48, 1) : Colors.white12,
       foregroundColor: _value ? Colors.white : Colors.black,
@@ -51,7 +48,7 @@ class _settingsState extends State<settings> {
       ),
     );
   }
-
+  /// 设置项
   Widget Settings() {
     return Column(
       children: [
@@ -115,7 +112,7 @@ class _settingsState extends State<settings> {
       ],
     );
   }
-
+  /// 设置子项
   ListTile _buildListTile(title, http) {
     return ListTile(
       trailing: const Icon(Icons.arrow_forward_ios, size: 20),

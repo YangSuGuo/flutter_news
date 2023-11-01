@@ -15,69 +15,74 @@ class app extends StatefulWidget {
 class _appState extends State<app> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Body()
-    );
+    return Scaffold(appBar: _buildAppbar(), body: Body());
   }
 
   /// Body
   Widget Body() {
     return Stack(
       children: [
-        Padding(padding: const EdgeInsets.only(top: 95), child: item()),
-        Header()
+        Padding(
+          padding: const EdgeInsets.only(top: 0),
+          child: item(),
+        ),
       ],
     );
   }
 
   /// 标题栏
-  Widget Header() {
-    DateTime dateTime = DateTime.now();
-    // String img = 'assets/image/ColinNeumannJr.png';
-    return Container(
-        margin: const EdgeInsets.only(top: 45, left: 10, right: 10, bottom: 10),
-        height: 50,
-        child: Row(children: [
-          Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      DateFormat('dd').format(dateTime),
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    Text(DateFormat('MM月').format(dateTime),
-                        style: const TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold)),
-                  ])),
-          const SizedBox(
-            width: 1,
-            height: 40,
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.grey),
-            ),
-          ),
-          const Padding(
-              padding: EdgeInsets.only(left: 15),
-              child: Text(
-                '知乎日报',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-              )),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
+  AppBar _buildAppbar() {
+    return AppBar(
+      elevation: 0,
+      leadingWidth: 60,
+      title: const Text('知乎日报',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
+      actions: [
+        Padding(
+            padding: const EdgeInsets.only(right: 20),
             child: IconButton(
-              onPressed: () {
-                print('设置');
-                Get.to(const settings());
-              },
+              onPressed: () => Get.to(const settings()),
               icon: const Icon(Icons.settings, size: 26),
               tooltip: '设置',
               splashColor: Colors.transparent,
-            ),
-          )
-        ]));
+            ))
+      ],
+      backgroundColor:
+          Get.isDarkMode ? Color.fromRGBO(48, 48, 48, 1) : Colors.white12,
+      foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
+      // leading: Header()
+      leading: leading_time(),
+    );
+  }
+
+  Widget leading_time() {
+    DateTime dateTime = DateTime.now();
+    return Row(
+      children: [
+        Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  DateFormat('dd').format(dateTime),
+                  style: const TextStyle(
+                      fontSize: 23, fontWeight: FontWeight.bold),
+                ),
+                Text(DateFormat('MM月').format(dateTime),
+                    style: const TextStyle(
+                        fontSize: 11, fontWeight: FontWeight.bold)),
+              ],
+            )),
+        const SizedBox(
+          width: 1,
+          height: 40,
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: Colors.grey),
+          ),
+        ),
+      ],
+    );
   }
 }
