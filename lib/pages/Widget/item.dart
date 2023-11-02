@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../http/net.dart';
-import 'body.dart';
+import '../Essay/essay.dart';
+// import 'body.dart';
 
 class item extends StatefulWidget {
   @override
@@ -53,7 +54,6 @@ class _itemState extends State<item> {
         print('数据为: $formattedDate');
         return items;
       } else {
-        showDialog(context: context, builder: (ctx) => dialog());
         throw Exception('加载数据失败');
       }
     } catch (e) {
@@ -78,7 +78,6 @@ class _itemState extends State<item> {
         print('数据为: $formattedDate');
         return items;
       } else {
-        showDialog(context: context, builder: (ctx) => dialog());
         throw Exception('加载数据失败');
       }
     } catch (e) {
@@ -92,6 +91,7 @@ class _itemState extends State<item> {
   }
 
   // bodyList
+  // bug 无网络时初始化失败无数据，下拉刷新失败
   Widget _buildList() {
     return EasyRefresh(
       header: const ClassicHeader(
@@ -110,23 +110,34 @@ class _itemState extends State<item> {
       ),
       onRefresh: () async {
         // 下拉刷新
-        final newItems = await _getList();
-        final oldItems = items.sublist(0, newItems.length);
-        // bug listEquals(oldItems, newItems) 比对结果错误
-        print(listEquals(oldItems, newItems));
-        if (!listEquals(oldItems, newItems)) {
-          items.removeRange(0, oldItems.length);
-          setState(() {
-            items.insertAll(0, newItems);
-          });
+        try{
+          final newItems = await _getList();
+          final oldItems = items.sublist(0, newItems.length);
+          // bug listEquals(oldItems, newItems) 比对结果错误
+          print(listEquals(oldItems, newItems));
+          if (!listEquals(oldItems, newItems)) {
+            items.removeRange(0, oldItems.length);
+            setState(() {
+              items.insertAll(0, newItems);
+            });
+          }
+        }catch(e){
+          showDialog(context: context, builder: (ctx) => dialog());
         }
+
       },
       onLoad: () async {
         // 上拉加载
-        final oldItems = await _getOldList(dateTime, day);
-        setState(() {
-          items.addAll(oldItems);
-        });
+        try{
+          final oldItems = await _getOldList(dateTime, day);
+          if (oldItems.isNotEmpty){
+            setState(() {
+              items.addAll(oldItems);
+            });
+          }
+        }catch(e){
+          showDialog(context: context, builder: (ctx) => dialog());
+        }
       },
       child: ListView.builder(
         itemCount: items.length,
@@ -147,6 +158,7 @@ class _itemState extends State<item> {
         behavior: HitTestBehavior.translucent,
         onTap: () {
           print('列表');
+          // Get.to(essay(), arguments: {'id': item['id']});
           Get.to(essay(), arguments: {'id': item['id']});
         },
         child: Row(
@@ -186,7 +198,7 @@ class _itemState extends State<item> {
                 ),
               ),
             ),
-            if (item['images'] != null && item['images'].isNotEmpty)
+            if (item['images'].isNotEmpty)
               Card(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 elevation: 0.0,
@@ -205,8 +217,7 @@ class _itemState extends State<item> {
   }
 
   Widget dialog() {
-    return
-      AlertDialog(
+    return AlertDialog(
         title: const Text('🚨无网络'),
         content: const Text('请检查网络是否连接！'),
         actions: [

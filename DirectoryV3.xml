@@ -17,4 +17,7 @@
     <tree path="/lib/pages/Widget/body.dart" title="旧文章"/>
     <tree path="/lib/themes" title="主题"/>
     <tree path="/analysis_options.yaml" title="代码检查"/>
+    <tree path="/lib/pages/Essay/Widget/_itemIconButton.dart" title="横向图标按钮"/>
+    <tree path="/lib/pages/Essay" title="文章"/>
+    <tree path="/lib/pages/Comments" title="评论"/>
 </trees>

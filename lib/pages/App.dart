@@ -9,6 +9,9 @@ import 'Settings/settings.dart';
 // todo 文章正文页面重写 ！！！
 // todo 主题切换优化 ！
 // todo 可选 轮播图组件实现 ！！
+// todo 可选 已读文章id存入数据库实现已读、未读状态管理
+// todo 可选 持久化主题状态
+// todo 文章列表显示日期
 class app extends StatefulWidget {
   const app({super.key});
 

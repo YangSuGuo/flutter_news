@@ -127,6 +127,7 @@ class _settingsState extends State<settings> {
     );
   }
 
+  /// 弹框
   Widget dialog() {
     return AlertDialog(
       title: const Text('是否退出应用！'),
