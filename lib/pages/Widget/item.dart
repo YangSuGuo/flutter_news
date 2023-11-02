@@ -26,14 +26,18 @@ class _itemState extends State<item> {
     InitialData();
   }
 
+  // 初始化数据 2天数据
   Future<void> InitialData() async {
     try {
       final newItems = await _getList();
+      final oldItems = await _getOldList(dateTime, day);
       setState(() {
         items.addAll(newItems);
+        items.addAll(oldItems);
       });
     } catch (e) {
       print('加载列表初始数据失败: $e');
+      showDialog(context: context, builder: (ctx) => dialog());
     }
   }
 
@@ -44,11 +48,12 @@ class _itemState extends State<item> {
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
         final List<Map<String, dynamic>> items =
-            data['stories'].cast<Map<String, dynamic>>();
+        data['stories'].cast<Map<String, dynamic>>();
         final formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
         print('数据为: $formattedDate');
         return items;
       } else {
+        showDialog(context: context, builder: (ctx) => dialog());
         throw Exception('加载数据失败');
       }
     } catch (e) {
@@ -67,12 +72,13 @@ class _itemState extends State<item> {
         final data = json.decode(response.data);
 
         final List<Map<String, dynamic>> items =
-            data['stories'].cast<Map<String, dynamic>>();
+        data['stories'].cast<Map<String, dynamic>>();
         day = i++;
         dateTime = date.subtract(Duration(days: i));
         print('数据为: $formattedDate');
         return items;
       } else {
+        showDialog(context: context, builder: (ctx) => dialog());
         throw Exception('加载数据失败');
       }
     } catch (e) {
@@ -137,7 +143,7 @@ class _itemState extends State<item> {
   // 列表
   Widget _getItem(Map<String, dynamic> item) {
     return GestureDetector(
-        // todo 也可以用点击事件 InkWell
+      // todo 也可以用点击事件 InkWell
         behavior: HitTestBehavior.translucent,
         onTap: () {
           print('列表');
@@ -148,36 +154,37 @@ class _itemState extends State<item> {
           children: [
             Expanded(
               child: SizedBox(
-                  height: 108,
-                  child: Padding(
-                      padding: const EdgeInsets.only(top: 2, left: 3, right: 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // 主要文本
-                        children: [
-                          Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 5, bottom: 5, left: 5),
-                              child: Text(item['title'],
-                                  softWrap: true,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold))),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(item['hint'],
-                                  softWrap: true,
-                                  maxLines: 3,
-                                  style: const TextStyle(color: Colors.grey,fontSize: 13.0)),
-                            ),
-                          ),
-                        ],
+                height: 108,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 2, left: 3, right: 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // 主要文本
+                    children: [
+                      Padding(
+                          padding:
+                          const EdgeInsets.only(top: 5, bottom: 5, left: 5),
+                          child: Text(item['title'],
+                              softWrap: true,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold))),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(item['hint'],
+                              softWrap: true,
+                              maxLines: 3,
+                              style: const TextStyle(
+                                  color: Colors.grey, fontSize: 13.0)),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
+                ),
+              ),
             ),
             if (item['images'] != null && item['images'].isNotEmpty)
               Card(
@@ -195,5 +202,19 @@ class _itemState extends State<item> {
               ),
           ],
         ));
+  }
+
+  Widget dialog() {
+    return
+      AlertDialog(
+        title: const Text('🚨无网络'),
+        content: const Text('请检查网络是否连接！'),
+        actions: [
+          TextButton(
+            child: const Text('确定'),
+            onPressed: () => Get.back(),
+          )
+        ],
+      );
   }
 }

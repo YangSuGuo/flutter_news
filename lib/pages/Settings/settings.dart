@@ -31,6 +31,7 @@ class _settingsState extends State<settings> {
       body: Settings(),
     );
   }
+
   /// 标题栏
   AppBar _buildAppBar() {
     return AppBar(
@@ -48,6 +49,7 @@ class _settingsState extends State<settings> {
       ),
     );
   }
+
   /// 设置项
   Widget Settings() {
     return Column(
@@ -61,7 +63,9 @@ class _settingsState extends State<settings> {
               Get.changeTheme(_value ? ThemeData.dark() : ThemeData.light());
             });
           },
-          secondary: _value ? const Icon(Icons.wb_sunny) : const Icon(Icons.nightlight_round),
+          secondary: _value
+              ? const Icon(Icons.wb_sunny)
+              : const Icon(Icons.nightlight_round),
           title: const Text('夜间模式'),
         ),
         const SizedBox(height: 5),
@@ -98,8 +102,9 @@ class _settingsState extends State<settings> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               onPressed: () {
                 print('点击退出');
+                showDialog(context: context, builder: (ctx) => dialog());
                 // Dart虚拟机立即终止运行
-                exit(0);
+                // exit(0);
               },
               child: const Text(
                 '退出应用',
@@ -112,12 +117,30 @@ class _settingsState extends State<settings> {
       ],
     );
   }
+
   /// 设置子项
   ListTile _buildListTile(title, http) {
     return ListTile(
       trailing: const Icon(Icons.arrow_forward_ios, size: 20),
       title: Text(title),
       onTap: () => LaunchInBrowser(Uri.parse(http)),
+    );
+  }
+
+  Widget dialog() {
+    return AlertDialog(
+      title: const Text('是否退出应用！'),
+      actions: [
+        TextButton(
+          child: const Text('取消'),
+          onPressed: () => Get.back(),
+        ),
+        TextButton(
+          child: const Text('确定'),
+          // Dart虚拟机立即终止运行
+          onPressed: () => exit(0),
+        )
+      ],
     );
   }
 }

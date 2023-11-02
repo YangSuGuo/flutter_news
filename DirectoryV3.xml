@@ -14,4 +14,7 @@
     <tree path="/lib/pages/Widget/PhotoViewSimpleScreen.dart" title="预览"/>
     <tree path="/lib/db" title="数据库"/>
     <tree path="/lib/pages/App.dart" title="应用主页"/>
+    <tree path="/lib/pages/Widget/body.dart" title="旧文章"/>
+    <tree path="/lib/themes" title="主题"/>
+    <tree path="/analysis_options.yaml" title="代码检查"/>
 </trees>

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -5,6 +6,9 @@ import 'package:item_news/pages/Widget/item.dart';
 
 import 'Settings/settings.dart';
 
+// todo 文章正文页面重写 ！！！
+// todo 主题切换优化 ！
+// todo 可选 轮播图组件实现 ！！
 class app extends StatefulWidget {
   const app({super.key});
 
@@ -15,19 +19,12 @@ class app extends StatefulWidget {
 class _appState extends State<app> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _buildAppbar(), body: Body());
-  }
-
-  /// Body
-  Widget Body() {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 0),
+    return Scaffold(
+        appBar: _buildAppbar(),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 5),
           child: item(),
-        ),
-      ],
-    );
+        ));
   }
 
   /// 标题栏
@@ -36,7 +33,7 @@ class _appState extends State<app> {
       elevation: 0,
       leadingWidth: 60,
       title: const Text('知乎日报',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
       actions: [
         Padding(
             padding: const EdgeInsets.only(right: 20),
@@ -44,17 +41,16 @@ class _appState extends State<app> {
               onPressed: () => Get.to(const settings()),
               icon: const Icon(Icons.settings, size: 26),
               tooltip: '设置',
-              splashColor: Colors.transparent,
             ))
       ],
       backgroundColor:
-          Get.isDarkMode ? Color.fromRGBO(48, 48, 48, 1) : Colors.white12,
+          Get.isDarkMode ? const Color.fromRGBO(48, 48, 48, 1) : Colors.white12,
       foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
-      // leading: Header()
       leading: leading_time(),
     );
   }
 
+  /// 日期显示
   Widget leading_time() {
     DateTime dateTime = DateTime.now();
     return Row(
