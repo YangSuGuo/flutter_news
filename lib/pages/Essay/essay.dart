@@ -118,7 +118,7 @@ class _essayState extends State<essay> {
                   itemIconButton(
                     icon: Icons.messenger_outline,
                     onPressed: () =>
-                        Get.to(comments_page(), arguments: {'id': items['id'],'comments': comments['comments']}),
+                        Get.to(comments_page(), arguments: {'id': items['id'],'comments': comments}),
                     data: comments['comments'].toString(),
                   ),
                   IconButton(

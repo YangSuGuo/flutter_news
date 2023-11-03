@@ -12,8 +12,8 @@ class HttpApi {
   static const String zhihu_comments_info = 'story-extra/';
 
   // 知乎日报 长评论 {id}
-  static const String zhihu_comments = 'story/{id}/long-comments';
+  static const String zhihu_comments = '/long-comments';
 
   // 知乎日报 短评论 {id}
-  static const String zhihu_short_comments = 'story/{id}/short-comments';
+  static const String zhihu_short_comments = '/short-comments';
 }

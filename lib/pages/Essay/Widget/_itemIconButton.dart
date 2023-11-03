@@ -5,12 +5,14 @@ class itemIconButton extends StatelessWidget {
     super.key,
     this.icon,
     this.onPressed,
-    this.data
+    this.data,
+    this.size
   });
 
   final IconData? icon;
   final VoidCallback? onPressed;
   final String? data;
+  final double? size;
 
   @override Widget build(BuildContext context) {
     return Row(
@@ -18,7 +20,7 @@ class itemIconButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         IconButton(
-          icon: Icon(icon),
+          icon: Icon(icon,size: size),
           onPressed: onPressed,
           splashColor: Colors.transparent,
         ),
