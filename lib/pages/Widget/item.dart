@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../http/net.dart';
-import '../Essay/essay.dart';
-// import 'body.dart';
+// import '../Essay/essay.dart';
+import 'body.dart';
 
 class item extends StatefulWidget {
   @override
@@ -158,8 +158,8 @@ class _itemState extends State<item> {
         behavior: HitTestBehavior.translucent,
         onTap: () {
           print('列表');
-          // Get.to(essay(), arguments: {'id': item['id']});
           Get.to(essay(), arguments: {'id': item['id']});
+          // Get.to(essay(), arguments: {'id': item['id']});
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
