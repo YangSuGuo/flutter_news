@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?> 
- <trees>
-     <tree path="/lib/pages" title="页面"/>
-     <tree path="/lib/http" title="请求"/>
-     <tree path="/lib/http/dio_utils.dart" title="dio封装"/>
-     <tree path="/lib/http/error_handle.dart" title="错误封装"/>
-     <tree path="/lib/http/base_entity.dart" title="格式统一"/>
-     <tree path="/lib/http/http_api.dart" title="api"/>
-     <tree path="/lib/http/net.dart" title="统一引用"/>
-     <tree path="/pubspec.yaml" title="依赖管理"/>
-     <tree path="/lib/pages/Settings" title="设置"/>
-     <tree path="/lib/pages/Widget" title="组件"/>
-     <tree path="/lib/pages/Widget/item.dart" title="列表"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<trees>
+    <tree path="/lib/pages" title="页面"/>
+    <tree path="/lib/http" title="请求"/>
+    <tree path="/lib/http/dio_utils.dart" title="dio封装"/>
+    <tree path="/lib/http/error_handle.dart" title="错误封装"/>
+    <tree path="/lib/http/base_entity.dart" title="格式统一"/>
+    <tree path="/lib/http/http_api.dart" title="api"/>
+    <tree path="/lib/http/net.dart" title="统一引用"/>
+    <tree path="/pubspec.yaml" title="依赖管理"/>
+    <tree path="/lib/pages/Settings" title="设置"/>
+    <tree path="/lib/pages/Widget" title="组件"/>
+    <tree path="/lib/pages/Widget/item.dart" title="列表"/>
     <tree path="/lib/pages/Widget/PhotoViewSimpleScreen.dart" title="预览"/>
     <tree path="/lib/db" title="数据库"/>
     <tree path="/lib/pages/App.dart" title="应用主页"/>
@@ -20,4 +20,6 @@
     <tree path="/lib/pages/Essay/Widget/_itemIconButton.dart" title="横向图标按钮"/>
     <tree path="/lib/pages/Essay" title="文章"/>
     <tree path="/lib/pages/Comments" title="评论"/>
+    <tree path="/assets/md" title="Md文档资源"/>
+    <tree path="/assets/image" title="项目资源"/>
 </trees>

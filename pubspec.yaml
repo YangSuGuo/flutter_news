@@ -47,4 +47,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets\image\loading.gif
-    - assets\image\ColinNeumannJr.png
+#    - assets\image\ColinNeumannJr.png  头像

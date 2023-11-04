@@ -5,9 +5,8 @@ import 'package:get/get.dart';
 import 'package:item_news/pages/App.dart';
 
 void main() {
-  // 显式调用
+  // 显式调用 webview
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(const MyApp());
   // 沉浸式状态栏
   SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
@@ -22,7 +21,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit( // 屏幕适配
+    return ScreenUtilInit(
+        // 屏幕适配
         designSize: const Size(750.0, 1334.0),
         minTextAdapt: true,
         splitScreenMode: true,

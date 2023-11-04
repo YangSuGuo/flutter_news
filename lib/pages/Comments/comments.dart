@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../../http/net.dart';
 import '../Essay/Widget/_itemIconButton.dart';
 
+// 文章评论接口请求渲染
+
 class comments_page extends StatefulWidget {
   const comments_page({super.key});
 
@@ -17,7 +19,7 @@ class _comments_pageState extends State<comments_page> {
   int id = 9766161; // 初始值 id
   Map<String, dynamic> comments = {}; // 评论额外信息
   List<Map<String, dynamic>> comments_info = []; // 长评论信息
-  List<Map<Map<String,dynamic>, dynamic>> short_comments_info = []; // 短评论信息
+  List<Map<Map<String, dynamic>, dynamic>> short_comments_info = []; // 短评论信息
 
   @override
   void initState() {
@@ -37,11 +39,12 @@ class _comments_pageState extends State<comments_page> {
   // 文章长评论信息
   Future<List<Map<String, dynamic>>> _getComments(int id) async {
     try {
-      final response = await DioUtils.instance.dio.get(HttpApi.zhihu_body + '$id'+ HttpApi.zhihu_comments);
+      final response = await DioUtils.instance.dio
+          .get(HttpApi.zhihu_body + '$id' + HttpApi.zhihu_comments);
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
         final List<Map<String, dynamic>> items =
-        data['comments'].cast<Map<String, dynamic>>();
+            data['comments'].cast<Map<String, dynamic>>();
         return items;
       } else {
         throw Exception('加载数据失败');
@@ -52,13 +55,15 @@ class _comments_pageState extends State<comments_page> {
   }
 
   // 文章长评论信息
-  Future<List<Map<Map<String,dynamic>, dynamic>>> _getShort_Comments(int id) async {
+  Future<List<Map<Map<String, dynamic>, dynamic>>> _getShort_Comments(
+      int id) async {
     try {
-      final response = await DioUtils.instance.dio.get(HttpApi.zhihu_body + '$id'+ HttpApi.zhihu_short_comments);
+      final response = await DioUtils.instance.dio
+          .get(HttpApi.zhihu_body + '$id' + HttpApi.zhihu_short_comments);
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
-        final List<Map<Map<String,dynamic>, dynamic>> items =
-        data['comments'].cast<Map<Map<String,dynamic>, dynamic>>();
+        final List<Map<Map<String, dynamic>, dynamic>> items =
+            data['comments'].cast<Map<Map<String, dynamic>, dynamic>>();
         return items;
       } else {
         throw Exception('加载数据失败');
@@ -100,15 +105,15 @@ class _comments_pageState extends State<comments_page> {
       // mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if(comments['long_comments'] != 0)
-        Padding(
-            padding: const EdgeInsets.only(left: 10, bottom: 0),
-            child: Text(
-              '${comments['long_comments']} 条长评',
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            )),
-        if(comments['long_comments'] != 0)
-        long_comments(),
+        if (comments['long_comments'] != 0)
+          Padding(
+              padding: const EdgeInsets.only(left: 10, bottom: 0),
+              child: Text(
+                '${comments['long_comments']} 条长评',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              )),
+        if (comments['long_comments'] != 0) long_comments(),
         Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
@@ -123,7 +128,8 @@ class _comments_pageState extends State<comments_page> {
   // 长评论
   Widget long_comments() {
     return Padding(
-        padding: const EdgeInsets.only(top: 5,left: 12.5,right: 12.5,bottom: 5),
+        padding:
+            const EdgeInsets.only(top: 5, left: 12.5, right: 12.5, bottom: 5),
         child: Column(
           children: [
             Row(

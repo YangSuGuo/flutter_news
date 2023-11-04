@@ -63,8 +63,10 @@ class DioUtils {
   }
 
   static final DioUtils _singleton = DioUtils._();
+
   static DioUtils get instance => DioUtils();
   static late Dio _dio;
+
   Dio get dio => _dio;
 
   Future<BaseEntity<T>> _request<T>(

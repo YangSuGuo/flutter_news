@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 
 import '../../../http/net.dart';
 import '../Essay/essay.dart';
-// import 'body.dart';
 
 class item extends StatefulWidget {
   @override
@@ -49,7 +48,7 @@ class _itemState extends State<item> {
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
         final List<Map<String, dynamic>> items =
-        data['stories'].cast<Map<String, dynamic>>();
+            data['stories'].cast<Map<String, dynamic>>();
         final formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
         print('数据为: $formattedDate');
         return items;
@@ -67,12 +66,12 @@ class _itemState extends State<item> {
     try {
       final formattedDate = DateFormat('yyyyMMdd').format(date);
       final response = await DioUtils.instance.dio
-          .get(HttpApi.zhihu_oldList + '$formattedDate');
+          .get('${HttpApi.zhihu_oldList}$formattedDate');
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
 
         final List<Map<String, dynamic>> items =
-        data['stories'].cast<Map<String, dynamic>>();
+            data['stories'].cast<Map<String, dynamic>>();
         day = i++;
         dateTime = date.subtract(Duration(days: i));
         print('数据为: $formattedDate');
@@ -92,6 +91,7 @@ class _itemState extends State<item> {
 
   // bodyList
   // bug 无网络时初始化失败无数据，下拉刷新失败
+  // bug 无网络时初始化失败，上拉刷新成功，下拉刷新会将上拉刷新的覆盖【 items.removeRange(0, oldItems.length) 】
   Widget _buildList() {
     return EasyRefresh(
       header: const ClassicHeader(
@@ -110,7 +110,7 @@ class _itemState extends State<item> {
       ),
       onRefresh: () async {
         // 下拉刷新
-        try{
+        try {
           final newItems = await _getList();
           final oldItems = items.sublist(0, newItems.length);
           // bug listEquals(oldItems, newItems) 比对结果错误
@@ -121,21 +121,20 @@ class _itemState extends State<item> {
               items.insertAll(0, newItems);
             });
           }
-        }catch(e){
+        } catch (e) {
           showDialog(context: context, builder: (ctx) => dialog());
         }
-
       },
       onLoad: () async {
         // 上拉加载
-        try{
+        try {
           final oldItems = await _getOldList(dateTime, day);
-          if (oldItems.isNotEmpty){
+          if (oldItems.isNotEmpty) {
             setState(() {
               items.addAll(oldItems);
             });
           }
-        }catch(e){
+        } catch (e) {
           showDialog(context: context, builder: (ctx) => dialog());
         }
       },
@@ -154,12 +153,11 @@ class _itemState extends State<item> {
   // 列表
   Widget _getItem(Map<String, dynamic> item) {
     return GestureDetector(
-      // todo 也可以用点击事件 InkWell
         behavior: HitTestBehavior.translucent,
         onTap: () {
           print('列表');
           // Get.to(essay(), arguments: {'id': item['id']});
-          Get.to(essay(), arguments: {'id': item['id'],'url': item['url']});
+          Get.to(essay(), arguments: {'id': item['id'], 'url': item['url']});
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,7 +173,7 @@ class _itemState extends State<item> {
                     children: [
                       Padding(
                           padding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 5),
+                              const EdgeInsets.only(top: 5, bottom: 5, left: 5),
                           child: Text(item['title'],
                               softWrap: true,
                               maxLines: 2,
@@ -218,14 +216,14 @@ class _itemState extends State<item> {
 
   Widget dialog() {
     return AlertDialog(
-        title: const Text('🚨无网络'),
-        content: const Text('请检查网络是否连接！'),
-        actions: [
-          TextButton(
-            child: const Text('确定'),
-            onPressed: () => Get.back(),
-          )
-        ],
-      );
+      title: const Text('🚨无网络'),
+      content: const Text('请检查网络是否连接！'),
+      actions: [
+        TextButton(
+          child: const Text('确定'),
+          onPressed: () => Get.back(),
+        )
+      ],
+    );
   }
 }

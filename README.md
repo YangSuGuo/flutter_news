@@ -22,6 +22,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 ```
 
 ## 项目插件
+
 ```dart
 # icon图标
 cupertino_icons: ^1.0.2
@@ -52,23 +53,30 @@ getwidget: ^2.0.4
 # Html【稳定版】与依赖 easy_refresh 冲突（两个svg插件版本不同）
 flutter_html: ^3.0.0-beta.2
 flutter_html_svg: ^3.0.0-beta.2
-#  flutter_html_math: ^3.0.0-beta.2
-#  flutter_html_video: ^3.0.0-beta.2
-flutter_html_table: ^3.0.0-beta.2
+# flutter_html_math: ^3.0.0-beta.2
+# flutter_html_video: ^3.0.0-beta.2
+flutter_html_table:
+^
+3.0
+.0
+-
+beta
+.2
 ```
-
 
 ## 首页
 
 ![S31103-12455591_com.example.item_news](assets/md/S31103-12455591_com.example.item_news.png)
 
 ## 设置页
+
 ![S31103-12472530_com.example.item_news](assets/md/S31103-12460666_com.example.item_news.png)
 
 ## 评论页
 
 ![S31103-12472530_com.example.item_news](assets/md/S31103-12472530_com.example.item_news.png)
 
-## 文章详情页【旧.会重写】
+## 文章详情页
 
-![S31103-12455591_com.example.item_news](assets/md/S31103-12505416_com.example.item_news.png)
+![S31103-12455591_com.example.item_news](assets/md/tmp_1059964480_S31104-17310627_com.example.item_n.png)
+![S31103-12455591_com.example.item_news](assets/md/tmp_1059984552_S31104-17312917_com.example.item_n.png)
