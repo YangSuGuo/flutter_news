@@ -18,31 +18,24 @@ dependencies:
   dio: ^5.3.2
   # 状态，路由，依赖管理
   get: ^4.6.6
-  # 数据库
-  sqflite: ^2.3.0
-  # 持久化
-  shared_preferences: ^2.2.2
+  # 数据库【目前没用】
+#  sqflite: ^2.3.0
+  # 持久化【目前没用】
+#  shared_preferences: ^2.2.2
   # 刷新
   easy_refresh: ^3.3.2+1
-  # 轮播
-  card_swiper: ^3.0.1
+  # 轮播【目前没用】
+#  card_swiper: ^3.0.1
   # url跳转
   url_launcher: ^6.1.14
+  # webview flutter实现
+  flutter_inappwebview: ^5.8.0
   # 视差
   flutter_tilt: ^2.0.10
   # 时间日期
   intl: ^0.18.1
-  # 预览
-  photo_view: ^0.14.0
-  # ui
+  # ui 【可以移除，只用到加载组件】
   getwidget: ^2.0.4
-  # Html【稳定版】与依赖 easy_refresh 冲突（两个svg插件版本不同）
-  flutter_html: ^3.0.0-beta.2
-  flutter_html_svg: ^3.0.0-beta.2
-  #  flutter_html_math: ^3.0.0-beta.2
-  #  flutter_html_video: ^3.0.0-beta.2
-  flutter_html_table: ^3.0.0-beta.2
-
 
 dev_dependencies:
   flutter_test:

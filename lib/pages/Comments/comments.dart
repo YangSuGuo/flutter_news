@@ -16,7 +16,7 @@ class comments_page extends StatefulWidget {
 class _comments_pageState extends State<comments_page> {
   int id = 9766161; // 初始值 id
   Map<String, dynamic> comments = {}; // 评论额外信息
-  List<Map<Map<String,dynamic>, dynamic>> comments_info = []; // 长评论信息
+  List<Map<String, dynamic>> comments_info = []; // 长评论信息
   List<Map<Map<String,dynamic>, dynamic>> short_comments_info = []; // 短评论信息
 
   @override
@@ -24,21 +24,24 @@ class _comments_pageState extends State<comments_page> {
     super.initState();
     comments = Get.arguments["comments"];
     id = Get.arguments["id"];
+    print("获取传值:${Get.arguments["id"]}");
+    final comments_item = _getComments(id);
     // setState(() {
-    //   comments_info = _getComments(id) as List<Map<Map<String, dynamic>, dynamic>>;
-    //   short_comments_info = _getShort_Comments(id) as List<Map<Map<String, dynamic>, dynamic>>;
+    //   comments_info.addAll(comments_item);
     // });
-    print(comments_info);
+    // print(id);
+    // print(comments_item.toString());
+    // debugPrint(comments_item.toString()));
   }
 
   // 文章长评论信息
-  Future<List<Map<Map<String,dynamic>, dynamic>>> _getComments(int id) async {
+  Future<List<Map<String, dynamic>>> _getComments(int id) async {
     try {
       final response = await DioUtils.instance.dio.get(HttpApi.zhihu_body + '$id'+ HttpApi.zhihu_comments);
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
-        final List<Map<Map<String,dynamic>, dynamic>> items =
-        data['comments'].cast<Map<Map<String,dynamic>, dynamic>>();
+        final List<Map<String, dynamic>> items =
+        data['comments'].cast<Map<String, dynamic>>();
         return items;
       } else {
         throw Exception('加载数据失败');

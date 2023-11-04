@@ -5,7 +5,11 @@ import 'package:get/get.dart';
 import 'package:item_news/pages/App.dart';
 
 void main() {
+  // 显式调用
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
+  // 沉浸式状态栏
   SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,

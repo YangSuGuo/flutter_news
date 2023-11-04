@@ -12,6 +12,8 @@ import 'Settings/settings.dart';
 // todo 可选 已读文章id存入数据库实现已读、未读状态管理
 // todo 可选 持久化主题状态
 // todo 文章列表显示日期
+// todo 弹框提示封装组件
+
 class app extends StatefulWidget {
   const app({super.key});
 
