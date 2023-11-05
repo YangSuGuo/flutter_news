@@ -2,6 +2,11 @@
 
 A new Flutter project.
 
+## 知乎日报 api分析
+@ 作者：wzjhoutai
+
+https://www.cnblogs.com/wzjhoutai/p/7297445.html
+
 ## 项目版本
 
 ```
@@ -46,22 +51,8 @@ url_launcher: ^6.1.14
 flutter_tilt: ^2.0.10
 # 时间日期
 intl: ^0.18.1
-# 预览
-photo_view: ^0.14.0
 # ui
 getwidget: ^2.0.4
-# Html【稳定版】与依赖 easy_refresh 冲突（两个svg插件版本不同）
-flutter_html: ^3.0.0-beta.2
-flutter_html_svg: ^3.0.0-beta.2
-# flutter_html_math: ^3.0.0-beta.2
-# flutter_html_video: ^3.0.0-beta.2
-flutter_html_table:
-^
-3.0
-.0
--
-beta
-.2
 ```
 
 ## 首页

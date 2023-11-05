@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:item_news/pages/Widget/item.dart';
+import 'package:item_news/pages/Item/item.dart';
 
 import 'Settings/settings.dart';
 
@@ -12,6 +12,7 @@ import 'Settings/settings.dart';
 // todo 可选 持久化主题状态
 // todo 文章列表显示日期
 // todo 弹框提示封装组件
+// todo 将网络层分离至http_api
 
 class app extends StatefulWidget {
   const app({super.key});
