@@ -22,4 +22,5 @@
     <tree path="/lib/pages/Comments" title="评论"/>
     <tree path="/assets/md" title="Md文档资源"/>
     <tree path="/assets/image" title="项目资源"/>
+    <tree path="/lib/pages/Item" title="列表"/>
 </trees>
