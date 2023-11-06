@@ -24,6 +24,8 @@ dependencies:
 #  shared_preferences: ^2.2.2
   # 刷新
   easy_refresh: ^3.3.2+1
+  # 分享
+  share_plus: ^7.2.1
   # 轮播【目前没用】
 #  card_swiper: ^3.0.1
   # url跳转

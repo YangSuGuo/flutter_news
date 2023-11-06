@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../http/net.dart';
 import '../Comments/comments.dart';
@@ -188,7 +189,9 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                   // todo 分享功能实现
                   IconButton(
                     icon: const Icon(Icons.share_rounded),
-                    onPressed: () => Get.back(),
+                    onPressed: () {
+                      Share.share('https://daily.zhihu.com/story/$id');
+                    },
                   ),
                 ],
               ),

@@ -194,7 +194,8 @@ class _comments_pageState extends State<comments_page> {
                       icon: const Icon(
                         Icons.short_text_rounded,
                         size: 30,
-                      )),
+                      ),
+                      splashColor: Colors.transparent),
                 )
               ],
             ),
@@ -210,8 +211,9 @@ class _comments_pageState extends State<comments_page> {
               Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: Container(
+                      width: MediaQuery.of(context).size.width - 40, // 适配屏幕不同宽度
                       padding: const EdgeInsets.only(
-                          top: 5, left: 5, right: 5, bottom: 5),
+                          top: 5, left: 5, right: 6, bottom: 6),
                       decoration: const BoxDecoration(
                           color: Color.fromRGBO(222, 222, 222, 1),
                           borderRadius: BorderRadius.all(Radius.circular(6))),
@@ -225,7 +227,9 @@ class _comments_pageState extends State<comments_page> {
                               children: [
                                 TextSpan(
                                     text: comments['reply_to']['content'],
-                                    style: const TextStyle(color: Colors.black,fontWeight: FontWeight.normal))
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal))
                               ])))),
             // 评论时间
             Row(
