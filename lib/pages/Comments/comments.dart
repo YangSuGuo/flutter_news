@@ -90,20 +90,19 @@ class _comments_pageState extends State<comments_page> {
     );
   }
 
+  /// 评论区
   Widget _buildComments() {
     return ListView(children: [
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (comments['long_comments'] != 0) _buildLong_Comments(),
-          if (comments['short_comments'] != 0) _buildShort_Comments()
-        ],
-      )
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        if (comments['long_comments'] != 0) _buildLong_Comments(),
+        if (comments['short_comments'] != 0) _buildShort_Comments()
+      ])
     ]);
   }
 
-  /// 长评论
+  // 长评论
   Widget _buildLong_Comments() {
+    // 异步加载
     return FutureBuilder<List<dynamic>>(
       future: _getComments(id),
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
@@ -127,8 +126,7 @@ class _comments_pageState extends State<comments_page> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: Long_Comments.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Map<String, dynamic> comment = Long_Comments[index];
-                  return comments_widget(comment);
+                  return comments_widget(Long_Comments[index]);
                 },
               ),
             ],
@@ -138,7 +136,7 @@ class _comments_pageState extends State<comments_page> {
     );
   }
 
-  /// 短评论
+  // 短评论
   Widget _buildShort_Comments() {
     return FutureBuilder<List<dynamic>>(
       future: _getShort_Comments(id),
@@ -163,8 +161,7 @@ class _comments_pageState extends State<comments_page> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: shortComments.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Map<String, dynamic> comment = shortComments[index];
-                  return comments_widget(comment);
+                  return comments_widget(shortComments[index]);
                 },
               ),
             ],
@@ -183,18 +180,21 @@ class _comments_pageState extends State<comments_page> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // '评论人',
+            // 评论人,
             Row(
               children: [
                 Text(comments['author'],
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 const Spacer(),
                 SizedBox(
                   width: 43,
                   height: 43,
                   child: IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.short_text_rounded,size: 30,)),
+                      icon: const Icon(
+                        Icons.short_text_rounded,
+                        size: 30,
+                      )),
                 )
               ],
             ),
@@ -207,28 +207,26 @@ class _comments_pageState extends State<comments_page> {
             ),
             if (comments['reply_to'] != null)
               // 回复
-              Container(
-                padding:
-                    const EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5),
-                decoration: const BoxDecoration(
-                    color: Colors.black12,
-                    borderRadius: BorderRadius.all(Radius.circular(6))),
-                child: Row(
-                  children: [
-                    Text(
-                      comments['reply_to']['author'] + '︰',
-                      softWrap: true,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    // todo 文本换行
-                    Text(
-                      comments['reply_to']['content'],
-                      softWrap: true,
-                    ),
-                  ],
-                ),
-              ),
-
+              Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Container(
+                      padding: const EdgeInsets.only(
+                          top: 5, left: 5, right: 5, bottom: 5),
+                      decoration: const BoxDecoration(
+                          color: Color.fromRGBO(222, 222, 222, 1),
+                          borderRadius: BorderRadius.all(Radius.circular(6))),
+                      child: RichText(
+                          softWrap: true,
+                          text: TextSpan(
+                              text: comments['reply_to']['author'] + '︰',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                              children: [
+                                TextSpan(
+                                    text: comments['reply_to']['content'],
+                                    style: const TextStyle(color: Colors.black,fontWeight: FontWeight.normal))
+                              ])))),
             // 评论时间
             Row(
               children: [

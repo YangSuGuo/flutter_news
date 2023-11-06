@@ -19,11 +19,18 @@ class essay extends StatefulWidget {
   State<essay> createState() => _essayState();
 }
 
-class _essayState extends State<essay> {
+class _essayState extends State<essay> with SingleTickerProviderStateMixin {
+  /// 文章
   Map<String, dynamic> items = {}; // 文章正文
   Map<String, dynamic> comments = {}; // 评论信息
   int id = 9766161; // 初始值 id
+  // 按钮
+  bool stars = false;
+  /// 旋转动画
+  late final AnimationController _ctrl =
+      AnimationController(vsync: this, duration: const Duration(seconds: 1));
 
+  /// 浏览器
   final urlController = TextEditingController();
   final GlobalKey webViewKey = GlobalKey();
   InAppWebViewController? webViewController;
@@ -68,13 +75,12 @@ class _essayState extends State<essay> {
   Future<void> _getComments(int id) async {
     try {
       final response =
-          await DioUtils.instance.dio.get(HttpApi.zhihu_comments_info + '$id');
+          await DioUtils.instance.dio.get('${HttpApi.zhihu_comments_info}$id');
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
         setState(() {
           comments = data;
         });
-
         print('获取评论数据成功');
       } else {
         throw Exception('获取评论数据失败');
@@ -96,7 +102,7 @@ class _essayState extends State<essay> {
         padding: const EdgeInsets.only(top: 35),
         child:
             // 用于添加集成到 flutter widget 树中的内联原生 WebView
-            // 应该是解析转换为widget
+            // 应该是解析转换为widget,根据图片与文字的间隙看出，
             InAppWebView(
           key: webViewKey,
           initialUrlRequest:
@@ -149,24 +155,37 @@ class _essayState extends State<essay> {
                     icon: Icons.messenger_outline,
                     onPressed: () {
                       if (comments['comments'] != 0) {
-                        Get.to(comments_page(),
+                        Get.to(const comments_page(),
                             arguments: {'id': id, 'comments': comments});
                       }
                     },
                     data: comments['comments'].toString(),
                   ),
+                  // 收藏动画
                   IconButton(
                       icon: const Icon(
                         Icons.star_border_rounded,
                         size: 28,
                       ),
-                      onPressed: () => Get.back()),
-                  IconButton(
-                    icon: const Icon(Icons.loop),
-                    onPressed: () {
-                      webViewController?.reload();
-                    },
-                  ),
+                      // isSelected: stars,
+                      // selectedIcon: const Icon(Icons.star,size: 28,color: Colors.amber),
+                      // highlightColor: Colors.amber,
+                      // color: stars? Colors.black : Colors.amber ,
+                      onPressed: () {
+                        stars = !stars;
+                      }),
+                  // 刷新按钮
+                  RotationTransition(
+                      turns:
+                          CurvedAnimation(parent: _ctrl, curve: Curves.linear),
+                      child: IconButton(
+                        icon: const Icon(Icons.loop),
+                        onPressed: () {
+                          _ctrl.forward(from: 0);
+                          webViewController?.reload();
+                        },
+                      )),
+                  // todo 分享功能实现
                   IconButton(
                     icon: const Icon(Icons.share_rounded),
                     onPressed: () => Get.back(),
