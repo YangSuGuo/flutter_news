@@ -32,6 +32,7 @@ dependencies:
   url_launcher: ^6.1.14
   # webview flutter实现
   flutter_inappwebview: ^5.8.0
+#  flutter_inappwebview: ^6.0.0-beta.25
   # 视差
   flutter_tilt: ^2.0.10
   # 时间日期

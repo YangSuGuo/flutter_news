@@ -13,7 +13,7 @@ import 'Widget/_itemIconButton.dart';
 
 // bug 在无网络的情况下，会持续进行加载页面，中间打开网络并不会更新状态，需要持续接口请求
 // todo 去除文章页面的打开app广告
-// todo 点击刷新按钮时，旋转动画
+// todo 分离页面视图层
 
 class essay extends StatefulWidget {
   @override
@@ -27,19 +27,44 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   int id = 9766161; // 初始值 id
   // 按钮
   bool stars = false;
+
   /// 旋转动画
   late final AnimationController _ctrl =
       AnimationController(vsync: this, duration: const Duration(seconds: 1));
 
   /// 浏览器
+  /// todo js更改属性 data-theme="dark" 即为夜间模式
+  /// bug BLUETOOTH_CONNECT permission is missing.
+  /// bug setForceDark() is a no-op in an app with targetSdkVersion>=T
+  /// bug Application attempted to call on a destroyed WebView【webview 版本 111.0.5563.116（556311633）】
   final urlController = TextEditingController();
   final GlobalKey webViewKey = GlobalKey();
   InAppWebViewController? webViewController;
   late PullToRefreshController pullToRefreshController;
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
       crossPlatform: InAppWebViewOptions(
-        useShouldOverrideUrlLoading: true,
+        // 自动播放媒体
         mediaPlaybackRequiresUserGesture: false,
+        // js
+        javaScriptEnabled: true,
+        // 去垂直滚动
+        verticalScrollBarEnabled: false,
+        // 背景透明
+        transparentBackground: false,
+        // 清缓存
+        clearCache: true,
+        // 去广告
+        // 根据 CSS选择器 ,设置display：none 【CSS_DISPLAY_NONE】
+        /// **NOTE**: on Android, JavaScript must be enabled!!!
+        contentBlockers: [
+          ContentBlocker(
+              trigger: ContentBlockerTrigger(urlFilter: ".*"),
+              action: ContentBlockerAction(
+                  type: ContentBlockerActionType.CSS_DISPLAY_NONE,
+                  selector: '.Daily,.view-more'
+              )
+          )
+        ],
       ),
       android: AndroidInAppWebViewOptions(
         useHybridComposition: true,
