@@ -24,8 +24,6 @@ dependencies:
 #  shared_preferences: ^2.2.2
   # 路径
   path_provider: ^2.1.1
-  # APP 图标
-  flutter_launcher_icons: ^0.13.1
   # 刷新
   easy_refresh: ^3.3.2+1
   # 分享
@@ -36,19 +34,22 @@ dependencies:
   url_launcher: ^6.1.14
   # webview flutter实现
   flutter_inappwebview: ^5.8.0
-#  flutter_inappwebview: ^6.0.0-beta.25
   # 视差
-  flutter_tilt: ^2.0.10
+#  flutter_tilt: ^2.0.10
   # 时间日期
   intl: ^0.18.1
   # ui 【可以移除，只用到加载组件】
   getwidget: ^2.0.4
 
+# 开发环境
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+
+  # APP 图标
+  flutter_launcher_icons: ^0.13.1
 
 flutter_launcher_icons:
   android: "icon"

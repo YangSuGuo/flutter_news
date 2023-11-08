@@ -159,7 +159,7 @@ packages:
     source: hosted
     version: "5.8.0"
   flutter_launcher_icons:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_launcher_icons
       sha256: "526faf84284b86a4cb36d20a5e45147747b7563d921373d4ee0559c54fcdbcea"
@@ -187,14 +187,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_tilt:
-    dependency: "direct main"
-    description:
-      name: flutter_tilt
-      sha256: "4e9e2c79fd3e495c2c147fb7c404a10c9db2429b56dfc9b033ff89f89536a353"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.0.10"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -400,22 +392,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.7.3"
-  sensors_plus:
-    dependency: transitive
-    description:
-      name: sensors_plus
-      sha256: a1e461f28a8e8d3f81feb07d5c4e87e948379ea91f0b5131266bb79f72b38acb
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.1.0"
-  sensors_plus_platform_interface:
-    dependency: transitive
-    description:
-      name: sensors_plus_platform_interface
-      sha256: "95f0cc08791b8bf0c41c5fa99c84be2a7d5bf60a811ddc17e1438b1e68caf0d3"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.1.3"
   share_plus:
     dependency: "direct main"
     description:
@@ -485,14 +461,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
-  stream_transform:
-    dependency: transitive
-    description:
-      name: stream_transform
-      sha256: "14a00e794c7c11aa145a170587321aedce29769c08d7f58b1d141da75e3b1c6f"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.1.0"
   string_scanner:
     dependency: transitive
     description:
