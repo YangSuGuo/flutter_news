@@ -24,6 +24,8 @@ dependencies:
 #  shared_preferences: ^2.2.2
   # 路径
   path_provider: ^2.1.1
+  # APP 图标
+  flutter_launcher_icons: ^0.13.1
   # 刷新
   easy_refresh: ^3.3.2+1
   # 分享
@@ -48,8 +50,14 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
 
+flutter_launcher_icons:
+  android: "icon"
+  ios: false
+  image_path: "assets/daily.zhihu-1024x1024.png"
+  min_sdk_android: 21
+
 flutter:
   uses-material-design: true
   assets:
     - assets\image\loading.gif
-#    - assets\image\ColinNeumannJr.png  头像
+    - assets\daily.zhihu-1024x1024.png
