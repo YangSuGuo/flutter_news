@@ -206,7 +206,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                       ),
                       color: Get.isDarkMode
                           ? (stars ? Colors.deepOrange : Colors.white) // 夜间模式
-                          : (stars ? Colors.black : Colors.deepOrange), // 日间模式
+                          : (stars ? Colors.deepOrange : Colors.black), // 日间模式
                       onPressed: () {
                         setState(() {
                           stars = !stars;
