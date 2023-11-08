@@ -7,8 +7,6 @@ import 'package:intl/intl.dart';
 import '../../http/net.dart';
 import '../Essay/Widget/_itemIconButton.dart';
 
-// 文章评论接口请求渲染
-
 class comments_page extends StatefulWidget {
   const comments_page({super.key});
 

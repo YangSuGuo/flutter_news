@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -12,8 +13,7 @@ import '../Comments/comments.dart';
 import 'Widget/_itemIconButton.dart';
 
 // bug 在无网络的情况下，会持续进行加载页面，中间打开网络并不会更新状态，需要持续接口请求
-// todo 去除文章页面的打开app广告
-// todo 分离页面视图层
+// todo 分离操作列表
 
 class essay extends StatefulWidget {
   @override
@@ -25,16 +25,17 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   Map<String, dynamic> items = {}; // 文章正文
   Map<String, dynamic> comments = {}; // 评论信息
   int id = 9766161; // 初始值 id
-  // 按钮
-  bool stars = false;
+  bool end = true; // 加载状态
+  bool stars = false; // 收藏
 
   /// 旋转动画
   late final AnimationController _ctrl =
       AnimationController(vsync: this, duration: const Duration(seconds: 1));
 
   /// 浏览器
-  /// todo js更改属性 data-theme="dark" 即为夜间模式
-  /// bug BLUETOOTH_CONNECT permission is missing.
+  /// todo 添加加载图，增加用户体验，优化用户使用，避免闪屏！！！！！！超级重要
+  /// js更改属性 data-theme="dark" 即为夜间模式（<html class="itcauecng" data-theme="dark">）,
+  /// bug BLUETOOTH_CONNECT permission is missing
   /// bug setForceDark() is a no-op in an app with targetSdkVersion>=T
   /// bug Application attempted to call on a destroyed WebView【webview 版本 111.0.5563.116（556311633）】
   final urlController = TextEditingController();
@@ -47,10 +48,10 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
         mediaPlaybackRequiresUserGesture: false,
         // js
         javaScriptEnabled: true,
-        // 去垂直滚动
+        // 垂直滚动
         verticalScrollBarEnabled: false,
         // 背景透明
-        transparentBackground: false,
+        transparentBackground: true,
         // 清缓存
         clearCache: true,
         // 去广告
@@ -61,9 +62,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
               trigger: ContentBlockerTrigger(urlFilter: ".*"),
               action: ContentBlockerAction(
                   type: ContentBlockerActionType.CSS_DISPLAY_NONE,
-                  selector: '.Daily,.view-more'
-              )
-          )
+                  selector: '.Daily,.view-more'))
         ],
       ),
       android: AndroidInAppWebViewOptions(
@@ -81,7 +80,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
     id = Get.arguments["id"];
     _getComments(id);
 
-    // 下拉刷新操作
+    // 浏览器下拉刷新操作
     pullToRefreshController = PullToRefreshController(
       options: PullToRefreshOptions(
         color: Colors.black,
@@ -97,6 +96,16 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
     );
   }
 
+  // 浏览器夜间模式实现 js 查找dom更改
+  void changeDataTheme(InAppWebViewController controller) async {
+    await controller.evaluateJavascript(source: """
+    let elements = document.querySelectorAll('[data-theme="light"]');
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].setAttribute('data-theme', 'dark');
+    }
+  """);
+  }
+
   // 获取文章额外信息【评论，点赞】
   Future<void> _getComments(int id) async {
     try {
@@ -106,6 +115,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
         final data = json.decode(response.data);
         setState(() {
           comments = data;
+          end = false;
         });
         print('获取评论数据成功');
       } else {
@@ -118,7 +128,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: comments.isEmpty ? const GFLoader() : _buildBody());
+    return Scaffold(body: end ? const GFLoader() : _buildBody());
   }
 
   Widget _buildBody() {
@@ -126,10 +136,8 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
       Expanded(
           child: Padding(
         padding: const EdgeInsets.only(top: 35),
-        child:
-            // 用于添加集成到 flutter widget 树中的内联原生 WebView
-            // 应该是解析转换为widget,根据图片与文字的间隙看出，
-            InAppWebView(
+        // 用于添加集成到 flutter widget 树中的内联原生 WebView
+        child: InAppWebView(
           key: webViewKey,
           initialUrlRequest:
               URLRequest(url: Uri.parse("https://daily.zhihu.com/story/$id")),
@@ -140,6 +148,9 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
           },
           onLoadStop: (controller, url) async {
             pullToRefreshController.endRefreshing();
+            if (Get.isDarkMode) {
+              changeDataTheme(controller);
+            }
           },
           onLoadError: (controller, url, code, message) {
             pullToRefreshController.endRefreshing();
@@ -193,12 +204,13 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                         Icons.star_border_rounded,
                         size: 28,
                       ),
-                      // isSelected: stars,
-                      // selectedIcon: const Icon(Icons.star,size: 28,color: Colors.amber),
-                      // highlightColor: Colors.amber,
-                      // color: stars? Colors.black : Colors.amber ,
+                      color: Get.isDarkMode
+                          ? (stars ? Colors.deepOrange : Colors.white) // 夜间模式
+                          : (stars ? Colors.black : Colors.deepOrange), // 日间模式
                       onPressed: () {
-                        stars = !stars;
+                        setState(() {
+                          stars = !stars;
+                        });
                       }),
                   // 刷新按钮
                   RotationTransition(

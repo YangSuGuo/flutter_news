@@ -23,4 +23,8 @@
     <tree path="/assets/md" title="Md文档资源"/>
     <tree path="/assets/image" title="项目资源"/>
     <tree path="/lib/pages/Item" title="列表"/>
+    <tree path="/lib/db/db.dart" title="数据库&api" extension="" presentableText="" tooltipTitle="" icon="" textColor=""
+          backgroundColor=""/>
+    <tree path="/lib/db/database" title="表"/>
+    <tree path="/lib/db/database/stars.dart" title="收藏表"/>
 </trees>

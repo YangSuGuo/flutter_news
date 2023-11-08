@@ -19,9 +19,11 @@ dependencies:
   # 状态，路由，依赖管理
   get: ^4.6.6
   # 数据库【目前没用】
-#  sqflite: ^2.3.0
+  sqflite: ^2.3.0
   # 持久化【目前没用】
 #  shared_preferences: ^2.2.2
+  # 路径
+  path_provider: ^2.1.1
   # 刷新
   easy_refresh: ^3.3.2+1
   # 分享

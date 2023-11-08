@@ -9,12 +9,13 @@ class Item extends StatelessWidget {
     required this.item,
   });
 
-  final Map<String,dynamic> item;
+  final Map<String, dynamic> item;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: ()=>Get.to(()=>essay(), arguments: {'id': item['id']}),
+        onTap: () => Get.to(() => essay(), arguments: {'id': item['id']}),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,7 +30,7 @@ class Item extends StatelessWidget {
                     children: [
                       Padding(
                           padding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 5),
+                              const EdgeInsets.only(top: 5, bottom: 5, left: 5),
                           child: Text(item['title'],
                               softWrap: true,
                               maxLines: 2,
@@ -68,10 +69,8 @@ class Item extends StatelessWidget {
               ),
           ],
         ));
-
   }
 // 列表
 //   Widget _getItem(Map<String, dynamic> item) {
 //     return
 }
-

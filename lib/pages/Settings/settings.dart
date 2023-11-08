@@ -78,9 +78,9 @@ class _settingsState extends State<settings> {
               decoration: BoxDecoration(color: Colors.grey),
             )),
         const SizedBox(height: 5),
-        _buildListTile('点个星星', "https://github.com/YangSuGuo/flutter_item1"),
+        _buildListTile('点个星星', "https://github.com/YangSuGuo/flutter_news"),
         _buildListTile(
-            '提交问题', 'https://github.com/YangSuGuo/flutter_item1/issues'),
+            '提交问题', 'https://github.com/YangSuGuo/flutter_news/issues'),
         _buildListTile('作者信息', "https://github.com/YangSuGuo"),
         const SizedBox(height: 4),
         const SizedBox(
