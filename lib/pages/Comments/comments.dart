@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../http/net.dart';
-import '../Essay/Widget/_itemIconButton.dart';
 
 class comments_page extends StatefulWidget {
   const comments_page({super.key});
@@ -17,6 +16,7 @@ class comments_page extends StatefulWidget {
 class _comments_pageState extends State<comments_page> {
   int id = 9766161; // 初始值 id
   Map<String, dynamic> comments = {}; // 评论额外信息
+  bool support = false; // 点赞状态
 
   @override
   void initState() {
@@ -213,7 +213,7 @@ class _comments_pageState extends State<comments_page> {
                       padding: const EdgeInsets.only(
                           top: 5, left: 5, right: 6, bottom: 6),
                       decoration: const BoxDecoration(
-                          color: Color.fromRGBO(222, 222, 222, 1),
+                          color: Color.fromRGBO(233, 233, 233, 0.4),
                           borderRadius: BorderRadius.all(Radius.circular(6))),
                       child: RichText(
                           softWrap: true,
@@ -242,12 +242,13 @@ class _comments_pageState extends State<comments_page> {
                     style: const TextStyle(color: Colors.grey)),
                 const Spacer(),
                 // 点赞数量
-                itemIconButton(
+                IconButton(
+                  icon: const Icon(Icons.thumb_up_off_alt, size: 20),
+                  splashColor: Colors.transparent,
                   onPressed: () {},
-                  icon: Icons.thumb_up_off_alt,
-                  size: 20,
-                  data: comments['likes'].toString(),
                 ),
+                if (comments['likes'] != 0)
+                  Text(comments['likes'].toString()),
                 const SizedBox(width: 10)
               ],
             )

@@ -21,7 +21,7 @@ class itemIconButton extends StatelessWidget {
           onPressed: onPressed,
           splashColor: Colors.transparent,
         ),
-        if (data != null) Text(data!, style: const TextStyle()),
+        if (data != null) Text(data!),
       ],
     );
   }

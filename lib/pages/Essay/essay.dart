@@ -204,6 +204,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                         Icons.star_border_rounded,
                         size: 28,
                       ),
+                      splashColor: Colors.transparent,
                       color: Get.isDarkMode
                           ? (stars ? Colors.deepOrange : Colors.white) // 夜间模式
                           : (stars ? Colors.deepOrange : Colors.black), // 日间模式
