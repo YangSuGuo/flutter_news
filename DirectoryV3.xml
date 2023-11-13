@@ -28,4 +28,6 @@
     <tree path="/lib/db/database" title="表"/>
     <tree path="/lib/db/database/stars.dart" title="收藏表"/>
     <tree path="/assets/daily.zhihu-1024x1024.png" title="App图标"/>
+    <tree path="/key.jks" title="App密钥"/>
+    <tree path="/desktop.ini" title="项目图标"/>
 </trees>

@@ -1,6 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-
 import 'database/stars.dart';
 
 class DB{
@@ -35,10 +34,18 @@ class DB{
   /// 创建
   void _onCreate(Database db, int newVersion) async {
     final batch = db.batch();
-
-    /// 内表
+    /// 表
     batch.execute(Stars().dropTable);
 
     await batch.commit();
+  }
+
+  /// 查询所有详情
+  Future<List> selectAllStars() async {
+    final db = await database;
+    final List list = await db.query(
+      Stars.tableName,
+    );
+    return list;
   }
 }

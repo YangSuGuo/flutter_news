@@ -247,8 +247,7 @@ class _comments_pageState extends State<comments_page> {
                   splashColor: Colors.transparent,
                   onPressed: () {},
                 ),
-                if (comments['likes'] != 0)
-                  Text(comments['likes'].toString()),
+                if (comments['likes'] != 0) Text(comments['likes'].toString()),
                 const SizedBox(width: 10)
               ],
             )

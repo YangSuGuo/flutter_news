@@ -34,6 +34,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
 
   /// 浏览器
   /// todo 添加加载图，增加用户体验，优化用户使用，避免闪屏！！！！！！超级重要
+  /// todo 可选异步加载浏览器
   /// js更改属性 data-theme="dark" 即为夜间模式（<html class="itcauecng" data-theme="dark">）,
   /// bug BLUETOOTH_CONNECT permission is missing
   /// bug setForceDark() is a no-op in an app with targetSdkVersion>=T
@@ -139,8 +140,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
         // 用于添加集成到 flutter widget 树中的内联原生 WebView
         child: InAppWebView(
           key: webViewKey,
-          initialUrlRequest:
-              URLRequest(url: Uri.parse("https://daily.zhihu.com/story/$id")),
+          initialUrlRequest: URLRequest(url: Uri.parse("https://daily.zhihu.com/story/$id")),
           initialOptions: options,
           pullToRefreshController: pullToRefreshController,
           onWebViewCreated: (controller) {

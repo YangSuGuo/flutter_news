@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// bug 横屏状态下溢出
-
 class settings extends StatefulWidget {
   const settings({super.key});
 
@@ -54,70 +52,72 @@ class _settingsState extends State<settings> {
 
   /// 设置项
   Widget Settings() {
-    return Column(
-      children: [
-        SwitchListTile(
-          activeColor: Colors.deepOrangeAccent,
-          value: _value,
-          onChanged: (v) {
-            setState(() {
-              _value = !_value;
-              Get.changeTheme(_value ? ThemeData.dark() : ThemeData.light());
-            });
-          },
-          secondary: _value
-              ? const Icon(Icons.wb_sunny)
-              : const Icon(Icons.nightlight_round),
-          title: const Text('夜间模式'),
-        ),
-        const SizedBox(height: 5),
-        const SizedBox(
-            height: 1,
-            width: 360,
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.grey),
-            )),
-        const SizedBox(height: 5),
-        _buildListTile('点个星星', "https://github.com/YangSuGuo/flutter_news"),
-        _buildListTile(
-            '提交问题', 'https://github.com/YangSuGuo/flutter_news/issues'),
-        _buildListTile('作者信息', "https://github.com/YangSuGuo"),
-        const SizedBox(height: 4),
-        const SizedBox(
-            height: 1,
-            width: 360,
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.grey),
-            )),
-        const SizedBox(height: 4),
-        _buildListTile('证照一览', "https://www.zhihu.com/certificates"),
-        _buildListTile('知乎协议', 'https://www.zhihu.com/plainterms'),
-        const SizedBox(height: 10),
-        // 按钮
-        SizedBox(
-          width: 360,
-          height: 50,
-          child: MaterialButton(
-              color: _value ? Colors.black12 : Colors.white,
-              elevation: 0,
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              onPressed: () {
-                print('点击退出');
-                showDialog(context: context, builder: (ctx) => dialog());
-                // Dart虚拟机立即终止运行
-                // exit(0);
-              },
-              child: const Text(
-                '退出应用',
-                style:
-                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+    return ListView(children: [
+      Column(
+        children: [
+          SwitchListTile(
+            activeColor: Colors.deepOrangeAccent,
+            value: _value,
+            onChanged: (v) {
+              setState(() {
+                _value = !_value;
+                Get.changeTheme(_value ? ThemeData.dark() : ThemeData.light());
+              });
+            },
+            secondary: _value
+                ? const Icon(Icons.wb_sunny)
+                : const Icon(Icons.nightlight_round),
+            title: const Text('夜间模式'),
+          ),
+          const SizedBox(height: 5),
+          SizedBox(
+              height: 1,
+              width: MediaQuery.of(context).size.width - 40,
+              child: const DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
               )),
-        ),
-        const SizedBox(height: 10),
-        const Text('当前版本：3.6.4（1270）', style: TextStyle(color: Colors.grey))
-      ],
-    );
+          const SizedBox(height: 5),
+          _buildListTile('点个星星', "https://github.com/YangSuGuo/flutter_news"),
+          _buildListTile(
+              '提交问题', 'https://github.com/YangSuGuo/flutter_news/issues'),
+          _buildListTile('作者信息', "https://github.com/YangSuGuo"),
+          const SizedBox(height: 4),
+          SizedBox(
+              height: 1,
+              width: MediaQuery.of(context).size.width - 40,
+              child: const DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
+              )),
+          const SizedBox(height: 4),
+          _buildListTile('证照一览', "https://www.zhihu.com/certificates"),
+          _buildListTile('知乎协议', 'https://www.zhihu.com/plainterms'),
+          const SizedBox(height: 10),
+          // 按钮
+          SizedBox(
+            width: MediaQuery.of(context).size.width - 40,
+            height: 50,
+            child: MaterialButton(
+                color: _value ? Colors.black12 : Colors.white,
+                elevation: 0,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                onPressed: () {
+                  print('点击退出');
+                  showDialog(context: context, builder: (ctx) => dialog());
+                  // Dart虚拟机立即终止运行
+                  // exit(0);
+                },
+                child: const Text(
+                  '退出应用',
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                )),
+          ),
+          const SizedBox(height: 10),
+          const Text('当前版本：3.6.4（1270）', style: TextStyle(color: Colors.grey))
+        ],
+      )
+    ]);
   }
 
   /// 设置子项

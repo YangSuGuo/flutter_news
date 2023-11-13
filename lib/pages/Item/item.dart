@@ -92,6 +92,7 @@ class _itemState extends State<item> {
   // bodyList
   // bug 无网络时初始化失败无数据，下拉刷新失败
   // bug 无网络时初始化失败，上拉刷新成功，下拉刷新会将上拉刷新的覆盖【 items.removeRange(0, oldItems.length) 】
+  // bug listEquals(oldItems, newItems) 比对结果错误
   Widget _buildList() {
     return EasyRefresh(
       header: const ClassicHeader(
@@ -111,13 +112,16 @@ class _itemState extends State<item> {
       onRefresh: () async {
         // 下拉刷新
         try {
+          // 获取新数据
           final newItems = await _getList();
+          // 截取已有数据的新数据条数，进行比对
           final oldItems = items.sublist(0, newItems.length);
-          // bug listEquals(oldItems, newItems) 比对结果错误
           print(listEquals(oldItems, newItems));
+          // 如果不相同，删除相应的旧数据，更新新数据
           if (!listEquals(oldItems, newItems)) {
             items.removeRange(0, oldItems.length);
             setState(() {
+              // 添加数据
               items.insertAll(0, newItems);
             });
           }
