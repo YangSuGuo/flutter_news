@@ -21,7 +21,7 @@ class Stars{
   static const String publishTime = 'publishTime';
 
   // 收藏时间
-  static const String collectTime = 'collectTime';
+  // static const String collectTime = 'collectTime';
 
   /// 删除数据库
   final String dropTable = 'DROP TABLE IF EXISTS $tableName';
@@ -35,7 +35,6 @@ class Stars{
         $image TEXT,
         $link TEXT,
         $publishTime VARCHAR(40),
-        $collectTime VARCHAR(40)
       );
     ''';
 }

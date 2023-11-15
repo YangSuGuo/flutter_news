@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import '../models/stars.dart';
 import 'database/stars.dart';
 
 class DB{
@@ -40,12 +41,20 @@ class DB{
     await batch.commit();
   }
 
-  /// 查询所有详情
+  /// 查询所有收藏
   Future<List> selectAllStars() async {
     final db = await database;
     final List list = await db.query(
       Stars.tableName,
     );
     return list;
+  }
+
+  /// 新增收藏
+  Future<bool> insertMood(StarsData starsData) async {
+    final db = await database;
+    final int result =
+    await db.insert(Stars.tableName, starsData.toJson());
+    return result > 0;
   }
 }
