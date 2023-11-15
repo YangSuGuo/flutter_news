@@ -37,7 +37,6 @@ class DB{
     final batch = db.batch();
     /// 表
     batch.execute(Stars().dropTable);
-
     await batch.commit();
   }
 
@@ -51,7 +50,7 @@ class DB{
   }
 
   /// 新增收藏
-  Future<bool> insertMood(StarsData starsData) async {
+  Future<bool> insertStars(StarsData starsData) async {
     final db = await database;
     final int result =
     await db.insert(Stars.tableName, starsData.toJson());
