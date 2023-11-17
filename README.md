@@ -9,7 +9,7 @@ https://www.cnblogs.com/wzjhoutai/p/7297445.html
 
 ## 项目版本
 
-
+```dart
 [√] Flutter (Channel stable, 3.13.1, on Microsoft Windows [版本 10.0.19045.3693], locale zh-CN)
     • Flutter version 3.13.1 on channel stable at D:\flutter
     • Upstream repository https://github.com/flutter/flutter.git
@@ -50,7 +50,7 @@ https://www.cnblogs.com/wzjhoutai/p/7297445.html
     • MEIZU 20 (mobile) • 3*********P • android-arm64  • Android 13 (API 33)
     • Windows (desktop) • windows       • windows-x64    • Microsoft Windows [版本 10.0.19045.3693]
     • Edge (web)        • edge          • web-javascript • Microsoft Edge 119.0.2151.58
-
+```
 
 ## 项目插件
 
