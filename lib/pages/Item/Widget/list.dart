@@ -15,7 +15,13 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: () => Get.to(() => essay(), arguments: {'id': item['id']}),
+        onTap: () => Get.to(() => essay(), arguments: {
+              'id': item['id'],
+              'title': item['title'],
+              'link': item['url'],
+              'description': item['hint'],
+              'images': item['images'][0]
+            }),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

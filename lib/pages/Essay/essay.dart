@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../db/db.dart';
 import '../../http/net.dart';
+import '../../models/stars.dart';
 import '../Comments/comments.dart';
 import 'Widget/_itemIconButton.dart';
 
@@ -22,7 +24,6 @@ class essay extends StatefulWidget {
 
 class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   /// 文章
-  Map<String, dynamic> items = {}; // 文章正文
   Map<String, dynamic> comments = {}; // 评论信息
   int id = 9766161; // 初始值 id
   bool end = true; // 加载状态
@@ -209,9 +210,23 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                           ? (stars ? Colors.deepOrange : Colors.white) // 夜间模式
                           : (stars ? Colors.deepOrange : Colors.black), // 日间模式
                       onPressed: () {
+                        // 收藏信息
+                        final StarsData star = StarsData();
+                        star.starsID = id;
+                        star.title = Get.arguments['title'];
+                        star.link = Get.arguments['link'];
+                        star.description = Get.arguments['description'];
+                        star.image = Get.arguments['images'];
+                        star.collectTime = DateTime.now().toIso8601String();
+                        // todo 完善逻辑
+                        DB.db.insertStars(star);
                         setState(() {
+                          // todo 持久化收藏状态
+                          // 存在相同id，没有id，取消收藏删除记录，
+                          // 或者说 返回按钮根据收藏状态才进行数据库的操作，按下收藏按钮只是预先记录
                           stars = !stars;
                         });
+
                       }),
                   // 刷新按钮
                   RotationTransition(

@@ -135,6 +135,7 @@ class _itemState extends State<item> {
           final oldItems = await _getOldList(dateTime, day);
           if (oldItems.isNotEmpty) {
             setState(() {
+              // 日期数据为真，加载一条数据后改为假
               items.addAll(oldItems);
             });
           }

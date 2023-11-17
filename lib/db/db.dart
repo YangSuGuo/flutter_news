@@ -36,7 +36,7 @@ class DB{
   void _onCreate(Database db, int newVersion) async {
     final batch = db.batch();
     /// 表
-    batch.execute(Stars().dropTable);
+    batch.execute(Stars().createTable);
     await batch.commit();
   }
 
@@ -49,11 +49,26 @@ class DB{
     return list;
   }
 
+  /// 查询收藏详情
+  /// [starsID] 查询id (9766161)
+  Future<List> selectStars(int id) async {
+    final db = await database;
+    final List list = await db.query(
+      Stars.tableName,
+      where: '''
+        ${Stars.starsID} like ? 
+      ''',
+      whereArgs: ['$id%'],
+    );
+    return list;
+  }
+
   /// 新增收藏
   Future<bool> insertStars(StarsData starsData) async {
     final db = await database;
     final int result =
     await db.insert(Stars.tableName, starsData.toJson());
+    print(result);
     return result > 0;
   }
 }

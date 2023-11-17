@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 StarsData moodDataFromJson(String str) => StarsData.fromJson(json.decode(str));
+
 String StarsDataToJson(StarsData data) => json.encode(data.toJson());
 
 /// 收藏数据
@@ -11,7 +12,7 @@ class StarsData {
     this.description,
     this.image,
     this.link,
-    this.publishTime,
+    this.collectTime,
   });
 
   // ID
@@ -30,7 +31,7 @@ class StarsData {
   late String? link;
 
   // 修改日期
-  late String? publishTime;
+  late String? collectTime;
 
   factory StarsData.fromJson(Map<String, dynamic> json) => StarsData(
         starsID: json['starsID'],
@@ -38,7 +39,7 @@ class StarsData {
         description: json['description'],
         image: json['image'],
         link: json['link'],
-        publishTime: json['publishTime'],
+        collectTime: json['collectTime'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +48,6 @@ class StarsData {
         'description': description,
         'image': image,
         'link': link,
-        'publishTime': publishTime,
+        'collectTime': collectTime,
       };
 }

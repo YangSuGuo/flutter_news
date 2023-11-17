@@ -30,4 +30,7 @@
     <tree path="/assets/daily.zhihu-1024x1024.png" title="App图标"/>
     <tree path="/key.jks" title="App密钥"/>
     <tree path="/desktop.ini" title="项目图标"/>
+    <tree path="/lib/pages/Stars" title="收藏"/>
+    <tree path="/lib/models" title="模型"/>
+    <tree path="/lib/pages/Item/Widget/list.dart" title="文章列表"/>
 </trees>
