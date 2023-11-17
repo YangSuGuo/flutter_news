@@ -219,14 +219,21 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                         star.image = Get.arguments['images'];
                         star.collectTime = DateTime.now().toIso8601String();
                         // todo 完善逻辑
-                        DB.db.insertStars(star);
-                        setState(() {
-                          // todo 持久化收藏状态
-                          // 存在相同id，没有id，取消收藏删除记录，
-                          // 或者说 返回按钮根据收藏状态才进行数据库的操作，按下收藏按钮只是预先记录
-                          stars = !stars;
-                        });
-
+                        // todo 持久化收藏状态
+                        // 收藏状态，先查数据库id有没有，有真 无假
+                        if(!stars){
+                          // 没有 添加
+                          DB.db.insertStars(star);
+                          setState(() {
+                            stars = true;
+                          });
+                        }else{
+                          // 有 删除
+                          // DB.db.deleteStars(id);
+                          setState(() {
+                            stars = false;
+                          });
+                        }
                       }),
                   // 刷新按钮
                   RotationTransition(

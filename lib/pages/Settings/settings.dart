@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:item_news/pages/Stars/stars.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class settings extends StatefulWidget {
@@ -13,6 +14,8 @@ class settings extends StatefulWidget {
 
 class _settingsState extends State<settings> {
   bool _value = Get.isDarkMode;
+  List<bool> _isSelected = [false, !Get.isDarkMode, Get.isDarkMode]; // 主题设置
+
 
   // 跳转
   Future<void> LaunchInBrowser(uni) async {
@@ -28,7 +31,7 @@ class _settingsState extends State<settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Settings(),
+      body: _buildSettings(),
     );
   }
 
@@ -50,81 +53,186 @@ class _settingsState extends State<settings> {
     );
   }
 
-  /// 设置项
-  Widget Settings() {
+  /// 设置
+  Widget _buildSettings() {
     return ListView(children: [
-      Column(
-        children: [
-          SwitchListTile(
-            activeColor: Colors.deepOrangeAccent,
-            value: _value,
-            onChanged: (v) {
-              setState(() {
-                _value = !_value;
-                Get.changeTheme(_value ? ThemeData.dark() : ThemeData.light());
-              });
-            },
-            secondary: _value
-                ? const Icon(Icons.wb_sunny)
-                : const Icon(Icons.nightlight_round),
-            title: const Text('夜间模式'),
-          ),
-          const SizedBox(height: 5),
-          SizedBox(
-              height: 1,
-              width: MediaQuery.of(context).size.width - 40,
-              child: const DecoratedBox(
-                decoration: BoxDecoration(color: Colors.grey),
-              )),
-          const SizedBox(height: 5),
-          _buildListTile('点个星星', "https://github.com/YangSuGuo/flutter_news"),
-          _buildListTile(
-              '提交问题', 'https://github.com/YangSuGuo/flutter_news/issues'),
-          _buildListTile('作者信息', "https://github.com/YangSuGuo"),
-          const SizedBox(height: 4),
-          SizedBox(
-              height: 1,
-              width: MediaQuery.of(context).size.width - 40,
-              child: const DecoratedBox(
-                decoration: BoxDecoration(color: Colors.grey),
-              )),
-          const SizedBox(height: 4),
-          _buildListTile('证照一览', "https://www.zhihu.com/certificates"),
-          _buildListTile('知乎协议', 'https://www.zhihu.com/plainterms'),
-          const SizedBox(height: 10),
-          // 按钮
-          SizedBox(
-            width: MediaQuery.of(context).size.width - 40,
-            height: 50,
-            child: MaterialButton(
-                color: _value ? Colors.black12 : Colors.white,
-                elevation: 0,
+      Padding(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width / 50,
+              right: MediaQuery.of(context).size.width / 50),
+          child: Column(children: [
+            // 用户界面
+            Card(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                elevation: 0.0,
                 shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                onPressed: () {
-                  print('点击退出');
-                  showDialog(context: context, builder: (ctx) => dialog());
-                  // Dart虚拟机立即终止运行
-                  // exit(0);
-                },
-                child: const Text(
-                  '退出应用',
-                  style:
-                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                      child: Text(
+                        '界面',
+                        style: TextStyle(
+                          color: Colors.lightBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.7,
+                        ),
+                      ),
+                    ),
+                    ToggleButtons(
+                      isSelected: _isSelected,
+                      onPressed: (value) => setState(() {
+                        _isSelected = _isSelected.map((e) => false).toList();
+                        _isSelected[value] = true;
+                        if (value == 0) {
+                          _value = Get.isDarkMode;
+                          Get.changeTheme(_value ? ThemeData.dark() : ThemeData.light());
+                        } else if (value == 1) {
+                          Get.changeTheme(ThemeData.light());
+                          _value = false;
+                        } else if (value == 2) {
+                          Get.changeTheme(ThemeData.dark());
+                          _value = true;
+                        }
+                      }),
+                      renderBorder: false,
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 10,
+                                right: MediaQuery.of(context).size.width / 10),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Icon(Icons.brightness_4,size: 30),
+                                Text('跟随系统', style: TextStyle(fontSize: 10))
+                              ],
+                            )),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 9,
+                                right: MediaQuery.of(context).size.width / 9),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Icon(Icons.wb_sunny,size: 30),
+                                Text('日间模式', style: TextStyle(fontSize: 10))
+                              ],
+                            )),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 10,
+                                right: MediaQuery.of(context).size.width / 10),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Icon(Icons.nightlight_round,size: 30),
+                                Text('夜间模式', style: TextStyle(fontSize: 10))
+                              ],
+                            ))
+                      ],
+                    ),
+                    const SizedBox(height: 10)
+                  ],
                 )),
-          ),
-          const SizedBox(height: 10),
-          const Text('当前版本：3.6.4（1270）', style: TextStyle(color: Colors.grey))
-        ],
-      )
+            // 功能界面
+            Card(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                elevation: 0.0,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                      child: Text(
+                        '功能',
+                        style: TextStyle(
+                          color: Colors.lightBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.7,
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      title: const Text('收藏夹'),
+                      visualDensity: const VisualDensity(vertical: -4),
+                      onTap: () => Get.to(const stars()),
+                    ),
+                    ListTile(
+                      title: const Text('推送中心'),
+                      visualDensity: const VisualDensity(vertical: -3),
+                      onTap: () => Get.to(const stars()),
+                    ),
+                  ],
+                )),
+            // 关于
+            Card(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                elevation: 0.0,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: Text(
+                        '关于',
+                        style: TextStyle(
+                          color: Colors.lightBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.7,
+                        ),
+                      ),
+                    ),
+                    _buildListTile('作者信息', "https://github.com/YangSuGuo"),
+                    _buildListTile(
+                        '项目地址', "https://github.com/YangSuGuo/flutter_news"),
+                    _buildListTile(
+                        '证照一览', "https://www.zhihu.com/certificates"),
+                    _buildListTile(
+                        '知乎用户协议', 'https://www.zhihu.com/plainterms'),
+                  ],
+                )),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              child: MaterialButton(
+                  color: _value ? Colors.black12 : Colors.white,
+                  elevation: 0,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  onPressed: () {
+                    print('点击退出');
+                    showDialog(context: context, builder: (ctx) => dialog());
+                    // Dart虚拟机立即终止运行
+                    // exit(0);
+                  },
+                  child: const Text(
+                    '退出应用',
+                    style: TextStyle(
+                        color: Colors.red, fontWeight: FontWeight.bold),
+                  )),
+            ),
+            const SizedBox(height: 10),
+            const Text('当前版本：3.6.4（1270）', style: TextStyle(color: Colors.grey))
+          ]))
     ]);
   }
 
   /// 设置子项
   ListTile _buildListTile(title, http) {
     return ListTile(
-      trailing: const Icon(Icons.arrow_forward_ios, size: 20),
+      // trailing: const Icon(Icons.arrow_forward_ios, size: 20),
       title: Text(title),
+      visualDensity: const VisualDensity(horizontal: 0, vertical: -2),
+      contentPadding: const EdgeInsets.only(left: 10),
       onTap: () => LaunchInBrowser(Uri.parse(http)),
     );
   }

@@ -9,22 +9,48 @@ https://www.cnblogs.com/wzjhoutai/p/7297445.html
 
 ## 项目版本
 
-```
-Doctor summary (to see all details, run flutter doctor -v):
-[✓] Flutter (Channel stable, 3.13.1, on Microsoft Windows [版本 10.0.19045.3570], locale zh-CN)
-[✓] Windows Version (Installed version of Windows is version 10 or higher)
-[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
-[✗] Chrome - develop for the web (Cannot find Chrome executable at .\Google\Chrome\Application\chrome.exe)
+
+[√] Flutter (Channel stable, 3.13.1, on Microsoft Windows [版本 10.0.19045.3693], locale zh-CN)
+    • Flutter version 3.13.1 on channel stable at D:\flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision e1e47221e8 (3 months ago), 2023-08-22 21:43:18 -0700
+    • Engine revision b20183e040
+    • Dart version 3.1.0
+    • DevTools version 2.25.0
+    • Pub download mirror https://pub.flutter-io.cn
+    • Flutter download mirror https://storage.flutter-io.cn
+
+[√] Windows Version (Installed version of Windows is version 10 or higher)
+
+[√] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+    • Android SDK at F:\SDK
+    • Platform android-34, build-tools 34.0.0
+    • Java binary at: D:\Program Files\Java\JDK17\bin\java.exe
+    • Java version Java(TM) SE Runtime Environment (build 17.0.2+8-LTS-86)
+    • All Android licenses accepted.
+
+[X] Chrome - develop for the web (Cannot find Chrome executable at .\Google\Chrome\Application\chrome.exe)
     ! Cannot find Chrome. Try setting CHROME_EXECUTABLE to a Chrome executable.
-[✗] Visual Studio - develop Windows apps
-    ✗ Visual Studio not installed; this is necessary to develop Windows apps.
+
+[X] Visual Studio - develop Windows apps
+    X Visual Studio not installed; this is necessary to develop Windows apps.
       Download at https://visualstudio.microsoft.com/downloads/.
       Please install the "Desktop development with C++" workload, including all of its default components
+
 [!] Android Studio (not installed)
-[✓] IntelliJ IDEA Ultimate Edition (version 2023.2)
-[✓] Connected device (3 available)
-[✓] Network resources
-```
+    • Android Studio not found; download from https://developer.android.com/studio/index.html
+      (or visit https://flutter.dev/docs/get-started/install/windows#android-setup for detailed instructions).
+
+[√] IntelliJ IDEA Ultimate Edition (version 2023.2)
+    • IntelliJ at D:\Program Files\IntelliJ IDEA 2023.2.2
+    • Flutter plugin version 76.3.4
+    • Dart plugin version 232.10072.19
+
+[√] Connected device (3 available)
+    • MEIZU 20 (mobile) • 3*********P • android-arm64  • Android 13 (API 33)
+    • Windows (desktop) • windows       • windows-x64    • Microsoft Windows [版本 10.0.19045.3693]
+    • Edge (web)        • edge          • web-javascript • Microsoft Edge 119.0.2151.58
+
 
 ## 项目插件
 
@@ -39,35 +65,38 @@ dio: ^5.3.2
 get: ^4.6.6
 # 数据库
 sqflite: ^2.3.0
-# 持久化
-shared_preferences: ^2.2.2
+# 持久化【目前没用】
+#  shared_preferences: ^2.2.2
+# 路径
+path_provider: ^2.1.1
 # 刷新
 easy_refresh: ^3.3.2+1
-# 轮播
-card_swiper: ^3.0.1
+# 分享
+share_plus: ^7.2.1
+# 轮播图【目前没用】
+#  card_swiper: ^3.0.1
 # url跳转
 url_launcher: ^6.1.14
-# 视差
-flutter_tilt: ^2.0.10
+# webview flutter实现
+flutter_inappwebview: ^5.8.0
 # 时间日期
 intl: ^0.18.1
-# ui
+# ui 【可以移除，只用到加载组件】
 getwidget: ^2.0.4
 ```
 
 ## 首页
 
-![S31103-12455591_com.example.item_news](assets/md/S31103-12455591_com.example.item_news.png)
+<img alt="S31103-12455591_com.example.item_news" height="500" src="assets/md/S31103-12455591_com.example.item_news.png"/>
 
 ## 设置页
 
-![S31103-12472530_com.example.item_news](assets/md/S31103-12460666_com.example.item_news.png)
+<img alt="S31117-19434108_com.example.item_news" height="500" src="assets/md/S31117-19434108_com.example.item_news.png"/>
 
 ## 评论页
 
-![S31103-12472530_com.example.item_news](assets/md/S31103-12472530_com.example.item_news.png)
+<img alt="S31117-19455273_com.example.item_news" height="500" src="assets/md/S31117-19455273_com.example.item_news.png"/>
 
 ## 文章详情页
 
-![S31103-12455591_com.example.item_news](assets/md/tmp_1059964480_S31104-17310627_com.example.item_n.png)
-![S31103-12455591_com.example.item_news](assets/md/tmp_1059984552_S31104-17312917_com.example.item_n.png)
+<img alt="S31117-19443625_com.example.item_news" height="500" src="assets/md/S31117-19443625_com.example.item_news.png"/>
