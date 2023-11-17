@@ -1,7 +1,7 @@
 name: item_news
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.1.0+1
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -53,7 +53,7 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: "icon"
-  ios: false
+  ios: true
   image_path: "assets/daily.zhihu-1024x1024.png"
   min_sdk_android: 21
 
