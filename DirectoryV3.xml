@@ -39,4 +39,5 @@
     <tree path="/lib/pages/Settings/Widget/ThemeTile.dart" title="主题选项卡"/>
     <tree path="/lib/pages/Settings/Widget/CardColumn.dart" title="卡片"/>
     <tree path="/lib/pages/Settings/Widget/CustomHeaderText.dart" title="标题"/>
+    <tree path="/lib/Widget" title="通用组件"/>
 </trees>

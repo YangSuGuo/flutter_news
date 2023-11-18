@@ -9,7 +9,7 @@ https://www.cnblogs.com/wzjhoutai/p/7297445.html
 
 ## 项目版本
 
-```dart
+```
 [√] Flutter (Channel stable, 3.13.1, on Microsoft Windows [版本 10.0.19045.3693], locale zh-CN)
     • Flutter version 3.13.1 on channel stable at D:\flutter
     • Upstream repository https://github.com/flutter/flutter.git
@@ -54,7 +54,9 @@ https://www.cnblogs.com/wzjhoutai/p/7297445.html
 
 ## 项目插件
 
-```dart
+
+
+```yaml
 # icon图标
 cupertino_icons: ^1.0.2
 # 屏幕适配
@@ -85,18 +87,8 @@ intl: ^0.18.1
 getwidget: ^2.0.4
 ```
 
-## 首页
+## 预览
 
-<img alt="S31103-12455591_com.example.item_news" height="500" src="assets/md/S31103-12455591_com.example.item_news.png"/>
-
-## 设置页
-
-<img alt="S31117-19434108_com.example.item_news" height="500" src="assets/md/S31117-19434108_com.example.item_news.png"/>
-
-## 评论页
-
-<img alt="S31117-19455273_com.example.item_news" height="500" src="assets/md/S31117-19455273_com.example.item_news.png"/>
-
-## 文章详情页
-
-<img alt="S31117-19443625_com.example.item_news" height="500" src="assets/md/S31117-19443625_com.example.item_news.png"/>
+| 首页                                                         | 文章                                                         | 设置                                                         | 评论                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img alt="S31103-12455591_com.example.item_news" height="500" src="assets/md/S31103-12455591_com.example.item_news.png"/> | <img alt="S31117-19443625_com.example.item_news" height="500" src="assets/md/S31117-19443625_com.example.item_news.png"/> | <img alt="S31117-19434108_com.example.item_news" height="500" src="assets/md/S31117-19434108_com.example.item_news.png"/> | <img alt="S31117-19455273_com.example.item_news" height="500" src="assets/md/S31117-19455273_com.example.item_news.png"/> |

@@ -246,7 +246,6 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                           webViewController?.reload();
                         },
                       )),
-                  // todo 分享功能实现
                   IconButton(
                     icon: const Icon(Icons.share_rounded),
                     onPressed: () {
