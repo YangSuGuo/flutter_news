@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../http/net.dart';
+import '../../Widget/CustomDialogs.dart';
 import 'Widget/list.dart';
 
 class item extends StatefulWidget {
@@ -36,8 +37,13 @@ class _itemState extends State<item> {
         items.addAll(oldItems);
       });
     } catch (e) {
+      CustomDialogs.confirmationDialog(
+          title: '🚨无网络!',
+          content: '请检查网络是否连接!',
+          context: context,
+          onCancel: false,
+          onConfirm: (() => Get.back()));
       print('加载列表初始数据失败: $e');
-      showDialog(context: context, builder: (ctx) => dialog());
     }
   }
 
@@ -56,6 +62,12 @@ class _itemState extends State<item> {
         throw Exception('加载数据失败');
       }
     } catch (e) {
+      CustomDialogs.confirmationDialog(
+          title: '🚨无网络!',
+          content: '请检查网络是否连接!',
+          context: context,
+          onCancel: false,
+          onConfirm: (() => Get.back()));
       throw Exception('错误：$e');
     }
   }
@@ -126,7 +138,12 @@ class _itemState extends State<item> {
             });
           }
         } catch (e) {
-          showDialog(context: context, builder: (ctx) => dialog());
+          CustomDialogs.confirmationDialog(
+              title: '🚨无网络!',
+              content: '请检查网络是否连接!',
+              context: context,
+              onCancel: false,
+              onConfirm: (() => Get.back()));
         }
       },
       onLoad: () async {
@@ -140,7 +157,12 @@ class _itemState extends State<item> {
             });
           }
         } catch (e) {
-          showDialog(context: context, builder: (ctx) => dialog());
+          CustomDialogs.confirmationDialog(
+              title: '🚨无网络!',
+              content: '请检查网络是否连接!',
+              context: context,
+              onCancel: false,
+              onConfirm: (() => Get.back()));
         }
       },
       child: ListView.builder(
@@ -152,19 +174,6 @@ class _itemState extends State<item> {
           );
         },
       ),
-    );
-  }
-
-  Widget dialog() {
-    return AlertDialog(
-      title: const Text('🚨无网络'),
-      content: const Text('请检查网络是否连接！'),
-      actions: [
-        TextButton(
-          child: const Text('确定'),
-          onPressed: () => Get.back(),
-        )
-      ],
     );
   }
 }

@@ -1,7 +1,7 @@
 name: item_news
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.1.0+1
+version: 1.2.0+1
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -21,6 +21,7 @@ dependencies:
   # 数据库【目前没用】
   sqflite: ^2.3.0
   # 持久化【目前没用】
+  # get_storage: ^2.1.1
 #  shared_preferences: ^2.2.2
   # 路径
   path_provider: ^2.1.1

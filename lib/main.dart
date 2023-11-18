@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
             themeMode: ThemeMode.light,
+            // themeMode: ThemeMode.system,跟随系统
             initialRoute: "/",
             defaultTransition: Transition.cupertino,
             transitionDuration: const Duration(milliseconds: 450),

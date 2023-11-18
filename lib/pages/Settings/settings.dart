@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:item_news/pages/Stars/stars.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+import '../../Widget/CustomDialogs.dart';
+import 'Widget/ListTile.dart';
 
 class settings extends StatefulWidget {
   const settings({super.key});
@@ -13,19 +15,8 @@ class settings extends StatefulWidget {
 }
 
 class _settingsState extends State<settings> {
-  bool _value = Get.isDarkMode;
+  final bool _value = Get.isDarkMode;
   List<bool> _isSelected = [false, !Get.isDarkMode, Get.isDarkMode]; // 主题设置
-
-
-  // 跳转
-  Future<void> LaunchInBrowser(uni) async {
-    if (!await launchUrl(
-      uni,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw Exception('无法打开浏览器 $uni');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,54 +79,56 @@ class _settingsState extends State<settings> {
                         _isSelected = _isSelected.map((e) => false).toList();
                         _isSelected[value] = true;
                         if (value == 0) {
-                          _value = Get.isDarkMode;
-                          Get.changeTheme(_value ? ThemeData.dark() : ThemeData.light());
+                          // todo 跟随系统实现
                         } else if (value == 1) {
                           Get.changeTheme(ThemeData.light());
-                          _value = false;
                         } else if (value == 2) {
                           Get.changeTheme(ThemeData.dark());
-                          _value = true;
                         }
                       }),
                       renderBorder: false,
                       children: [
                         Padding(
                             padding: EdgeInsets.only(
+                                top: 10,
                                 left: MediaQuery.of(context).size.width / 10,
-                                right: MediaQuery.of(context).size.width / 10),
+                                right: MediaQuery.of(context).size.width / 10,
+                                bottom: 10),
                             child: const Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Icon(Icons.brightness_4,size: 30),
+                                Icon(Icons.brightness_4, size: 30),
                                 Text('跟随系统', style: TextStyle(fontSize: 10))
                               ],
                             )),
                         Padding(
                             padding: EdgeInsets.only(
+                                top: 10,
                                 left: MediaQuery.of(context).size.width / 9,
-                                right: MediaQuery.of(context).size.width / 9),
+                                right: MediaQuery.of(context).size.width / 9,
+                                bottom: 10),
                             child: const Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Icon(Icons.wb_sunny,size: 30),
+                                Icon(Icons.wb_sunny, size: 30),
                                 Text('日间模式', style: TextStyle(fontSize: 10))
                               ],
                             )),
                         Padding(
                             padding: EdgeInsets.only(
+                                top: 10,
                                 left: MediaQuery.of(context).size.width / 10,
-                                right: MediaQuery.of(context).size.width / 10),
+                                right: MediaQuery.of(context).size.width / 10,
+                                bottom: 10),
                             child: const Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Icon(Icons.nightlight_round,size: 30),
+                                Icon(Icons.nightlight_round, size: 30),
                                 Text('夜间模式', style: TextStyle(fontSize: 10))
                               ],
                             ))
                       ],
                     ),
-                    const SizedBox(height: 10)
                   ],
                 )),
             // 功能界面
@@ -172,15 +165,15 @@ class _settingsState extends State<settings> {
                   ],
                 )),
             // 关于
-            Card(
+            const Card(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 elevation: 0.0,
-                shape: const RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 10, top: 10),
                       child: Text(
                         '关于',
@@ -191,13 +184,22 @@ class _settingsState extends State<settings> {
                         ),
                       ),
                     ),
-                    _buildListTile('作者信息', "https://github.com/YangSuGuo"),
-                    _buildListTile(
-                        '项目地址', "https://github.com/YangSuGuo/flutter_news"),
-                    _buildListTile(
-                        '证照一览', "https://www.zhihu.com/certificates"),
-                    _buildListTile(
-                        '知乎用户协议', 'https://www.zhihu.com/plainterms'),
+                    CustomListTile(
+                      title: '作者信息',
+                      http: 'https://github.com/YangSuGuo',
+                    ),
+                    CustomListTile(
+                      title: '项目地址',
+                      http: 'https://github.com/YangSuGuo/flutter_news',
+                    ),
+                    CustomListTile(
+                      title: '证照一览',
+                      http: '"https://www.zhihu.com/certificates',
+                    ),
+                    CustomListTile(
+                      title: '知乎用户协议',
+                      http: 'https://www.zhihu.com/plainterms',
+                    )
                   ],
                 )),
             SizedBox(
@@ -209,10 +211,11 @@ class _settingsState extends State<settings> {
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   onPressed: () {
-                    print('点击退出');
-                    showDialog(context: context, builder: (ctx) => dialog());
-                    // Dart虚拟机立即终止运行
-                    // exit(0);
+                    CustomDialogs.confirmationDialog(
+                        title: '是否退出应用!',
+                        context: context,
+                        onCancel: true,
+                        onConfirm: (() => exit(0)));
                   },
                   child: const Text(
                     '退出应用',
@@ -224,34 +227,5 @@ class _settingsState extends State<settings> {
             const Text('当前版本：3.6.4（1270）', style: TextStyle(color: Colors.grey))
           ]))
     ]);
-  }
-
-  /// 设置子项
-  ListTile _buildListTile(title, http) {
-    return ListTile(
-      // trailing: const Icon(Icons.arrow_forward_ios, size: 20),
-      title: Text(title),
-      visualDensity: const VisualDensity(horizontal: 0, vertical: -2),
-      contentPadding: const EdgeInsets.only(left: 10),
-      onTap: () => LaunchInBrowser(Uri.parse(http)),
-    );
-  }
-
-  /// 弹框
-  Widget dialog() {
-    return AlertDialog(
-      title: const Text('是否退出应用！'),
-      actions: [
-        TextButton(
-          child: const Text('取消'),
-          onPressed: () => Get.back(),
-        ),
-        TextButton(
-          child: const Text('确定'),
-          // Dart虚拟机立即终止运行
-          onPressed: () => exit(0),
-        )
-      ],
-    );
   }
 }

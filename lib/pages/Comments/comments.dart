@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 import '../../http/net.dart';
+import 'Widget/CommentWidget.dart';
 
 class comments_page extends StatefulWidget {
   const comments_page({super.key});
@@ -124,7 +124,7 @@ class _comments_pageState extends State<comments_page> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: Long_Comments.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return comments_widget(Long_Comments[index]);
+                  return CommentWidget(comment: Long_Comments[index]);
                 },
               ),
             ],
@@ -159,7 +159,7 @@ class _comments_pageState extends State<comments_page> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: shortComments.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return comments_widget(shortComments[index]);
+                  return CommentWidget(comment: shortComments[index]);
                 },
               ),
             ],
@@ -167,91 +167,5 @@ class _comments_pageState extends State<comments_page> {
         }
       },
     );
-  }
-
-  // 评论
-  Widget comments_widget(Map<String, dynamic> comments) {
-    return Padding(
-        padding:
-            const EdgeInsets.only(top: 5, left: 12.5, right: 12.5, bottom: 5),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 评论人,
-            Row(
-              children: [
-                Text(comments['author'],
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                const Spacer(),
-                SizedBox(
-                  width: 43,
-                  height: 43,
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.short_text_rounded,
-                        size: 30,
-                      ),
-                      splashColor: Colors.transparent),
-                )
-              ],
-            ),
-            // 评论内容
-            Text(
-              comments['content'],
-              textAlign: TextAlign.left,
-              softWrap: true,
-              style: const TextStyle(),
-            ),
-            if (comments['reply_to'] != null)
-              // 回复
-              Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: Container(
-                      width: MediaQuery.of(context).size.width - 40, // 适配屏幕不同宽度
-                      padding: const EdgeInsets.only(
-                          top: 5, left: 5, right: 6, bottom: 6),
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(233, 233, 233, 0.4),
-                          borderRadius: BorderRadius.all(Radius.circular(6))),
-                      child: RichText(
-                          softWrap: true,
-                          text: TextSpan(
-                              text: comments['reply_to']['author'] + '︰',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                              children: [
-                                TextSpan(
-                                    text: comments['reply_to']['content'],
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal))
-                              ])))),
-            // 评论时间
-            Row(
-              children: [
-                Text(
-                    DateFormat('MM-dd  hh∶mm')
-                        .format(DateTime.fromMillisecondsSinceEpoch(
-                            comments['time'] * 1000))
-                        .toString(),
-
-                    // '10-17 17:20'
-                    style: const TextStyle(color: Colors.grey)),
-                const Spacer(),
-                // 点赞数量
-                IconButton(
-                  icon: const Icon(Icons.thumb_up_off_alt, size: 20),
-                  splashColor: Colors.transparent,
-                  onPressed: () {},
-                ),
-                if (comments['likes'] != 0) Text(comments['likes'].toString()),
-                const SizedBox(width: 10)
-              ],
-            )
-          ],
-        ));
   }
 }
