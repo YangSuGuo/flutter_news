@@ -5,7 +5,10 @@ import 'package:get/get.dart';
 import 'package:item_news/pages/Stars/stars.dart';
 
 import '../../Widget/CustomDialogs.dart';
+import 'Widget/CardColumn.dart';
+import 'Widget/CustomHeaderText.dart';
 import 'Widget/ListTile.dart';
+import 'Widget/ThemeTile.dart';
 
 class settings extends StatefulWidget {
   const settings({super.key});
@@ -53,155 +56,63 @@ class _settingsState extends State<settings> {
               right: MediaQuery.of(context).size.width / 50),
           child: Column(children: [
             // 用户界面
-            Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                elevation: 0.0,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                      child: Text(
-                        '界面',
-                        style: TextStyle(
-                          color: Colors.lightBlue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.7,
-                        ),
-                      ),
-                    ),
-                    ToggleButtons(
-                      isSelected: _isSelected,
-                      onPressed: (value) => setState(() {
-                        _isSelected = _isSelected.map((e) => false).toList();
-                        _isSelected[value] = true;
-                        if (value == 0) {
-                          // todo 跟随系统实现
-                        } else if (value == 1) {
-                          Get.changeTheme(ThemeData.light());
-                        } else if (value == 2) {
-                          Get.changeTheme(ThemeData.dark());
-                        }
-                      }),
-                      renderBorder: false,
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(
-                                top: 10,
-                                left: MediaQuery.of(context).size.width / 10,
-                                right: MediaQuery.of(context).size.width / 10,
-                                bottom: 10),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Icon(Icons.brightness_4, size: 30),
-                                Text('跟随系统', style: TextStyle(fontSize: 10))
-                              ],
-                            )),
-                        Padding(
-                            padding: EdgeInsets.only(
-                                top: 10,
-                                left: MediaQuery.of(context).size.width / 9,
-                                right: MediaQuery.of(context).size.width / 9,
-                                bottom: 10),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Icon(Icons.wb_sunny, size: 30),
-                                Text('日间模式', style: TextStyle(fontSize: 10))
-                              ],
-                            )),
-                        Padding(
-                            padding: EdgeInsets.only(
-                                top: 10,
-                                left: MediaQuery.of(context).size.width / 10,
-                                right: MediaQuery.of(context).size.width / 10,
-                                bottom: 10),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Icon(Icons.nightlight_round, size: 30),
-                                Text('夜间模式', style: TextStyle(fontSize: 10))
-                              ],
-                            ))
-                      ],
-                    ),
-                  ],
-                )),
+            CustomCard(children: [
+              const CustomHeaderText(text: '界面'),
+              ToggleButtons(
+                isSelected: _isSelected,
+                onPressed: (value) => setState(() {
+                  _isSelected = _isSelected.map((e) => false).toList();
+                  _isSelected[value] = true;
+                  if (value == 0) {
+                    // todo 跟随系统实现
+                  } else if (value == 1) {
+                    Get.changeTheme(ThemeData.light());
+                  } else if (value == 2) {
+                    Get.changeTheme(ThemeData.dark());
+                  }
+                }),
+                renderBorder: false,
+                children: [
+                  ThemeTile(text: '跟随系统',icon: Icons.brightness_4,horizontalPadding: MediaQuery.of(context).size.width / 10),
+                  ThemeTile(text: '日间模式',icon: Icons.wb_sunny,horizontalPadding: MediaQuery.of(context).size.width / 9),
+                  ThemeTile(text: '夜间模式',icon: Icons.nightlight_round,horizontalPadding: MediaQuery.of(context).size.width / 10),
+                ],
+              ),
+            ]),
             // 功能界面
-            Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                elevation: 0.0,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                      child: Text(
-                        '功能',
-                        style: TextStyle(
-                          color: Colors.lightBlue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.7,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: const Text('收藏夹'),
-                      visualDensity: const VisualDensity(vertical: -4),
-                      onTap: () => Get.to(const stars()),
-                    ),
-                    ListTile(
-                      title: const Text('推送中心'),
-                      visualDensity: const VisualDensity(vertical: -3),
-                      onTap: () => Get.to(const stars()),
-                    ),
-                  ],
-                )),
+            CustomCard(children: [
+              const CustomHeaderText(text: '功能'),
+              ListTile(
+                title: const Text('收藏夹'),
+                visualDensity: const VisualDensity(vertical: -4),
+                onTap: () => Get.to(const stars()),
+              ),
+              ListTile(
+                title: const Text('推送中心'),
+                visualDensity: const VisualDensity(vertical: -3),
+                onTap: () => Get.to(const stars()),
+              ),
+            ]),
             // 关于
-            const Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                elevation: 0.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 10, top: 10),
-                      child: Text(
-                        '关于',
-                        style: TextStyle(
-                          color: Colors.lightBlue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.7,
-                        ),
-                      ),
-                    ),
-                    CustomListTile(
-                      title: '作者信息',
-                      http: 'https://github.com/YangSuGuo',
-                    ),
-                    CustomListTile(
-                      title: '项目地址',
-                      http: 'https://github.com/YangSuGuo/flutter_news',
-                    ),
-                    CustomListTile(
-                      title: '证照一览',
-                      http: '"https://www.zhihu.com/certificates',
-                    ),
-                    CustomListTile(
-                      title: '知乎用户协议',
-                      http: 'https://www.zhihu.com/plainterms',
-                    )
-                  ],
-                )),
+            const CustomCard(children: [
+              CustomHeaderText(text: '关于'),
+              CustomListTile(
+                title: '作者信息',
+                http: 'https://github.com/YangSuGuo',
+              ),
+              CustomListTile(
+                title: '项目地址',
+                http: 'https://github.com/YangSuGuo/flutter_news',
+              ),
+              CustomListTile(
+                title: '证照一览',
+                http: '"https://www.zhihu.com/certificates',
+              ),
+              CustomListTile(
+                title: '知乎用户协议',
+                http: 'https://www.zhihu.com/plainterms',
+              )
+            ]),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 50,

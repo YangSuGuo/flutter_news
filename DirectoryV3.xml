@@ -23,7 +23,7 @@
     <tree path="/assets/md" title="Md文档资源"/>
     <tree path="/assets/image" title="项目资源"/>
     <tree path="/lib/pages/Item" title="列表"/>
-    <tree path="/lib/db/db.dart" title="数据库&api" extension="" presentableText="" tooltipTitle="" icon="" textColor=""
+    <tree path="/lib/db/db.dart" title="数据库 api" extension="" presentableText="" tooltipTitle="" icon="" textColor=""
           backgroundColor=""/>
     <tree path="/lib/db/database" title="表"/>
     <tree path="/lib/db/database/stars.dart" title="收藏表"/>
@@ -35,4 +35,8 @@
     <tree path="/lib/pages/Item/Widget/list.dart" title="文章列表"/>
     <tree path="/lib/Widget/CustomDialogs.dart" title="弹框提示"/>
     <tree path="/lib/pages/Comments/Widget/CommentWidget.dart" title="评论组件"/>
+    <tree path="/lib/pages/Settings/Widget/ListTile.dart" title="设置列表"/>
+    <tree path="/lib/pages/Settings/Widget/ThemeTile.dart" title="主题选项卡"/>
+    <tree path="/lib/pages/Settings/Widget/CardColumn.dart" title="卡片"/>
+    <tree path="/lib/pages/Settings/Widget/CustomHeaderText.dart" title="标题"/>
 </trees>
