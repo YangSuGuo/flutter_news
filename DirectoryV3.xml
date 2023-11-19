@@ -40,4 +40,5 @@
     <tree path="/lib/pages/Settings/Widget/CardColumn.dart" title="卡片"/>
     <tree path="/lib/pages/Settings/Widget/CustomHeaderText.dart" title="标题"/>
     <tree path="/lib/Widget" title="通用组件"/>
+    <tree path="/lib/db/shared_preferences" title="持久化"/>
 </trees>

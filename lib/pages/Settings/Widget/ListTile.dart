@@ -5,7 +5,8 @@ class CustomListTile extends StatelessWidget {
   final String title;
   final String http;
 
-  const CustomListTile({Key? key, required this.title, required this.http}) : super(key: key);
+  const CustomListTile({Key? key, required this.title, required this.http})
+      : super(key: key);
 
   Future<void> _launchInBrowser(Uri uri) async {
     if (!await launchUrl(

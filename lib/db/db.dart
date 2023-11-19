@@ -1,10 +1,12 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
 import '../models/stars.dart';
 import 'database/stars.dart';
 
-class DB{
+class DB {
   DB._();
+
   static final DB db = DB._();
   late Database _db;
 
@@ -23,18 +25,17 @@ class DB{
   Future<Database> createDatabase() async {
     final String dbPath = await getDatabasesPath();
     final String path = join(dbPath, _databaseName);
-    final Database db = await openDatabase(
-      path,
-      version: _version,
-      onCreate: _onCreate
-    );
+    final Database db =
+        await openDatabase(path, version: _version, onCreate: _onCreate);
     return db;
   }
+
   Future close() async => _db.close();
 
   /// 创建
   void _onCreate(Database db, int newVersion) async {
     final batch = db.batch();
+
     /// 表
     batch.execute(Stars().createTable);
     await batch.commit();
@@ -66,8 +67,7 @@ class DB{
   /// 新增收藏
   Future<bool> insertStars(StarsData starsData) async {
     final db = await database;
-    final int result =
-    await db.insert(Stars.tableName, starsData.toJson());
+    final int result = await db.insert(Stars.tableName, starsData.toJson());
     print(result);
     return result > 0;
   }

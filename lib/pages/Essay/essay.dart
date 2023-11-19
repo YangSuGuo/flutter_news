@@ -123,7 +123,8 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
         // 用于添加集成到 flutter widget 树中的内联原生 WebView
         child: InAppWebView(
           key: webViewKey,
-          initialUrlRequest: URLRequest(url: Uri.parse("https://daily.zhihu.com/story/$id")),
+          initialUrlRequest:
+              URLRequest(url: Uri.parse("https://daily.zhihu.com/story/$id")),
           initialOptions: options,
           pullToRefreshController: pullToRefreshController,
           onWebViewCreated: (controller) {
@@ -203,13 +204,13 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                         // todo 完善逻辑
                         // todo 持久化收藏状态
                         // 收藏状态，先查数据库id有没有，有真 无假
-                        if(!stars){
+                        if (!stars) {
                           // 没有 添加
                           DB.db.insertStars(star);
                           setState(() {
                             stars = true;
                           });
-                        }else{
+                        } else {
                           // 有 删除
                           // DB.db.deleteStars(id);
                           setState(() {

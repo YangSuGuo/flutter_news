@@ -11,7 +11,6 @@ import 'Settings/settings.dart';
 // todo 可选 持久化主题状态【shared_preferences】，自动跟随系统主题
 // todo 可选 json 实体化
 // todo 文章列表显示日期
-// todo 将网络层分离至http_api
 
 class app extends StatefulWidget {
   const app({super.key});
@@ -19,15 +18,11 @@ class app extends StatefulWidget {
   @override
   State<app> createState() => _appState();
 }
+
 class _appState extends State<app> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: _buildAppbar(),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: item(),
-        ));
+    return Scaffold(appBar: _buildAppbar(), body: _buildBody());
   }
 
   /// 标题栏
@@ -82,6 +77,14 @@ class _appState extends State<app> {
           ),
         ),
       ],
+    );
+  }
+
+  /// Body
+  Widget _buildBody() {
+    return Padding(
+        padding: const EdgeInsets.only(top: 0),
+        child: item()
     );
   }
 }

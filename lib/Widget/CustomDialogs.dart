@@ -20,10 +20,10 @@ class CustomDialogs {
                     onPressed: () => Get.back(),
                     child: const Text('取消'),
                   ),
-                  TextButton(
-                    onPressed: onConfirm,
-                    child: const Text('确定'),
-                  )
+                TextButton(
+                  onPressed: onConfirm,
+                  child: const Text('确定'),
+                )
               ],
             ));
   }

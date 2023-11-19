@@ -38,7 +38,7 @@ class _starsState extends State<stars> {
   }
 
   /// 收藏列表
-  Widget _buildBody(Map<String, dynamic> items){
+  Widget _buildBody(Map<String, dynamic> items) {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {

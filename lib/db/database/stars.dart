@@ -1,4 +1,4 @@
-class Stars{
+class Stars {
   // 收藏表
   static const String tableName = 'stars_info';
 

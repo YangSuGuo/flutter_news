@@ -4,10 +4,7 @@ import 'package:intl/intl.dart';
 class CommentWidget extends StatelessWidget {
   final Map<String, dynamic> comment;
 
-  const CommentWidget({
-    Key? key,
-    required this.comment
-  }) : super(key: key);
+  const CommentWidget({Key? key, required this.comment}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

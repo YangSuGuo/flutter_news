@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:intl/intl.dart';
+
 import 'net.dart';
 
 class HttpApi {
@@ -29,7 +30,7 @@ class HttpApi {
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
         final List<Map<String, dynamic>> items =
-        data['stories'].cast<Map<String, dynamic>>();
+            data['stories'].cast<Map<String, dynamic>>();
         final formattedDate = DateFormat('yyyyMMdd').format(DateTime.now());
         print('数据为: $formattedDate');
         return items;
@@ -52,8 +53,25 @@ class HttpApi {
         final data = json.decode(response.data);
 
         final List<Map<String, dynamic>> items =
-        data['stories'].cast<Map<String, dynamic>>();
+            data['stories'].cast<Map<String, dynamic>>();
         print('数据为: $formattedDate');
+        return items;
+      } else {
+        throw Exception('加载数据失败');
+      }
+    } catch (e) {
+      throw Exception('错误：$e');
+    }
+  }
+
+  // 轮播图数据
+  static Future<List<Map<String, dynamic>>> getSwiper() async {
+    try {
+      final response = await DioUtils.instance.dio.get(HttpApi.zhihu_list);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.data);
+        final List<Map<String, dynamic>> items =
+        data['top_stories'].cast<Map<String, dynamic>>();
         return items;
       } else {
         throw Exception('加载数据失败');
@@ -67,7 +85,7 @@ class HttpApi {
   static Future<Map<String, dynamic>> getCommentsInfo(int id) async {
     try {
       final response =
-      await DioUtils.instance.dio.get('${HttpApi.zhihu_comments_info}$id');
+          await DioUtils.instance.dio.get('${HttpApi.zhihu_comments_info}$id');
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
         return data;

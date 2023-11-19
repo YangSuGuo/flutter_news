@@ -73,9 +73,20 @@ class _settingsState extends State<settings> {
                 }),
                 renderBorder: false,
                 children: [
-                  ThemeTile(text: '跟随系统',icon: Icons.brightness_4,horizontalPadding: MediaQuery.of(context).size.width / 10),
-                  ThemeTile(text: '日间模式',icon: Icons.wb_sunny,horizontalPadding: MediaQuery.of(context).size.width / 9),
-                  ThemeTile(text: '夜间模式',icon: Icons.nightlight_round,horizontalPadding: MediaQuery.of(context).size.width / 10),
+                  ThemeTile(
+                      text: '跟随系统',
+                      icon: Icons.brightness_4,
+                      horizontalPadding:
+                          MediaQuery.of(context).size.width / 10),
+                  ThemeTile(
+                      text: '日间模式',
+                      icon: Icons.wb_sunny,
+                      horizontalPadding: MediaQuery.of(context).size.width / 9),
+                  ThemeTile(
+                      text: '夜间模式',
+                      icon: Icons.nightlight_round,
+                      horizontalPadding:
+                          MediaQuery.of(context).size.width / 10),
                 ],
               ),
             ]),
@@ -88,7 +99,7 @@ class _settingsState extends State<settings> {
                 onTap: () => Get.to(const stars()),
               ),
               ListTile(
-                title: const Text('推送中心'),
+                title: const Text('实验室'),
                 visualDensity: const VisualDensity(vertical: -3),
                 onTap: () => Get.to(const stars()),
               ),

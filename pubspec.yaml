@@ -30,7 +30,7 @@ dependencies:
   # 分享
   share_plus: ^7.2.1
   # 轮播【目前没用】
-#  card_swiper: ^3.0.1
+  card_swiper: ^3.0.1
   # url跳转
   url_launcher: ^6.1.14
   # webview flutter实现
