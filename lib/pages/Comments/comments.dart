@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,42 +22,6 @@ class _comments_pageState extends State<comments_page> {
     comments = Get.arguments["comments"];
     id = Get.arguments["id"];
     print("获取传值:${Get.arguments["id"]}");
-  }
-
-  // 文章长评信息
-  Future<List<dynamic>> _getComments(int id) async {
-    try {
-      final response = await DioUtils.instance.dio
-          .get('${HttpApi.zhihu_body}$id${HttpApi.zhihu_comments}');
-      if (response.statusCode == 200) {
-        final data = json.decode(response.data);
-        final List<dynamic> comments = data['comments'];
-        // print(comments.toString());
-        return comments;
-      } else {
-        throw Exception('加载数据失败');
-      }
-    } catch (e) {
-      throw Exception('错误：$e');
-    }
-  }
-
-  // 文章短评信息
-  Future<List<dynamic>> _getShort_Comments(int id) async {
-    try {
-      final response = await DioUtils.instance.dio
-          .get('${HttpApi.zhihu_body}$id${HttpApi.zhihu_short_comments}');
-      if (response.statusCode == 200) {
-        final data = json.decode(response.data);
-        final List<dynamic> comments = data['comments'];
-        print(comments.toString());
-        return comments;
-      } else {
-        throw Exception('加载数据失败');
-      }
-    } catch (e) {
-      throw Exception('错误：$e');
-    }
   }
 
   @override
@@ -102,7 +64,7 @@ class _comments_pageState extends State<comments_page> {
   Widget _buildLong_Comments() {
     // 异步加载
     return FutureBuilder<List<dynamic>>(
-      future: _getComments(id),
+      future: HttpApi.getComments(id),
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center();
@@ -137,7 +99,7 @@ class _comments_pageState extends State<comments_page> {
   // 短评论
   Widget _buildShort_Comments() {
     return FutureBuilder<List<dynamic>>(
-      future: _getShort_Comments(id),
+      future: HttpApi.getShortComments(id),
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center();

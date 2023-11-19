@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -26,7 +24,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   /// 文章
   Map<String, dynamic> comments = {}; // 评论信息
   int id = 9766161; // 初始值 id
-  bool end = true; // 加载状态
+  // bool end = true; // 加载状态
   bool stars = false; // 收藏
 
   /// 旋转动画
@@ -80,8 +78,12 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
     // 初始化数据
     print("获取传值:${Get.arguments["id"]}");
     id = Get.arguments["id"];
-    _getComments(id);
-
+    // 评论数据
+    HttpApi.getCommentsInfo(id).then((data) {
+      setState(() {
+        comments = data;
+      });
+    });
     // 浏览器下拉刷新操作
     pullToRefreshController = PullToRefreshController(
       options: PullToRefreshOptions(
@@ -108,29 +110,9 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   """);
   }
 
-  // 获取文章额外信息【评论，点赞】
-  Future<void> _getComments(int id) async {
-    try {
-      final response =
-          await DioUtils.instance.dio.get('${HttpApi.zhihu_comments_info}$id');
-      if (response.statusCode == 200) {
-        final data = json.decode(response.data);
-        setState(() {
-          comments = data;
-          end = false;
-        });
-        print('获取评论数据成功');
-      } else {
-        throw Exception('获取评论数据失败');
-      }
-    } catch (e) {
-      throw Exception('错误：$e');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: end ? const GFLoader() : _buildBody());
+    return Scaffold(body: comments.isEmpty ? const GFLoader() : _buildBody());
   }
 
   Widget _buildBody() {
