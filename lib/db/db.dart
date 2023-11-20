@@ -42,7 +42,7 @@ class DB {
   }
 
   /// 查询所有收藏
-  Future<List<Map<String, dynamic>>> selectAllStars() async {
+  Future<List> selectAllStars() async {
     final db = await database;
     final List<Map<String, dynamic>> list = await db.query(
       Stars.tableName,
@@ -51,7 +51,6 @@ class DB {
   }
 
   /// 查询收藏详情
-  /// [starsID] 查询id (9766161)
   Future<List> selectStars(int id) async {
     final db = await database;
     final List list = await db.query(

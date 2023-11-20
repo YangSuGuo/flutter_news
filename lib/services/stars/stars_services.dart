@@ -10,4 +10,8 @@ class StarsServices{
     }
     return dataList;
   }
+
+  // static Future<List<Map<String,dynamic>>> getSelectStars(int id) async {
+  //
+  // }
 }

@@ -24,8 +24,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   /// 文章
   Map<String, dynamic> comments = {}; // 评论信息
   int id = 9766161; // 初始值 id
-  // bool end = true; // 加载状态
-  bool stars = false; // 收藏
+  bool stars = false; // 收藏状态
 
   /// 旋转动画
   late final AnimationController _ctrl =
@@ -33,7 +32,6 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
 
   /// 浏览器
   /// todo 添加加载图，增加用户体验，优化用户使用，避免闪屏！！！！！！超级重要
-  /// todo 可选异步加载浏览器
   /// js更改属性 data-theme="dark" 即为夜间模式（<html class="itcauecng" data-theme="dark">）,
   /// bug BLUETOOTH_CONNECT permission is missing
   /// bug setForceDark() is a no-op in an app with targetSdkVersion>=T
@@ -76,14 +74,8 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     // 初始化数据
-    print("获取传值:${Get.arguments["id"]}");
     id = Get.arguments["id"];
-    // 评论数据
-    HttpApi.getCommentsInfo(id).then((data) {
-      setState(() {
-        comments = data;
-      });
-    });
+    InitialData(id);
     // 浏览器下拉刷新操作
     pullToRefreshController = PullToRefreshController(
       options: PullToRefreshOptions(
@@ -98,6 +90,17 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
         }
       },
     );
+  }
+
+  // 评论 收藏初始化
+  Future<void> InitialData(int id) async {
+    Map<String, dynamic> data = await HttpApi.getCommentsInfo(id); // 评论数据
+    List result = await DB.db.selectStars(id); // 收藏状态
+    print(result.isNotEmpty);
+    setState(() {
+      stars = result.isNotEmpty;
+      comments = data;
+    });
   }
 
   // 浏览器夜间模式实现 js 查找dom更改
@@ -193,7 +196,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                           ? (stars ? Colors.deepOrange : Colors.white) // 夜间模式
                           : (stars ? Colors.deepOrange : Colors.black), // 日间模式
                       onPressed: () {
-                        // 收藏信息
+                        // 初始化收藏信息
                         final StarsData star = StarsData();
                         star.starsID = id;
                         star.title = Get.arguments['title'];
@@ -201,26 +204,19 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                         star.description = Get.arguments['description'];
                         star.image = Get.arguments['images'];
                         star.collectTime = DateTime.now().toIso8601String();
-                        // todo 完善逻辑
-                        // todo 持久化收藏状态
-                        // 收藏状态，先查数据库id有没有，有真 无假
-                        DB.db.insertStars(star);
-                        setState(() {
-                          stars = !stars;
-                        });
-                        // if (!stars) {
-                        //   // 没有 添加
-                        //   DB.db.insertStars(star);
-                        //   setState(() {
-                        //     stars = true;
-                        //   });
-                        // } else {
-                        //   // 有 删除
-                        //   // DB.db.deleteStars(id);
-                        //   setState(() {
-                        //     stars = false;
-                        //   });
-                        // }
+                        // 收藏逻辑
+                        if (stars == false) {
+                          DB.db.insertStars(star); // 添加
+                          setState(() {
+                            stars = true;
+                          });
+                        } else {
+                          DB.db.deleteStars(star); // 删除
+                          setState(() {
+                            stars = false;
+                          });
+                        }
+
                       }),
                   // 刷新按钮
                   RotationTransition(

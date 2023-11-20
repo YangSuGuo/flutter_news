@@ -16,12 +16,25 @@ class starsitem extends StatelessWidget {
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () => Get.to(() => essay(), arguments: {
-          'id': item['starsID'],
-          'title': item['title'],
-          'link': item['link'],
-          'description': item['description'],
-          'images': item['images']
-        }),
+              'id': item['starsID'],
+              'title': item['title'],
+              'link': item['link'],
+              'description': item['description'],
+              'images': item['images']
+            }),
+        /*onLongPress: () {
+          CustomDialogs.confirmationDialog(
+              title: '是否删除？',
+              content: '从数据库中删除，此操作不可逆❗',
+              context: context,
+              onCancel: true,
+              onConfirm: () {
+                // todo 实现从列表中删除 or 重新加载
+                final StarsData star = StarsData();
+                star.starsID = item['starsID'];
+                DB.db.deleteStars(star);
+              });
+        },*/
         child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Expanded(
               child: SizedBox(
@@ -44,13 +57,13 @@ class starsitem extends StatelessWidget {
                                         fontWeight: FontWeight.bold))),
                             Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Text(item['description'],
-                                      softWrap: true,
-                                      maxLines: 3,
-                                      style: const TextStyle(
-                                          color: Colors.grey, fontSize: 13.0)),
-                                ))
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(item['description'],
+                                  softWrap: true,
+                                  maxLines: 3,
+                                  style: const TextStyle(
+                                      color: Colors.grey, fontSize: 13.0)),
+                            ))
                           ])))),
           if (item['image'].isNotEmpty)
             Card(

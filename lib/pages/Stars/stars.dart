@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:item_news/pages/Stars/Widget/starsItem.dart';
 
 import '../../services/stars/stars_services.dart';
-import '../Item/Widget/list.dart';
 
 class stars extends StatefulWidget {
   const stars({super.key});
@@ -24,11 +23,11 @@ class _starsState extends State<stars> {
   Future<void> loadData() async {
     // 连接数据库
     List<Map<String, dynamic>> starsDataList = await StarsServices.getStarsAllData();
-    print(starsDataList);
+    // print(starsDataList);
     setState(() {
       items.addAll(starsDataList);
     });
-    print(items);
+    // print(items);
   }
 
   @override
