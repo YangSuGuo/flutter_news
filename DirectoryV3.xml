@@ -41,4 +41,7 @@
     <tree path="/lib/pages/Settings/Widget/CustomHeaderText.dart" title="标题"/>
     <tree path="/lib/Widget" title="通用组件"/>
     <tree path="/lib/db/shared_preferences" title="持久化"/>
+    <tree path="/lib/themes/app_theme.dart" title="自定义主题"/>
+    <tree path="/lib/pages/Stars/Widget/remind.dart" title="空提示"/>
+    <tree path="/lib/pages/Stars/Widget/starsItem.dart" title="收藏列表"/>
 </trees>

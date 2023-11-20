@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:item_news/pages/Stars/Widget/remind.dart';
 import 'package:item_news/pages/Stars/Widget/starsItem.dart';
 
 import '../../services/stars/stars_services.dart';
@@ -22,19 +23,18 @@ class _starsState extends State<stars> {
 
   Future<void> loadData() async {
     // 连接数据库
-    List<Map<String, dynamic>> starsDataList = await StarsServices.getStarsAllData();
-    // print(starsDataList);
+    List<Map<String, dynamic>> starsDataList =
+        await StarsServices.getStarsAllData();
     setState(() {
       items.addAll(starsDataList);
     });
-    // print(items);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: _buildBody(),
+      body: items.isNotEmpty ? _buildBody() : RemindWidget(),
     );
   }
 
@@ -56,7 +56,7 @@ class _starsState extends State<stars> {
     );
   }
 
-  /// 收藏列表
+  /// 收藏区
   Widget _buildBody() {
     return ListView.builder(
       itemCount: items.length,
