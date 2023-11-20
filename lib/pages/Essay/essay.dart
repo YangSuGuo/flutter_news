@@ -204,19 +204,23 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                         // todo 完善逻辑
                         // todo 持久化收藏状态
                         // 收藏状态，先查数据库id有没有，有真 无假
-                        if (!stars) {
-                          // 没有 添加
-                          DB.db.insertStars(star);
-                          setState(() {
-                            stars = true;
-                          });
-                        } else {
-                          // 有 删除
-                          // DB.db.deleteStars(id);
-                          setState(() {
-                            stars = false;
-                          });
-                        }
+                        DB.db.insertStars(star);
+                        setState(() {
+                          stars = !stars;
+                        });
+                        // if (!stars) {
+                        //   // 没有 添加
+                        //   DB.db.insertStars(star);
+                        //   setState(() {
+                        //     stars = true;
+                        //   });
+                        // } else {
+                        //   // 有 删除
+                        //   // DB.db.deleteStars(id);
+                        //   setState(() {
+                        //     stars = false;
+                        //   });
+                        // }
                       }),
                   // 刷新按钮
                   RotationTransition(

@@ -37,7 +37,7 @@ class _itemState extends State<item> {
         items.addAll(newItems);
         items.addAll(oldItems);
       });
-      dateTime = dateTime.subtract(Duration(days: 1));
+      dateTime = dateTime.subtract(const Duration(days: 1));
     } catch (e) {
       CustomDialogs.confirmationDialog(
           title: '🚨无网络!',

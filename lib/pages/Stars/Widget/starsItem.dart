@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../Essay/essay.dart';
 
-class Item extends StatelessWidget {
-  const Item({
+class starsitem extends StatelessWidget {
+  const starsitem({
     super.key,
     required this.item,
   });
@@ -16,12 +16,12 @@ class Item extends StatelessWidget {
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () => Get.to(() => essay(), arguments: {
-              'id': item['id'],
-              'title': item['title'],
-              'link': item['url'],
-              'description': item['hint'],
-              'images': item['images'][0]
-            }),
+          'id': item['starsID'],
+          'title': item['title'],
+          'link': item['link'],
+          'description': item['description'],
+          'images': item['images']
+        }),
         child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Expanded(
               child: SizedBox(
@@ -44,15 +44,15 @@ class Item extends StatelessWidget {
                                         fontWeight: FontWeight.bold))),
                             Expanded(
                                 child: Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(item['hint'],
-                                  softWrap: true,
-                                  maxLines: 3,
-                                  style: const TextStyle(
-                                      color: Colors.grey, fontSize: 13.0)),
-                            ))
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(item['description'],
+                                      softWrap: true,
+                                      maxLines: 3,
+                                      style: const TextStyle(
+                                          color: Colors.grey, fontSize: 13.0)),
+                                ))
                           ])))),
-          if (item['images'].isNotEmpty)
+          if (item['image'].isNotEmpty)
             Card(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               elevation: 0.0,
@@ -60,7 +60,7 @@ class Item extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(2.0))),
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/image/loading.gif',
-                image: item['images'][0],
+                image: item['image'],
                 fit: BoxFit.cover,
                 width: 80,
                 height: 80,

@@ -42,9 +42,9 @@ class DB {
   }
 
   /// 查询所有收藏
-  Future<List> selectAllStars() async {
+  Future<List<Map<String, dynamic>>> selectAllStars() async {
     final db = await database;
-    final List list = await db.query(
+    final List<Map<String, dynamic>> list = await db.query(
       Stars.tableName,
     );
     return list;
@@ -69,6 +69,17 @@ class DB {
     final db = await database;
     final int result = await db.insert(Stars.tableName, starsData.toJson());
     print(result);
+    return result > 0;
+  }
+
+  /// 删除收藏
+  Future<bool> deleteStars(StarsData starsData) async {
+    final db = await database;
+    final int result = await db.delete(
+      Stars.tableName,
+      where: '${Stars.starsID} = ?',
+      whereArgs: [starsData.starsID],
+    );
     return result > 0;
   }
 }
