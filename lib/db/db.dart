@@ -1,3 +1,4 @@
+import 'package:item_news/db/database/history.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -36,8 +37,12 @@ class DB {
   void _onCreate(Database db, int newVersion) async {
     final batch = db.batch();
 
-    /// 表
+    // 收藏
     batch.execute(Stars().createTable);
+    // batch.execute(Stars().dropTable);
+    // 历史
+    batch.execute(History().createTable);
+    // batch.execute(History().dropTable);
     await batch.commit();
   }
 

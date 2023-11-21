@@ -17,9 +17,6 @@ class Stars {
   // 链接
   static const String link = 'link';
 
-  // 发布时间
-  // static const String publishTime = 'publishTime';
-
   // 收藏时间
   static const String collectTime = 'collectTime';
 

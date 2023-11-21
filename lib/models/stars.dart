@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-StarsData moodDataFromJson(String str) => StarsData.fromJson(json.decode(str));
+StarsData starsDataFromJson(String str) => StarsData.fromJson(json.decode(str));
 
-String StarsDataToJson(StarsData data) => json.encode(data.toJson());
+String starsDataToJson(StarsData data) => json.encode(data.toJson());
 
 /// 收藏数据
 class StarsData {
