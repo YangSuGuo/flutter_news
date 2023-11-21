@@ -81,7 +81,8 @@ class _settingsState extends State<settings> {
                               onPressed: () {},
                             )),
                         radius: 10,
-                        barrierDismissible: true);
+                        barrierDismissible: true
+                    );
                   } else if (value == 1) {
                     Get.changeTheme(ThemeData.light());
                   } else if (value == 2) {
@@ -153,7 +154,9 @@ class _settingsState extends State<settings> {
                     CustomDialogs.confirmationDialog(
                         title: '是否退出应用!',
                         context: context,
-                        onCancel: true,
+                        cancel: true,
+                        confirm: true,
+                        buttonMinWidth: true,
                         onConfirm: (() => exit(0)));
                   },
                   child: const Text(

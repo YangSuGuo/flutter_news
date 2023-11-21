@@ -29,22 +29,27 @@ class _itemState extends State<item> {
   // 初始化数据 2天数据
   Future<void> InitialData() async {
     try {
-      final swiper = await HttpApi.getSwiper();
+      // final swiper = await HttpApi.getSwiper();
       final newItems = await HttpApi.getList();
       final oldItems = await HttpApi.getOldList(dateTime);
       setState(() {
-        swiperItems.addAll(swiper);
+        // swiperItems.addAll(swiper);
         items.addAll(newItems);
         items.addAll(oldItems);
       });
       dateTime = dateTime.subtract(const Duration(days: 1));
     } catch (e) {
       CustomDialogs.confirmationDialog(
-          title: '🚨无网络!',
+          title: '🚨网络异常!',
           content: '请检查网络是否连接!',
           context: context,
-          onCancel: false,
-          onConfirm: (() => Get.back()));
+          cancel: false,
+          confirm: true,
+          buttonMinWidth: false,
+          onConfirm: (() {
+            InitialData();
+            Get.back();
+          }));
       print('加载列表初始数据失败: $e');
     }
   }
@@ -92,11 +97,15 @@ class _itemState extends State<item> {
             }
           } catch (e) {
             CustomDialogs.confirmationDialog(
-                title: '🚨无网络!',
+                title: '🚨网络异常!',
                 content: '请检查网络是否连接!',
                 context: context,
-                onCancel: false,
-                onConfirm: (() => Get.back()));
+                cancel: false,
+                confirm: true,
+                buttonMinWidth: false,
+                onConfirm: (() {
+                  Get.back();
+                }));
           }
         },
         onLoad: () async {
@@ -112,11 +121,15 @@ class _itemState extends State<item> {
             }
           } catch (e) {
             CustomDialogs.confirmationDialog(
-                title: '🚨无网络!',
+                title: '🚨网络异常!',
                 content: '请检查网络是否连接!',
                 context: context,
-                onCancel: false,
-                onConfirm: (() => Get.back()));
+                cancel: false,
+                confirm: true,
+                buttonMinWidth: false,
+                onConfirm: (() {
+                  Get.back();
+                }));
           }
         },
         child: ListView.builder(
