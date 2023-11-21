@@ -2,6 +2,7 @@ import 'package:item_news/db/database/history.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../models/history.dart';
 import '../models/stars.dart';
 import 'database/stars.dart';
 
@@ -36,7 +37,6 @@ class DB {
   /// 创建
   void _onCreate(Database db, int newVersion) async {
     final batch = db.batch();
-
     // 收藏
     batch.execute(Stars().createTable);
     // batch.execute(Stars().dropTable);
@@ -45,6 +45,8 @@ class DB {
     // batch.execute(History().dropTable);
     await batch.commit();
   }
+
+  ///////////////////////////////// 收藏 /////////////////////////////////
 
   /// 查询所有收藏
   Future<List> selectAllStars() async {
@@ -55,13 +57,13 @@ class DB {
     return list;
   }
 
-  /// 查询收藏详情
+  /// 按ID查找收藏
   Future<List> selectStars(int id) async {
     final db = await database;
     final List list = await db.query(
       Stars.tableName,
       where: '''
-        ${Stars.starsID} like ? 
+        ${Stars.id} like ? 
       ''',
       whereArgs: ['$id%'],
     );
@@ -81,9 +83,41 @@ class DB {
     final db = await database;
     final int result = await db.delete(
       Stars.tableName,
-      where: '${Stars.starsID} = ?',
-      whereArgs: [starsData.starsID],
+      where: '${Stars.id} = ?',
+      whereArgs: [starsData.id],
     );
+    return result > 0;
+  }
+
+  ///////////////////////////////// 历史 /////////////////////////////////
+
+  /// 查询所有历史记录
+  Future<List> selectAllHistory() async {
+    final db = await database;
+    final List<Map<String, dynamic>> list = await db.query(
+      History.tableName,
+    );
+    return list;
+  }
+
+  /// 按ID查找历史记录
+  Future<List> selectHistory(int id) async {
+    final db = await database;
+    final List list = await db.query(
+      History.tableName,
+      where: '''
+        ${History.id} like ? 
+      ''',
+      whereArgs: ['$id%'],
+    );
+    return list;
+  }
+
+  /// 新增历史记录
+  Future<bool> insertHistory(HistoryData historyData) async {
+    final db = await database;
+    final int result = await db.insert(History.tableName, historyData.toJson());
+    print(result);
     return result > 0;
   }
 }

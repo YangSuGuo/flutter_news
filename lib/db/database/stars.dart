@@ -3,19 +3,19 @@ class Stars {
   static const String tableName = 'stars_info';
 
   // ID
-  static const String starsID = 'starsID';
+  static const String id = 'id';
 
   // 标题
   static const String title = 'title';
 
   // 描述
-  static const String description = 'description';
+  static const String hint = 'hint';
 
   // 图片
   static const String image = 'image';
 
   // 链接
-  static const String link = 'link';
+  static const String url = 'url';
 
   // 收藏时间
   static const String collectTime = 'collectTime';
@@ -26,11 +26,11 @@ class Stars {
   /// 创建数据库
   final String createTable = '''
       CREATE TABLE $tableName (
-        $starsID INTEGER PRIMARY KEY,
+        $id INTEGER PRIMARY KEY,
         $title TEXT,
-        $description TEXT,
+        $hint TEXT,
         $image TEXT,
-        $link TEXT,
+        $url TEXT,
         $collectTime TEXT
       );
     ''';

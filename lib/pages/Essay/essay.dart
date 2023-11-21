@@ -198,10 +198,10 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                       onPressed: () {
                         // 初始化收藏信息
                         final StarsData star = StarsData();
-                        star.starsID = id;
+                        star.id = id;
                         star.title = Get.arguments['title'];
-                        star.link = Get.arguments['link'];
-                        star.description = Get.arguments['description'];
+                        star.url = Get.arguments['link'];
+                        star.hint = Get.arguments['description'];
                         star.image = Get.arguments['images'];
                         star.collectTime = DateTime.now().toIso8601String();
                         // 收藏逻辑

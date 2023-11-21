@@ -15,7 +15,7 @@ class RemindWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            '没有收藏哦',
+            '没有数据哦',
             style: TextStyle(
                 color: Colors.grey, fontSize: 20, fontWeight: FontWeight.w500),
           ),

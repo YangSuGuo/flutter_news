@@ -45,4 +45,5 @@
     <tree path="/lib/pages/Stars/Widget/remind.dart" title="空提示"/>
     <tree path="/lib/pages/Stars/Widget/starsItem.dart" title="收藏列表"/>
     <tree path="/lib/db/database/history.dart" title="历史记录"/>
+    <tree path="/lib/pages/History" title="历史"/>
 </trees>

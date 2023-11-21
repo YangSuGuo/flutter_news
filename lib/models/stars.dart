@@ -7,47 +7,47 @@ String starsDataToJson(StarsData data) => json.encode(data.toJson());
 /// 收藏数据
 class StarsData {
   StarsData({
-    this.starsID,
+    this.id,
     this.title,
-    this.description,
+    this.hint,
     this.image,
-    this.link,
+    this.url,
     this.collectTime,
   });
 
   // ID
-  late int? starsID;
+  late int? id;
 
   // 标题
   late String? title;
 
   // 描述
-  late String? description;
+  late String? hint;
 
   // 图片
   late String? image;
 
   // 链接
-  late String? link;
+  late String? url;
 
   // 修改日期
   late String? collectTime;
 
   factory StarsData.fromJson(Map<String, dynamic> json) => StarsData(
-        starsID: json['starsID'],
+        id: json['id'],
         title: json['title'],
-        description: json['description'],
+        hint: json['hint'],
         image: json['image'],
-        link: json['link'],
+        url: json['url'],
         collectTime: json['collectTime'],
       );
 
   Map<String, dynamic> toJson() => {
-        'starsID': starsID,
+        'id': id,
         'title': title,
-        'description': description,
+        'hint': hint,
         'image': image,
-        'link': link,
+        'url': url,
         'collectTime': collectTime,
       };
 }

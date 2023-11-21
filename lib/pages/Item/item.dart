@@ -7,6 +7,8 @@ import 'package:item_news/pages/Essay/essay.dart';
 
 import '../../../http/net.dart';
 import '../../Widget/CustomDialogs.dart';
+import '../../db/db.dart';
+import '../../models/history.dart';
 import 'Widget/list.dart';
 
 class item extends StatefulWidget {
@@ -136,9 +138,34 @@ class _itemState extends State<item> {
           itemCount: items.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.only(left: 5, right: 5, bottom: 2),
-              child: Item(item: items[index]),
-            );
+                padding: const EdgeInsets.only(left: 5, right: 5, bottom: 2),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    // 历史记录
+                    final HistoryData history = HistoryData();
+                    history.id = items[index]['id'];
+                    history.title = items[index]['title'];
+                    history.hint = items[index]['hint'];
+                    history.image = items[index]['images'][0];
+                    history.url = items[index]['url'];
+                    history.ga_prefix = items[index]['ga_prefix'];
+                    history.reading_time = DateTime.now().toIso8601String();
+                    // if(){}
+                    DB.db.insertHistory(history);
+                    // todo 如果有就更新数据
+
+                    // 收藏数据
+                    Get.to(() => essay(), arguments: {
+                      'id': items[index]['id'],
+                      'title': items[index]['title'],
+                      'link': items[index]['url'],
+                      'description': items[index]['hint'],
+                      'images': items[index]['images'][0]
+                    });
+                  },
+                  child: Item(item: items[index]),
+                ));
           },
         ));
   }

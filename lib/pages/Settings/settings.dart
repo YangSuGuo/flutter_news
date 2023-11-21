@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:item_news/pages/History/history.dart';
 import 'package:item_news/pages/Stars/stars.dart';
 
 import '../../Widget/CustomDialogs.dart';
@@ -112,14 +113,19 @@ class _settingsState extends State<settings> {
             CustomCard(children: [
               const CustomHeaderText(text: '功能'),
               ListTile(
+                title: const Text('实验室'),
+                visualDensity: const VisualDensity(vertical: -3),
+                onTap: () {},
+              ),
+              ListTile(
                 title: const Text('收藏夹'),
                 visualDensity: const VisualDensity(vertical: -4),
                 onTap: () => Get.to(const stars()),
               ),
               ListTile(
-                title: const Text('实验室'),
-                visualDensity: const VisualDensity(vertical: -3),
-                onTap: () {},
+                title: const Text('历史记录'),
+                visualDensity: const VisualDensity(vertical: -4),
+                onTap: () => Get.to(const history()),
               ),
             ]),
             // 关于
