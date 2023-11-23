@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:item_news/models/history.dart';
+import 'package:item_news/models/stories.dart';
 import 'package:item_news/pages/Item/Widget/list.dart';
 
 import '../../db/db.dart';
@@ -13,7 +15,7 @@ class history extends StatefulWidget {
 }
 
 class _historyState extends State<history> {
-  List<Map<String, dynamic>> items = []; // 历史数据
+  List<StoriesData> items = []; // 历史数据
 
   @override
   void initState() {
@@ -22,14 +24,8 @@ class _historyState extends State<history> {
   }
 
   Future<void> loadData() async {
-    // 连接数据库
     final historyData = await DB.db.selectAllHistory();
-    for (final value in historyData) {
-      setState(() {
-        items.add(value);
-      });
-    }
-    print(items);
+    setState(() => items = historyData);
   }
 
   @override
@@ -61,18 +57,12 @@ class _historyState extends State<history> {
       itemCount: items.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(left: 5, right: 5, bottom: 2),
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () => Get.to(() => essay(), arguments: {
-              'id': items[index]['id'],
-              'title': items[index]['title'],
-              'link': items[index]['url'],
-              'description': items[index]['hint'],
-              'images': items[index]['image']
-            }),
-            child: Item(item: items[index]),
-          ));
+            padding: const EdgeInsets.only(left: 5, right: 5, bottom: 2),
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () => Get.to(() => essay(), arguments: {'item': items[index]}),
+              child: Item(item: items[index]),
+            ));
       },
     );
   }

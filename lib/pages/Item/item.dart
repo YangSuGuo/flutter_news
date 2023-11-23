@@ -1,8 +1,8 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:item_news/models/stories.dart';
 import 'package:item_news/pages/Essay/essay.dart';
 
 import '../../../http/net.dart';
@@ -18,8 +18,8 @@ class item extends StatefulWidget {
 
 class _itemState extends State<item> {
   DateTime dateTime = DateTime.now(); // 时间
-  List<Map<String, dynamic>> swiperItems = []; // 轮播图
-  List<Map<String, dynamic>> items = []; // 知乎日报
+  // List<Map<String, dynamic>> swiperItems = []; // 轮播图
+  List<StoriesData> items = []; // 知乎日报
 
   @override
   void initState() {
@@ -84,16 +84,12 @@ class _itemState extends State<item> {
         onRefresh: () async {
           // 下拉刷新
           try {
-            // 获取新数据
             final newItems = await HttpApi.getList();
-            // 截取已有数据的新数据条数，进行比对
             final oldItems = items.sublist(0, newItems.length);
             print(listEquals(oldItems, newItems));
-            // 如果不相同，删除相应的旧数据，更新新数据
             if (!listEquals(oldItems, newItems)) {
               items.removeRange(0, oldItems.length);
               setState(() {
-                // 添加数据
                 items.insertAll(0, newItems);
               });
             }
@@ -143,26 +139,20 @@ class _itemState extends State<item> {
                   behavior: HitTestBehavior.translucent,
                   onTap: () {
                     // 历史记录
-                    final HistoryData history = HistoryData();
-                    history.id = items[index]['id'];
-                    history.title = items[index]['title'];
-                    history.hint = items[index]['hint'];
-                    history.image = items[index]['images'][0];
-                    history.url = items[index]['url'];
-                    history.ga_prefix = items[index]['ga_prefix'];
-                    history.reading_time = DateTime.now().toIso8601String();
+                    final HistoryData history = HistoryData(
+                        id: items[index].id,
+                        title: items[index].title,
+                        hint: items[index].hint,
+                        image: items[index].image,
+                        url: items[index].url,
+                        ga_prefix: items[index].ga_prefix,
+                        reading_time: DateTime.now().toString()
+                    );
                     // if(){}
                     DB.db.insertHistory(history);
                     // todo 如果有就更新数据
-
                     // 收藏数据
-                    Get.to(() => essay(), arguments: {
-                      'id': items[index]['id'],
-                      'title': items[index]['title'],
-                      'link': items[index]['url'],
-                      'description': items[index]['hint'],
-                      'images': items[index]['images'][0]
-                    });
+                    Get.to(() => essay(), arguments: {'item': items[index]});
                   },
                   child: Item(item: items[index]),
                 ));
@@ -170,8 +160,8 @@ class _itemState extends State<item> {
         ));
   }
 
-  // 轮播图
-  Widget swiper() {
+// 轮播图
+/*  Widget swiper() {
     return SizedBox(
         height: 300,
         child: Swiper(
@@ -205,5 +195,5 @@ class _itemState extends State<item> {
             );
           },
         ));
-  }
+  }*/
 }

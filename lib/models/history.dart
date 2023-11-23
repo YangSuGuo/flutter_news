@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:item_news/models/stories.dart';
+
 HistoryData historyDataFromJson(String str) =>
     HistoryData.fromJson(json.decode(str));
 
@@ -48,6 +50,17 @@ class HistoryData {
         reading_time: json['reading_time'],
       );
 
+  StoriesData toStoriesData() {
+    return StoriesData(
+        id: this.id,
+        title: this.title,
+        hint: this.hint,
+        image: this.image,
+        url: this.url,
+        ga_prefix: this.ga_prefix
+    );
+  }
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
@@ -57,4 +70,5 @@ class HistoryData {
         'ga_prefix': ga_prefix,
         'reading_time': reading_time
       };
+
 }

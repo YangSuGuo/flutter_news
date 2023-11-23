@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:item_news/Widget/remind.dart';
+import 'package:item_news/models/stars.dart';
 import 'package:item_news/pages/Item/Widget/list.dart';
 
 import '../../db/db.dart';
 import '../../models/history.dart';
+import '../../models/stories.dart';
 import '../Essay/essay.dart';
 
 class stars extends StatefulWidget {
@@ -15,7 +17,7 @@ class stars extends StatefulWidget {
 }
 
 class _starsState extends State<stars> {
-  List<Map<String, dynamic>> items = []; // 收藏数据
+  List<StoriesData> items = []; // 收藏数据
 
   @override
   void initState() {
@@ -26,11 +28,7 @@ class _starsState extends State<stars> {
   Future<void> loadData() async {
     // 连接数据库
     final starsData = await DB.db.selectAllStars();
-    for (final value in starsData) {
-      setState(() {
-        items.add(value);
-      });
-    }
+    setState(() => items = starsData);
   }
 
   @override
@@ -70,25 +68,19 @@ class _starsState extends State<stars> {
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 // 历史记录
-                final HistoryData history = HistoryData();
-                history.id = items[index]['id'];
-                history.title = items[index]['title'];
-                history.hint = items[index]['hint'];
-                history.image = items[index]['image'];
-                history.url = items[index]['url'];
-                history.ga_prefix = items[index]['ga_prefix'];
-                history.reading_time = DateTime.now().toIso8601String();
+                final HistoryData history = HistoryData(
+                    id: items[index].id,
+                    title: items[index].title,
+                    hint: items[index].hint,
+                    image: items[index].image,
+                    url: items[index].url,
+                    ga_prefix: items[index].ga_prefix,
+                    reading_time: DateTime.now().toString());
                 DB.db.insertHistory(history);
                 // todo 如果有就更新数据
 
                 // 收藏数据
-                Get.to(() => essay(), arguments: {
-                  'id': items[index]['id'],
-                  'title': items[index]['title'],
-                  'link': items[index]['url'],
-                  'description': items[index]['hint'],
-                  'images': items[index]['image']
-                });
+                Get.to(() => essay(), arguments: {'item': items[index]});
               },
               child: Item(item: items[index]),
             ));

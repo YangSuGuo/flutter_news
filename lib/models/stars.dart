@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:item_news/models/stories.dart';
+
 StarsData starsDataFromJson(String str) => StarsData.fromJson(json.decode(str));
 
 String starsDataToJson(StarsData data) => json.encode(data.toJson());
@@ -12,6 +14,7 @@ class StarsData {
     this.hint,
     this.image,
     this.url,
+    this.ga_prefix,
     this.collectTime,
   });
 
@@ -30,7 +33,10 @@ class StarsData {
   // 链接
   late String? url;
 
-  // 修改日期
+  // 日报时间
+  late String? ga_prefix;
+
+  // 收藏日期
   late String? collectTime;
 
   factory StarsData.fromJson(Map<String, dynamic> json) => StarsData(
@@ -39,8 +45,20 @@ class StarsData {
         hint: json['hint'],
         image: json['image'],
         url: json['url'],
+        ga_prefix: json['ga_prefix'],
         collectTime: json['collectTime'],
       );
+
+  StoriesData toStoriesData() {
+    return StoriesData(
+      id: this.id,
+      title: this.title,
+      hint: this.hint,
+      image: this.image,
+      url: this.url,
+      ga_prefix: this.ga_prefix
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -48,6 +66,7 @@ class StarsData {
         'hint': hint,
         'image': image,
         'url': url,
+        'ga_prefix': ga_prefix,
         'collectTime': collectTime,
       };
 }

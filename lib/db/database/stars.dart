@@ -17,6 +17,9 @@ class Stars {
   // 链接
   static const String url = 'url';
 
+  // 日报时间
+  static const String ga_prefix = 'ga_prefix';
+
   // 收藏时间
   static const String collectTime = 'collectTime';
 
@@ -31,6 +34,7 @@ class Stars {
         $hint TEXT,
         $image TEXT,
         $url TEXT,
+        $ga_prefix TEXT,
         $collectTime TEXT
       );
     ''';

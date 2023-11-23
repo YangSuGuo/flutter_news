@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:item_news/pages/Item/item.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../db/db.dart';
 import '../../http/net.dart';
 import '../../models/stars.dart';
+import '../../models/stories.dart';
 import '../Comments/comments.dart';
 import 'Widget/_itemIconButton.dart';
 
@@ -22,6 +24,7 @@ class essay extends StatefulWidget {
 
 class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   /// 文章
+  late StoriesData items; // 知乎日报
   Map<String, dynamic> comments = {}; // 评论信息
   int id = 9766161; // 初始值 id
   bool stars = false; // 收藏状态
@@ -74,7 +77,8 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     // 初始化数据
-    id = Get.arguments["id"];
+    items = Get.arguments['item'];
+    id = items.id!;
     InitialData(id);
     // 浏览器下拉刷新操作
     pullToRefreshController = PullToRefreshController(
@@ -197,13 +201,15 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                           : (stars ? Colors.deepOrange : Colors.black), // 日间模式
                       onPressed: () {
                         // 初始化收藏信息
-                        final StarsData star = StarsData();
-                        star.id = id;
-                        star.title = Get.arguments['title'];
-                        star.url = Get.arguments['link'];
-                        star.hint = Get.arguments['description'];
-                        star.image = Get.arguments['images'];
-                        star.collectTime = DateTime.now().toIso8601String();
+                        final StarsData star = StarsData(
+                          id: id,
+                          title: items.title,
+                          url: items.url,
+                          hint: items.hint,
+                          image: items.image,
+                          ga_prefix: items.ga_prefix,
+                          collectTime: DateTime.now().toString(),
+                        );
                         // 收藏逻辑
                         if (stars == false) {
                           DB.db.insertStars(star); // 添加
@@ -216,7 +222,6 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                             stars = false;
                           });
                         }
-
                       }),
                   // 刷新按钮
                   RotationTransition(

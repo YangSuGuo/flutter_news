@@ -1,4 +1,5 @@
 import 'package:item_news/db/database/history.dart';
+import 'package:item_news/models/stories.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -49,12 +50,14 @@ class DB {
   ///////////////////////////////// 收藏 /////////////////////////////////
 
   /// 查询所有收藏
-  Future<List> selectAllStars() async {
+  Future<List<StoriesData>> selectAllStars() async {
     final db = await database;
     final List<Map<String, dynamic>> list = await db.query(
       Stars.tableName,
+      orderBy: '${Stars.collectTime} DESC',
     );
-    return list;
+    List<StoriesData> starsList = list.map((data) => StoriesData.fromJsonInside(data)).toList();
+    return starsList;
   }
 
   /// 按ID查找收藏
@@ -92,12 +95,14 @@ class DB {
   ///////////////////////////////// 历史 /////////////////////////////////
 
   /// 查询所有历史记录
-  Future<List> selectAllHistory() async {
+  Future<List<StoriesData>> selectAllHistory() async {
     final db = await database;
     final List<Map<String, dynamic>> list = await db.query(
       History.tableName,
+      orderBy: '${History.reading_time} DESC',
     );
-    return list;
+    List<StoriesData> historyList = list.map((data) => StoriesData.fromJsonInside(data)).toList();
+    return historyList;
   }
 
   /// 按ID查找历史记录
