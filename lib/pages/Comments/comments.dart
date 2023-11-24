@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:item_news/pages/Comments/model/comments_model.dart';
 
 import '../../http/net.dart';
 import 'Widget/CommentWidget.dart';
@@ -13,21 +14,23 @@ class comments_page extends StatefulWidget {
 
 class _comments_pageState extends State<comments_page> {
   int id = 9766161; // 初始值 id
-  Map<String, dynamic> comments = {}; // 评论额外信息
+  late CommentInfoData comments; // 评论额外信息
   bool support = false; // 点赞状态
 
   @override
   void initState() {
     super.initState();
-    comments = Get.arguments["comments"];
-    id = Get.arguments["id"];
+    setState(() {
+      comments = Get.arguments["comments"];
+      id = Get.arguments["id"];
+    });
     print("获取传值:${Get.arguments["id"]}");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(comments['comments'].toString()),
+      appBar: _buildAppBar(comments.comments.toString()),
       body: _buildComments(),
     );
   }
@@ -54,8 +57,8 @@ class _comments_pageState extends State<comments_page> {
   Widget _buildComments() {
     return ListView(children: [
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        if (comments['long_comments'] != 0) _buildLong_Comments(),
-        if (comments['short_comments'] != 0) _buildShort_Comments()
+        if (comments.longComments != 0) _buildLong_Comments(),
+        if (comments.shortComments != 0) _buildShort_Comments()
       ])
     ]);
   }
@@ -76,7 +79,7 @@ class _comments_pageState extends State<comments_page> {
               Padding(
                 padding: const EdgeInsets.only(left: 10, bottom: 0),
                 child: Text(
-                  '${comments['long_comments']} 条长评',
+                  '${comments.longComments} 条长评',
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 16),
                 ),
@@ -111,7 +114,7 @@ class _comments_pageState extends State<comments_page> {
               Padding(
                 padding: const EdgeInsets.only(left: 10, bottom: 0),
                 child: Text(
-                  '${comments['short_comments']} 条短评',
+                  '${comments.shortComments} 条短评',
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 16),
                 ),

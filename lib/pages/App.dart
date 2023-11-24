@@ -12,6 +12,7 @@ import 'Settings/settings.dart';
 // todo 可选 持久化主题状态【shared_preferences】，自动跟随系统主题
 // todo 可选 json 实体化
 // todo 文章列表显示日期
+// todo 将数据库和网络请求的api，类型转换，api独立分成
 
 class app extends StatefulWidget {
   const app({super.key});

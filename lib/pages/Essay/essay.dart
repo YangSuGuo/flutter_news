@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
+import 'package:item_news/pages/Comments/model/comments_model.dart';
 import 'package:item_news/pages/Item/item.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -25,7 +26,7 @@ class essay extends StatefulWidget {
 class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   /// 文章
   late StoriesData items; // 知乎日报
-  Map<String, dynamic> comments = {}; // 评论信息
+  CommentInfoData? comments; // 评论信息
   int id = 9766161; // 初始值 id
   bool stars = false; // 收藏状态
 
@@ -103,7 +104,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
 
   // 评论 收藏初始化
   Future<void> InitialData(int id) async {
-    Map<String, dynamic> data = await HttpApi.getCommentsInfo(id); // 评论数据
+    CommentInfoData data = await HttpApi.getCommentsInfo(id); // 评论数据
     List result = await DB.db.selectStars(id); // 收藏状态
     print(result.isNotEmpty);
     setState(() {
@@ -124,7 +125,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: comments.isEmpty ? const GFLoader() : _buildBody());
+    return Scaffold(body: comments == null? GFLoader(): _buildBody());
   }
 
   Widget _buildBody() {
@@ -187,12 +188,12 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
                   itemIconButton(
                     icon: Icons.messenger_outline,
                     onPressed: () {
-                      if (comments['comments'] != 0) {
+                      if (comments?.comments !=  0) {
                         Get.to(const comments_page(),
                             arguments: {'id': id, 'comments': comments});
                       }
                     },
-                    data: comments['comments'].toString(),
+                    data: comments?.comments.toString(),
                   ),
                   // 收藏动画
                   IconButton(

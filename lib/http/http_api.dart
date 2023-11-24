@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:intl/intl.dart';
+import 'package:item_news/pages/Comments/model/comments_model.dart';
 
 import '../pages/Item/model/stories_model.dart';
 import 'net.dart';
@@ -84,13 +85,14 @@ class HttpApi {
   }
 
   // 获取文章评论,点赞信息
-  static Future<Map<String, dynamic>> getCommentsInfo(int id) async {
+  static Future<CommentInfoData> getCommentsInfo(int id) async {
     try {
       final response =
           await DioUtils.instance.dio.get('${HttpApi.zhihu_comments_info}$id');
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
-        return data;
+        final CommentInfoData commentInfoData = CommentInfoData.fromJson(data);
+        return commentInfoData;
       } else {
         throw Exception('获取评论数据失败');
       }
