@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:item_news/models/history.dart';
-import 'package:item_news/models/stories.dart';
+import 'package:item_news/pages/History/model/history_model.dart';
+import 'package:item_news/pages/Item/model/stories_model.dart';
 import 'package:item_news/pages/Item/Widget/list.dart';
 
 import '../../db/db.dart';

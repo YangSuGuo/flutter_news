@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:intl/intl.dart';
 
-import '../models/stories.dart';
+import '../pages/Item/model/stories_model.dart';
 import 'net.dart';
 
 class HttpApi {

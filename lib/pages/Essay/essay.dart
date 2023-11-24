@@ -9,8 +9,8 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../db/db.dart';
 import '../../http/net.dart';
-import '../../models/stars.dart';
-import '../../models/stories.dart';
+import '../Stars/model/stars_model.dart';
+import '../Item/model/stories_model.dart';
 import '../Comments/comments.dart';
 import 'Widget/_itemIconButton.dart';
 
@@ -54,7 +54,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
         // 背景透明
         transparentBackground: true,
         // 清缓存
-        clearCache: true,
+        clearCache: false,
         // 去广告
         // 根据 CSS选择器 ,设置display：none 【CSS_DISPLAY_NONE】
         /// **NOTE**: on Android, JavaScript must be enabled!!!
@@ -67,8 +67,11 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
         ],
       ),
       android: AndroidInAppWebViewOptions(
-        useHybridComposition: true,
-      ),
+          useHybridComposition: true,
+          geolocationEnabled: false,
+          saveFormData: false,
+          thirdPartyCookiesEnabled: false,
+          disableDefaultErrorPage: true),
       ios: IOSInAppWebViewOptions(
         allowsInlineMediaPlayback: true,
       ));
@@ -77,8 +80,10 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     // 初始化数据
-    items = Get.arguments['item'];
-    id = items.id!;
+    setState(() {
+      items = Get.arguments['item'];
+      id = items.id!;
+    });
     InitialData(id);
     // 浏览器下拉刷新操作
     pullToRefreshController = PullToRefreshController(

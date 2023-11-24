@@ -1,10 +1,10 @@
 import 'package:item_news/db/database/history.dart';
-import 'package:item_news/models/stories.dart';
+import 'package:item_news/pages/Item/model/stories_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../models/history.dart';
-import '../models/stars.dart';
+import '../pages/History/model/history_model.dart';
+import '../pages/Stars/model/stars_model.dart';
 import 'database/stars.dart';
 
 class DB {

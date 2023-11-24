@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:item_news/Widget/remind.dart';
-import 'package:item_news/models/stars.dart';
+import 'package:item_news/pages/Stars/model/stars_model.dart';
 import 'package:item_news/pages/Item/Widget/list.dart';
 
 import '../../db/db.dart';
-import '../../models/history.dart';
-import '../../models/stories.dart';
+import '../History/model/history_model.dart';
+import '../Item/model/stories_model.dart';
 import '../Essay/essay.dart';
 
 class stars extends StatefulWidget {
@@ -67,18 +67,6 @@ class _starsState extends State<stars> {
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                // 历史记录
-                final HistoryData history = HistoryData(
-                    id: items[index].id,
-                    title: items[index].title,
-                    hint: items[index].hint,
-                    image: items[index].image,
-                    url: items[index].url,
-                    ga_prefix: items[index].ga_prefix,
-                    reading_time: DateTime.now().toString());
-                DB.db.insertHistory(history);
-                // todo 如果有就更新数据
-
                 // 收藏数据
                 Get.to(() => essay(), arguments: {'item': items[index]});
               },

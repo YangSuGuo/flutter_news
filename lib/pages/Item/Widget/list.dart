@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:item_news/models/stories.dart';
+import 'package:item_news/pages/Item/model/stories_model.dart';
 
 class Item extends StatelessWidget {
   const Item({

@@ -2,13 +2,13 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:item_news/models/stories.dart';
+import 'package:item_news/pages/Item/model/stories_model.dart';
 import 'package:item_news/pages/Essay/essay.dart';
 
 import '../../../http/net.dart';
 import '../../Widget/CustomDialogs.dart';
 import '../../db/db.dart';
-import '../../models/history.dart';
+import '../History/model/history_model.dart';
 import 'Widget/list.dart';
 
 class item extends StatefulWidget {
@@ -18,8 +18,8 @@ class item extends StatefulWidget {
 
 class _itemState extends State<item> {
   DateTime dateTime = DateTime.now(); // 时间
-  // List<Map<String, dynamic>> swiperItems = []; // 轮播图
   List<StoriesData> items = []; // 知乎日报
+  bool read = false; // 阅读状态
 
   @override
   void initState() {
@@ -31,14 +31,14 @@ class _itemState extends State<item> {
   // 初始化数据 2天数据
   Future<void> InitialData() async {
     try {
-      // final swiper = await HttpApi.getSwiper();
       final newItems = await HttpApi.getList();
       final oldItems = await HttpApi.getOldList(dateTime);
+      // todo 获取初始化的阅读状态
       setState(() {
-        // swiperItems.addAll(swiper);
         items.addAll(newItems);
         items.addAll(oldItems);
       });
+
       dateTime = dateTime.subtract(const Duration(days: 1));
     } catch (e) {
       CustomDialogs.confirmationDialog(
@@ -137,7 +137,7 @@ class _itemState extends State<item> {
                 padding: const EdgeInsets.only(left: 5, right: 5, bottom: 2),
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () {
+                  onTap: () async {
                     // 历史记录
                     final HistoryData history = HistoryData(
                         id: items[index].id,
@@ -148,8 +148,15 @@ class _itemState extends State<item> {
                         ga_prefix: items[index].ga_prefix,
                         reading_time: DateTime.now().toString()
                     );
-                    // if(){}
-                    DB.db.insertHistory(history);
+                    List result = await DB.db.selectHistory(items[index].id!);
+                    read = !result.isNotEmpty;
+                    if(read){
+                      DB.db.insertHistory(history);
+                    }else{
+                      // todo 更新数据
+                      print('todo 更新数据');
+                    }
+
                     // todo 如果有就更新数据
                     // 收藏数据
                     Get.to(() => essay(), arguments: {'item': items[index]});
@@ -159,41 +166,4 @@ class _itemState extends State<item> {
           },
         ));
   }
-
-// 轮播图
-/*  Widget swiper() {
-    return SizedBox(
-        height: 300,
-        child: Swiper(
-          itemCount: swiperItems.length,
-          pagination: const SwiperPagination(alignment: Alignment.bottomRight),
-          autoplay: true,
-          autoplayDelay: 3000,
-          loop: true,
-          onTap: (int index) {
-            Get.to(essay(), arguments: {'id': swiperItems[index]['id']});
-          },
-          itemBuilder: (BuildContext context, int index) {
-            return Stack(
-              children: [
-                Image.network(
-                  swiperItems[index]['image'],
-                  fit: BoxFit.fitWidth,
-                  width: MediaQuery.of(context).size.width,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 230, right: 0),
-                  child: Text(
-                    swiperItems[index]['title'],
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ],
-            );
-          },
-        ));
-  }*/
 }

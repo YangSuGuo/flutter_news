@@ -1,22 +1,21 @@
 import 'dart:convert';
 
-import 'package:item_news/models/stories.dart';
+import 'package:item_news/pages/Item/model/stories_model.dart';
 
-HistoryData historyDataFromJson(String str) =>
-    HistoryData.fromJson(json.decode(str));
+StarsData starsDataFromJson(String str) => StarsData.fromJson(json.decode(str));
 
-String historyDataToJson(HistoryData data) => json.encode(data.toJson());
+String starsDataToJson(StarsData data) => json.encode(data.toJson());
 
-/// 历史记录数据
-class HistoryData {
-  HistoryData({
+/// 收藏数据
+class StarsData {
+  StarsData({
     this.id,
     this.title,
     this.hint,
     this.image,
     this.url,
     this.ga_prefix,
-    this.reading_time,
+    this.collectTime,
   });
 
   // ID
@@ -37,27 +36,27 @@ class HistoryData {
   // 日报时间
   late String? ga_prefix;
 
-  // 阅读时间
-  late String? reading_time;
+  // 收藏日期
+  late String? collectTime;
 
-  factory HistoryData.fromJson(Map<String, dynamic> json) => HistoryData(
+  factory StarsData.fromJson(Map<String, dynamic> json) => StarsData(
         id: json['id'],
         title: json['title'],
         hint: json['hint'],
         image: json['image'],
         url: json['url'],
         ga_prefix: json['ga_prefix'],
-        reading_time: json['reading_time'],
+        collectTime: json['collectTime'],
       );
 
   StoriesData toStoriesData() {
     return StoriesData(
-        id: this.id,
-        title: this.title,
-        hint: this.hint,
-        image: this.image,
-        url: this.url,
-        ga_prefix: this.ga_prefix
+      id: this.id,
+      title: this.title,
+      hint: this.hint,
+      image: this.image,
+      url: this.url,
+      ga_prefix: this.ga_prefix
     );
   }
 
@@ -68,7 +67,6 @@ class HistoryData {
         'image': image,
         'url': url,
         'ga_prefix': ga_prefix,
-        'reading_time': reading_time
+        'collectTime': collectTime,
       };
-
 }

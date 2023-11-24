@@ -1,7 +1,7 @@
 name: item_news
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.3.0
+version: 1.3.1
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -18,10 +18,10 @@ dependencies:
   dio: ^5.3.2
   # 状态，路由，依赖管理
   get: ^4.6.6
-  # 数据库【目前没用】
+  # 数据库
   sqflite: ^2.3.0
   # 持久化【目前没用】
-  # get_storage: ^2.1.1
+#  get_storage: ^2.1.1
 #  shared_preferences: ^2.2.2
   # 路径
   path_provider: ^2.1.1
@@ -35,8 +35,6 @@ dependencies:
   url_launcher: ^6.1.14
   # webview flutter实现
   flutter_inappwebview: ^5.8.0
-  # 视差
-#  flutter_tilt: ^2.0.10
   # 时间日期
   intl: ^0.18.1
   # ui 【可以移除，只用到加载组件】
