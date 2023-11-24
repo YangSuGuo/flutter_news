@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
-import 'package:item_news/pages/Comments/model/comments_model.dart';
+import 'package:item_news/pages/Essay/model/commentsinfo_model.dart';
 import 'package:item_news/pages/Item/item.dart';
 import 'package:share_plus/share_plus.dart';
 

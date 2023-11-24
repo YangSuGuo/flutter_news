@@ -46,4 +46,9 @@
     <tree path="/lib/pages/Stars/Widget/starsItem.dart" title="收藏列表"/>
     <tree path="/lib/db/database/history.dart" title="历史记录"/>
     <tree path="/lib/pages/History" title="历史"/>
+    <tree path="/lib/pages/Essay/model/commentsinfo_model.dart" title="评论信息"/>
+    <tree path="/lib/pages/Comments/model/comments_model.dart" title="评论"/>
+    <tree path="/lib/pages/History/model/history_model.dart" title="历史记录"/>
+    <tree path="/lib/pages/Item/model/stories_model.dart" title="列表"/>
+    <tree path="/lib/pages/Stars/model/stars_model.dart" title="收藏"/>
 </trees>

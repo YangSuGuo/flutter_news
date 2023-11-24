@@ -56,7 +56,8 @@ class DB {
       Stars.tableName,
       orderBy: '${Stars.collectTime} DESC',
     );
-    List<StoriesData> starsList = list.map((data) => StoriesData.fromJsonInside(data)).toList();
+    List<StoriesData> starsList =
+        list.map((data) => StoriesData.fromJsonInside(data)).toList();
     return starsList;
   }
 
@@ -101,7 +102,8 @@ class DB {
       History.tableName,
       orderBy: '${History.reading_time} DESC',
     );
-    List<StoriesData> historyList = list.map((data) => StoriesData.fromJsonInside(data)).toList();
+    List<StoriesData> historyList =
+        list.map((data) => StoriesData.fromJsonInside(data)).toList();
     return historyList;
   }
 
@@ -122,6 +124,19 @@ class DB {
   Future<bool> insertHistory(HistoryData historyData) async {
     final db = await database;
     final int result = await db.insert(History.tableName, historyData.toJson());
+    print(result);
+    return result > 0;
+  }
+
+  /// 更新历史记录
+  Future<bool> updateHistory(HistoryData historyData) async {
+    final db = await database;
+    final int result = await db.update(
+      History.tableName,
+      historyData.toJson(),
+      where: '${History.id} = ?',
+      whereArgs: [historyData.id],
+    );
     print(result);
     return result > 0;
   }

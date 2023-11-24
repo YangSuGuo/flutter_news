@@ -1,34 +1,57 @@
 import 'dart:convert';
 
-CommentInfoData commentInfoDataFromJson(String str) =>
-    CommentInfoData.fromJson(json.decode(str));
+CommentsData commentsDataFromJson(String str) =>
+    CommentsData.fromJson(json.decode(str));
 
-String commentInfoDataToJson(CommentInfoData data) => json.encode(data.toJson());
+class CommentsData {
+  late String? author;
+  late String? content;
+  late String? avatar;
+  late int? time;
+  late int? id;
+  late int? likes;
+  ReplyTo? replyTo;
 
-class CommentInfoData {
-  late int? longComments;
-  late int? popularity;
-  late int? shortComments;
-  late int? comments;
-
-  CommentInfoData({
-    this.longComments,
-    this.popularity,
-    this.shortComments,
-    this.comments,
+  CommentsData({
+    this.author,
+    this.content,
+    this.avatar,
+    this.time,
+    this.id,
+    this.likes,
+    this.replyTo,
   });
 
-  factory CommentInfoData.fromJson(Map<String, dynamic> json) => CommentInfoData(
-        longComments: json['long_comments'],
-        popularity: json['popularity'],
-        shortComments: json['short_comments'],
-        comments: json['comments'],
-      );
+  CommentsData.fromJson(Map<String, dynamic> json) {
+    author = json['author'];
+    content = json['content'];
+    avatar = json['avatar'];
+    time = json['time'];
+    id = json['id'];
+    likes = json['likes'];
+    if (json['reply_to'] != null) {
+      replyTo = ReplyTo.fromJson(json['reply_to']);
+    }
+  }
+}
 
-  Map<String, dynamic> toJson() => {
-        'long_comments': longComments,
-        'popularity': popularity,
-        'short_comments': shortComments,
-        'comments': comments
-      };
+class ReplyTo {
+  late String? content;
+  late int? status;
+  late int? id;
+  late String? author;
+
+  ReplyTo({
+    this.content,
+    this.status,
+    this.id,
+    this.author,
+  });
+
+  ReplyTo.fromJson(Map<String, dynamic> json) {
+    content = json['content'];
+    status = json['status'];
+    id = json['id'];
+    author = json['author'];
+  }
 }

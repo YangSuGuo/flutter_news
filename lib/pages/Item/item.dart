@@ -153,8 +153,8 @@ class _itemState extends State<item> {
                     if(read){
                       DB.db.insertHistory(history);
                     }else{
-                      // todo 更新数据
-                      print('todo 更新数据');
+                      DB.db.updateHistory(history);
+                      print('更新数据');
                     }
 
                     // todo 如果有就更新数据

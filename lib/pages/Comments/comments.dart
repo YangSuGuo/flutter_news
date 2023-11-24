@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:item_news/pages/Comments/model/comments_model.dart';
+import 'package:item_news/pages/Essay/model/commentsinfo_model.dart';
 
 import '../../http/net.dart';
 import 'Widget/CommentWidget.dart';

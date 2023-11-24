@@ -9,6 +9,15 @@ String historyDataToJson(HistoryData data) => json.encode(data.toJson());
 
 /// 历史记录数据
 class HistoryData {
+  late int? id;
+  late String? title;
+  late String? hint;
+  late String? image;
+  late String? url;
+  late String? ga_prefix;
+  // 阅读时间
+  late String? reading_time;
+
   HistoryData({
     this.id,
     this.title,
@@ -18,27 +27,6 @@ class HistoryData {
     this.ga_prefix,
     this.reading_time,
   });
-
-  // ID
-  late int? id;
-
-  // 标题
-  late String? title;
-
-  // 描述
-  late String? hint;
-
-  // 图片
-  late String? image;
-
-  // 链接
-  late String? url;
-
-  // 日报时间
-  late String? ga_prefix;
-
-  // 阅读时间
-  late String? reading_time;
 
   factory HistoryData.fromJson(Map<String, dynamic> json) => HistoryData(
         id: json['id'],
@@ -57,8 +45,7 @@ class HistoryData {
         hint: this.hint,
         image: this.image,
         url: this.url,
-        ga_prefix: this.ga_prefix
-    );
+        ga_prefix: this.ga_prefix);
   }
 
   Map<String, dynamic> toJson() => {
@@ -70,5 +57,4 @@ class HistoryData {
         'ga_prefix': ga_prefix,
         'reading_time': reading_time
       };
-
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:intl/intl.dart';
-import 'package:item_news/pages/Comments/model/comments_model.dart';
+import 'package:item_news/pages/Essay/model/commentsinfo_model.dart';
 
 import '../pages/Item/model/stories_model.dart';
 import 'net.dart';
