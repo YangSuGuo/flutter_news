@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../model/comments_model.dart';
+
 class CommentWidget extends StatelessWidget {
-  final Map<String, dynamic> comment;
+  final CommentsData comment;
 
   const CommentWidget({Key? key, required this.comment}) : super(key: key);
 
@@ -14,7 +16,7 @@ class CommentWidget extends StatelessWidget {
           // 评论人
           Row(children: [
             Text(
-              comment['author'],
+              comment.author ?? '',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const Spacer(),
@@ -32,12 +34,12 @@ class CommentWidget extends StatelessWidget {
           ]),
           // 评论内容
           Text(
-            comment['content'],
+            comment.content ?? '',
             textAlign: TextAlign.left,
             softWrap: true,
           ),
           // 回复
-          if (comment['reply_to'] != null)
+          if (comment.replyTo != null)
             Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Container(
@@ -51,14 +53,14 @@ class CommentWidget extends StatelessWidget {
                     child: RichText(
                         softWrap: true,
                         text: TextSpan(
-                            text: '${comment['reply_to']['author']}︰',
+                            text: '${comment.replyTo?.author}︰',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
                             children: [
                               TextSpan(
-                                  text: comment['reply_to']['content'],
+                                  text: comment.replyTo?.content,
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.normal,
@@ -68,7 +70,7 @@ class CommentWidget extends StatelessWidget {
             // 评论时间
             Text(
               DateFormat('MM-dd  hh∶mm').format(
-                DateTime.fromMillisecondsSinceEpoch(comment['time'] * 1000),
+                DateTime.fromMillisecondsSinceEpoch(comment.time! * 1000),
               ),
               style: const TextStyle(color: Colors.grey),
             ),
@@ -79,7 +81,7 @@ class CommentWidget extends StatelessWidget {
               splashColor: Colors.transparent,
               onPressed: () {},
             ),
-            if (comment['likes'] != 0) Text(comment['likes'].toString()),
+            if (comment.likes != 0) Text(comment.likes.toString()),
             const SizedBox(width: 10),
           ])
         ]));

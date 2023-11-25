@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:item_news/pages/Comments/model/comments_model.dart';
 import 'package:item_news/pages/Essay/model/commentsinfo_model.dart';
 
 import '../../http/net.dart';
@@ -14,8 +15,10 @@ class comments_page extends StatefulWidget {
 
 class _comments_pageState extends State<comments_page> {
   int id = 9766161; // 初始值 id
-  late CommentInfoData comments; // 评论额外信息
   bool support = false; // 点赞状态
+  late CommentInfoData comments; // 评论额外信息
+  // late List<CommentsData> longComments = []; // 长评
+  // late List<CommentsData> shortComments = []; // 短评
 
   @override
   void initState() {
@@ -24,8 +27,18 @@ class _comments_pageState extends State<comments_page> {
       comments = Get.arguments["comments"];
       id = Get.arguments["id"];
     });
+    // InitialData();
     print("获取传值:${Get.arguments["id"]}");
   }
+
+/*  Future<void> InitialData() async {
+    final longCommentsData = await HttpApi.getComments(id);
+    final shortCommentsData = await HttpApi.getShortComments(id);
+    setState(() {
+      longComments = longCommentsData;
+      shortComments = shortCommentsData;
+    });
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -63,16 +76,61 @@ class _comments_pageState extends State<comments_page> {
     ]);
   }
 
+/*  Widget _buildLong_Comments() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 10, bottom: 0),
+          child: Text(
+            '${comments.longComments} 条长评',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: longComments.length,
+          itemBuilder: (BuildContext context, int index) {
+            return CommentWidget(comment: longComments[index]);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildShort_Comments() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 10, bottom: 0),
+          child: Text(
+            '${comments.shortComments} 条短评',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: shortComments.length,
+          itemBuilder: (BuildContext context, int index) {
+            return CommentWidget(comment: shortComments[index]);
+          },
+        ),
+      ],
+    );
+  }*/
+
   // 长评论
   Widget _buildLong_Comments() {
-    // 异步加载
-    return FutureBuilder<List<dynamic>>(
+    return FutureBuilder<List<CommentsData>>(
       future: HttpApi.getComments(id),
-      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<CommentsData>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center();
         } else {
-          List<dynamic> Long_Comments = snapshot.data!;
+          List<CommentsData> longComments = snapshot.data!;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,9 +145,9 @@ class _comments_pageState extends State<comments_page> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: Long_Comments.length,
+                itemCount: longComments.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return CommentWidget(comment: Long_Comments[index]);
+                  return CommentWidget(comment: longComments[index]);
                 },
               ),
             ],
@@ -99,15 +157,16 @@ class _comments_pageState extends State<comments_page> {
     );
   }
 
+
   // 短评论
   Widget _buildShort_Comments() {
-    return FutureBuilder<List<dynamic>>(
+    return FutureBuilder<List<CommentsData>>(
       future: HttpApi.getShortComments(id),
-      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<CommentsData>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center();
         } else {
-          List<dynamic> shortComments = snapshot.data!;
+          List<CommentsData> shortComments = snapshot.data!;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

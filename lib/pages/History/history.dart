@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:item_news/pages/History/model/history_model.dart';
+import 'package:item_news/Widget/remind.dart';
 import 'package:item_news/pages/Item/model/stories_model.dart';
 import 'package:item_news/pages/Item/Widget/list.dart';
 
@@ -30,7 +30,10 @@ class _historyState extends State<history> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _buildAppBar(), body: _buildBody());
+    return Scaffold(
+        appBar: _buildAppBar(),
+        body: items.isNotEmpty ? _buildBody() : RemindWidget(),
+    );
   }
 
   /// 标题栏
@@ -60,7 +63,8 @@ class _historyState extends State<history> {
             padding: const EdgeInsets.only(left: 5, right: 5, bottom: 2),
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
-              onTap: () => Get.to(() => essay(), arguments: {'item': items[index]}),
+              onTap: () =>
+                  Get.to(() => essay(), arguments: {'item': items[index]}),
               child: Item(item: items[index]),
             ));
       },

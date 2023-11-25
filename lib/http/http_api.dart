@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:item_news/pages/Essay/model/commentsinfo_model.dart';
 
+import '../pages/Comments/model/comments_model.dart';
 import '../pages/Item/model/stories_model.dart';
 import 'net.dart';
 
@@ -101,7 +102,7 @@ class HttpApi {
     }
   }
 
-  // 长评论
+/*  // 长评论
   static Future<List<dynamic>> getComments(int id) async {
     try {
       final response = await DioUtils.instance.dio
@@ -126,6 +127,42 @@ class HttpApi {
       if (response.statusCode == 200) {
         final data = json.decode(response.data);
         final List<dynamic> comments = data['comments'];
+        return comments;
+      } else {
+        throw Exception('加载数据失败');
+      }
+    } catch (e) {
+      throw Exception('错误：$e');
+    }
+  }*/
+
+  static Future<List<CommentsData>> getComments(int id) async {
+    try {
+      final response = await DioUtils.instance.dio
+          .get('${HttpApi.zhihu_body}$id${HttpApi.zhihu_comments}');
+      if (response.statusCode == 200) {
+        final data = json.decode(response.data);
+        final List<dynamic> commentsJson = data['comments'];
+        List<CommentsData> comments =
+            commentsJson.map((json) => CommentsData.fromJson(json)).toList();
+        return comments;
+      } else {
+        throw Exception('加载数据失败');
+      }
+    } catch (e) {
+      throw Exception('错误：$e');
+    }
+  }
+
+  static Future<List<CommentsData>> getShortComments(int id) async {
+    try {
+      final response = await DioUtils.instance.dio
+          .get('${HttpApi.zhihu_body}$id${HttpApi.zhihu_short_comments}');
+      if (response.statusCode == 200) {
+        final data = json.decode(response.data);
+        final List<dynamic> commentsJson = data['comments'];
+        List<CommentsData> comments =
+            commentsJson.map((json) => CommentsData.fromJson(json)).toList();
         return comments;
       } else {
         throw Exception('加载数据失败');
