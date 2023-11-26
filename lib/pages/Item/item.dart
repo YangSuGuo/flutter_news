@@ -2,8 +2,8 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:item_news/pages/Item/model/stories_model.dart';
 import 'package:item_news/pages/Essay/essay.dart';
+import 'package:item_news/pages/Item/model/stories_model.dart';
 
 import '../../../http/net.dart';
 import '../../Widget/CustomDialogs.dart';
@@ -146,13 +146,12 @@ class _itemState extends State<item> {
                         image: items[index].image,
                         url: items[index].url,
                         ga_prefix: items[index].ga_prefix,
-                        reading_time: DateTime.now().toString()
-                    );
+                        reading_time: DateTime.now().toString());
                     List result = await DB.db.selectHistory(items[index].id!);
                     read = !result.isNotEmpty;
-                    if(read){
+                    if (read) {
                       DB.db.insertHistory(history);
-                    }else{
+                    } else {
                       DB.db.updateHistory(history);
                       print('更新数据');
                     }

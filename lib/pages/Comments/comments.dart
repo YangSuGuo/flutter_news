@@ -126,7 +126,8 @@ class _comments_pageState extends State<comments_page> {
   Widget _buildLong_Comments() {
     return FutureBuilder<List<CommentsData>>(
       future: HttpApi.getComments(id),
-      builder: (BuildContext context, AsyncSnapshot<List<CommentsData>> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<List<CommentsData>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center();
         } else {
@@ -157,12 +158,12 @@ class _comments_pageState extends State<comments_page> {
     );
   }
 
-
   // 短评论
   Widget _buildShort_Comments() {
     return FutureBuilder<List<CommentsData>>(
       future: HttpApi.getShortComments(id),
-      builder: (BuildContext context, AsyncSnapshot<List<CommentsData>> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<List<CommentsData>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center();
         } else {

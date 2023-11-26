@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:item_news/Widget/remind.dart';
-import 'package:item_news/pages/Item/model/stories_model.dart';
 import 'package:item_news/pages/Item/Widget/list.dart';
+import 'package:item_news/pages/Item/model/stories_model.dart';
 
 import '../../db/db.dart';
 import '../Essay/essay.dart';
@@ -31,8 +31,8 @@ class _historyState extends State<history> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _buildAppBar(),
-        body: items.isNotEmpty ? _buildBody() : RemindWidget(),
+      appBar: _buildAppBar(),
+      body: items.isNotEmpty ? _buildBody() : RemindWidget(),
     );
   }
 

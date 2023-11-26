@@ -85,9 +85,6 @@ class _appState extends State<app> {
 
   /// Body
   Widget _buildBody() {
-    return Padding(
-        padding: const EdgeInsets.only(top: 0),
-        child: item()
-    );
+    return Padding(padding: const EdgeInsets.only(top: 0), child: item());
   }
 }

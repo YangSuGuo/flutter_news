@@ -66,27 +66,10 @@ class _settingsState extends State<settings> {
                   _isSelected[value] = true;
                   if (value == 0) {
                     // todo 跟随系统实现
-                    // 对话框
-                    Get.defaultDialog(
-                        title: '标题',
-                        middleText: '这是描述信息！',
-                        confirm: SizedBox(
-                          // height: 35,
-                            width: MediaQuery.of(context).size.width / 1.65,
-                            child: MaterialButton(
-                              elevation: 0,
-                              color: Get.isDarkMode ? Colors.black12 : Colors.lightBlue.shade50,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(5))),
-                              child: Text('确定',style: TextStyle(color: Colors.deepOrange.shade500,fontSize: 14,fontWeight: FontWeight.bold),),
-                              onPressed: () {},
-                            )),
-                        radius: 10,
-                        barrierDismissible: true
-                    );
+                    Get.snackbar("跟随系统", "欢迎使用Snackbar");
                   } else if (value == 1) {
                     Get.changeTheme(ThemeData.light());
-                  } else if (value == 2) {
+                  } else if (value == 2) {;
                     Get.changeTheme(ThemeData.dark());
                   }
                 }),

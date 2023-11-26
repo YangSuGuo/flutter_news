@@ -1,4 +1,4 @@
-class History{
+class History {
   /// 历史记录表
   static const String tableName = 'history';
 

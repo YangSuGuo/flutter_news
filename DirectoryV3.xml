@@ -51,4 +51,5 @@
     <tree path="/lib/pages/History/model/history_model.dart" title="历史记录"/>
     <tree path="/lib/pages/Item/model/stories_model.dart" title="列表"/>
     <tree path="/lib/pages/Stars/model/stars_model.dart" title="收藏"/>
+    <tree path="/lib/pages/Essay/Widget/operate.dart" title="操作栏"/>
 </trees>

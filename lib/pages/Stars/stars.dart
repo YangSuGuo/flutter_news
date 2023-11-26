@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:item_news/Widget/remind.dart';
-import 'package:item_news/pages/Stars/model/stars_model.dart';
 import 'package:item_news/pages/Item/Widget/list.dart';
 
 import '../../db/db.dart';
-import '../History/model/history_model.dart';
-import '../Item/model/stories_model.dart';
 import '../Essay/essay.dart';
+import '../Item/model/stories_model.dart';
 
 class stars extends StatefulWidget {
   const stars({super.key});

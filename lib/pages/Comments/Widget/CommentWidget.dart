@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../model/comments_model.dart';
@@ -24,7 +25,9 @@ class CommentWidget extends StatelessWidget {
                 width: 43,
                 height: 43,
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.snackbar("Snackbar 标题", "欢迎使用Snackbar");
+                  },
                   icon: const Icon(
                     Icons.short_text_rounded,
                     size: 30,

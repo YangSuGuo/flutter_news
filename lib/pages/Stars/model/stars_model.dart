@@ -14,6 +14,7 @@ class StarsData {
   late String? image;
   late String? url;
   late String? ga_prefix;
+
   // 收藏日期
   late String? collectTime;
 

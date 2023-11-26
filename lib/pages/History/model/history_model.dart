@@ -15,6 +15,7 @@ class HistoryData {
   late String? image;
   late String? url;
   late String? ga_prefix;
+
   // 阅读时间
   late String? reading_time;
 
