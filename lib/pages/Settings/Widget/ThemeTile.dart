@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class ThemeTile extends StatelessWidget {
   final String text;
   final IconData icon;
-  final double horizontalPadding;
 
   const ThemeTile({
     Key? key,
     required this.text,
     required this.icon,
-    required this.horizontalPadding,
   }) : super(key: key);
 
   @override
@@ -17,7 +15,7 @@ class ThemeTile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: horizontalPadding,
+        horizontal: MediaQuery.of(context).size.width * 0.10442,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

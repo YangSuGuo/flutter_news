@@ -69,26 +69,24 @@ class _settingsState extends State<settings> {
                     Get.snackbar("跟随系统", "欢迎使用Snackbar");
                   } else if (value == 1) {
                     Get.changeTheme(ThemeData.light());
-                  } else if (value == 2) {;
+                  } else if (value == 2) {
                     Get.changeTheme(ThemeData.dark());
                   }
                 }),
                 renderBorder: false,
-                children: [
+                children: const [
                   ThemeTile(
-                      text: '跟随系统',
-                      icon: Icons.brightness_4,
-                      horizontalPadding:
-                          MediaQuery.of(context).size.width / 10),
+                    text: '跟随系统',
+                    icon: Icons.brightness_4,
+                  ),
                   ThemeTile(
-                      text: '日间模式',
-                      icon: Icons.wb_sunny,
-                      horizontalPadding: MediaQuery.of(context).size.width / 9),
+                    text: '日间模式',
+                    icon: Icons.wb_sunny,
+                  ),
                   ThemeTile(
-                      text: '夜间模式',
-                      icon: Icons.nightlight_round,
-                      horizontalPadding:
-                          MediaQuery.of(context).size.width / 10),
+                    text: '夜间模式',
+                    icon: Icons.nightlight_round,
+                  ),
                 ],
               ),
             ]),
@@ -159,10 +157,4 @@ class _settingsState extends State<settings> {
           ]))
     ]);
   }
-
-/*  static updateTheme() {
-    Future.delayed(const Duration(milliseconds: 300), () {
-      Get.forceAppUpdate();
-    });
-  }*/
 }
