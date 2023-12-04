@@ -85,12 +85,15 @@ class _itemState extends State<item> {
           // 下拉刷新
           try {
             final newItems = await HttpApi.getList();
-            final oldItems = items.sublist(0, newItems.length);
-            print(listEquals(oldItems, newItems));
-            if (!listEquals(oldItems, newItems)) {
-              items.removeRange(0, oldItems.length);
+            final oldIds = items
+                .map((StoriesData item) => item.id)
+                .toList()
+                .sublist(0, newItems.length);
+            final newIds = newItems.map((StoriesData item) => item.id).toList();
+
+            if (listEquals(oldIds, newIds)) {
               setState(() {
-                items.insertAll(0, newItems);
+                items = newItems;
               });
             }
           } catch (e) {

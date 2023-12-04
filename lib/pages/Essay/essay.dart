@@ -153,7 +153,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
       OperateBar(
         stars: stars,
         url: 'https://daily.zhihu.com/story/$id',
-        ctrl: _ctrl,
+        ctrl: AnimationController(vsync: this, duration: const Duration(seconds: 1)),
         comments: comments,
         webViewController: webViewController,
         onStarChange: (newStarState) {
