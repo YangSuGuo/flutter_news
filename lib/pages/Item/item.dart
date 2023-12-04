@@ -91,7 +91,7 @@ class _itemState extends State<item> {
                 .sublist(0, newItems.length);
             final newIds = newItems.map((StoriesData item) => item.id).toList();
 
-            if (listEquals(oldIds, newIds)) {
+            if (!listEquals(oldIds, newIds)) {
               setState(() {
                 items = newItems;
               });
