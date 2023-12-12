@@ -29,8 +29,8 @@ class CustomDialogs {
                 actions: [
                   ButtonBar(
                       buttonMinWidth: buttonMinWidth
-                          ? MediaQuery.of(context).size.width / 3
-                          : MediaQuery.of(context).size.width,
+                          ? Get.width / 3
+                          : Get.width,
                       alignment: MainAxisAlignment.center,
                       children: [
                         if (cancel!)

@@ -20,21 +20,17 @@ class essay extends StatefulWidget {
   State<essay> createState() => _essayState();
 }
 
-class _essayState extends State<essay> with SingleTickerProviderStateMixin {
+class _essayState extends State<essay> with TickerProviderStateMixin {
   /// 文章
   late StoriesData items; // 知乎日报
   CommentInfoData? comments; // 评论信息
   int id = 9766161; // 初始值 id
   bool stars = false; // 收藏状态
 
-  /// 旋转动画
-  late final AnimationController _ctrl =
-      AnimationController(vsync: this, duration: const Duration(seconds: 1));
-
   /// 浏览器
   /// todo 添加加载图，避免闪屏！
   /// todo 增加离线下载浏览
-  /// bug W/System  (23056): A resource failed to call response.body().close().没有释放资源
+  /// bug W/System  (23056): A resource failed to call response.body().close().
   final urlController = TextEditingController();
   final GlobalKey webViewKey = GlobalKey();
   InAppWebViewController? webViewController;
@@ -103,7 +99,6 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
   Future<void> InitialData(int id) async {
     CommentInfoData data = await HttpApi.getCommentsInfo(id); // 评论数据
     List result = await DB.db.selectStars(id); // 收藏状态
-    print(result.isNotEmpty);
     setState(() {
       stars = result.isNotEmpty;
       comments = data;
@@ -122,7 +117,7 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: comments == null ? GFLoader() : _buildBody());
+    return Scaffold(body: comments == null ? const GFLoader() : _buildBody());
   }
 
   Widget _buildBody() {
@@ -153,7 +148,8 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
       OperateBar(
         stars: stars,
         url: 'https://daily.zhihu.com/story/$id',
-        ctrl: AnimationController(vsync: this, duration: const Duration(seconds: 1)),
+        ctrl: AnimationController(
+            vsync: this, duration: const Duration(seconds: 1)),
         comments: comments,
         webViewController: webViewController,
         onStarChange: (newStarState) {
@@ -166,17 +162,13 @@ class _essayState extends State<essay> with SingleTickerProviderStateMixin {
             ga_prefix: items.ga_prefix,
             collectTime: DateTime.now().toString(),
           );
-          if (newStarState) {
-            DB.db.insertStars(star);
-          } else {
-            DB.db.deleteStars(star);
-          }
+          newStarState ? DB.db.insertStars(star) : DB.db.deleteStars(star);
           setState(() {
             stars = newStarState;
           });
         },
         onPressed: () {
-          if (comments?.comments != 0) {
+          if (comments!.comments != 0) {
             Get.to(const comments_page(),
                 arguments: {'id': id, 'comments': comments});
           }

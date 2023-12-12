@@ -6,13 +6,11 @@ import 'package:item_news/pages/Item/item.dart';
 import 'Settings/settings.dart';
 
 // todo 主题切换优化 ！
-// todo 利用布局构造器实现适配平板
+// todo 利用布局构造器实现适配大尺寸
 // todo 可选 轮播图组件实现 ！！
 // todo 可选 已读文章id存入【数据库】or【shared_preferences】实现已读、未读状态管理
-// todo 可选 持久化主题状态【shared_preferences】，自动跟随系统主题
-// todo 可选 json 实体化
+// todo 可选 持久化主题状态【shared_preferences】
 // todo 文章列表显示日期
-// todo 将数据库和网络请求的api，类型转换，api独立分成
 // todo 消息离线推送
 
 class app extends StatefulWidget {
@@ -54,11 +52,10 @@ class _appState extends State<app> {
   /// 日期显示
   Widget leading_time() {
     DateTime dateTime = DateTime.now();
-    return Row(
-      children: [
-        Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Column(
+    return Row(children: [
+      Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15),
+          child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -70,21 +67,18 @@ class _appState extends State<app> {
                 Text(DateFormat('MM月').format(dateTime),
                     style: const TextStyle(
                         fontSize: 11, fontWeight: FontWeight.bold)),
-              ],
-            )),
-        const SizedBox(
+              ])),
+      const SizedBox(
           width: 1,
           height: 40,
           child: DecoratedBox(
             decoration: BoxDecoration(color: Colors.grey),
-          ),
-        ),
-      ],
-    );
+          ))
+    ]);
   }
 
   /// Body
   Widget _buildBody() {
-    return Padding(padding: const EdgeInsets.only(top: 0), child: item());
+    return item();
   }
 }

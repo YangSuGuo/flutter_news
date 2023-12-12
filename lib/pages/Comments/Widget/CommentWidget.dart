@@ -46,7 +46,7 @@ class CommentWidget extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Container(
-                    width: MediaQuery.of(context).size.width - 40,
+                    width: Get.width - 40,
                     padding: const EdgeInsets.only(
                         top: 5, left: 5, right: 6, bottom: 6),
                     decoration: BoxDecoration(

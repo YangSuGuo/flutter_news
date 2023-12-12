@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ThemeTile extends StatelessWidget {
   final String text;
@@ -15,7 +16,7 @@ class ThemeTile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: MediaQuery.of(context).size.width * 0.10442,
+        horizontal: Get.width * 0.10442,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -22,7 +22,7 @@ class _starsState extends State<stars> {
     super.initState();
     loadData();
   }
-
+// todo 取消收藏时，返回后刷新
   Future<void> loadData() async {
     // 连接数据库
     final starsData = await DB.db.selectAllStars();

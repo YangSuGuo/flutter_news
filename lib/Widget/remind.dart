@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RemindWidget extends StatelessWidget {
   @override
@@ -20,7 +21,7 @@ class RemindWidget extends StatelessWidget {
                 color: Colors.grey, fontSize: 20, fontWeight: FontWeight.w500),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height / 3,
+            height: Get.height / 3,
           )
         ],
       ),

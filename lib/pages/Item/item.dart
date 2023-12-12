@@ -35,12 +35,11 @@ class _itemState extends State<item> {
       final oldItems = await HttpApi.getOldList(dateTime);
       // todo 获取初始化的阅读状态
       setState(() {
-        items.addAll(newItems);
-        items.addAll(oldItems);
+        items = [...newItems, ...oldItems];
       });
-
       dateTime = dateTime.subtract(const Duration(days: 1));
     } catch (e) {
+      // todo 数据库缓存临时加载
       CustomDialogs.confirmationDialog(
           title: '🚨网络异常!',
           content: '请检查网络是否连接!',
@@ -62,9 +61,6 @@ class _itemState extends State<item> {
   }
 
   // bodyList
-  // bug 无网络时初始化失败无数据，下拉刷新失败
-  // bug 无网络时初始化失败，上拉刷新成功，下拉刷新会将上拉刷新的覆盖【 items.removeRange(0, oldItems.length) 】
-  // bug listEquals(oldItems, newItems) 比对结果错误
   Widget _buildList() {
     return EasyRefresh(
         header: const ClassicHeader(
@@ -90,10 +86,9 @@ class _itemState extends State<item> {
                 .toList()
                 .sublist(0, newItems.length);
             final newIds = newItems.map((StoriesData item) => item.id).toList();
-
             if (!listEquals(oldIds, newIds)) {
               setState(() {
-                items = newItems;
+                items.replaceRange(0, newIds.length, newItems);
               });
             }
           } catch (e) {
@@ -116,7 +111,7 @@ class _itemState extends State<item> {
             if (oldItems.isNotEmpty) {
               setState(() {
                 // 日期数据 为真，加载一条数据后改为假
-                items.addAll(oldItems);
+                items = [...items, ...oldItems];
               });
               dateTime = dateTime.subtract(const Duration(days: 1));
             }
@@ -151,17 +146,10 @@ class _itemState extends State<item> {
                         ga_prefix: items[index].ga_prefix,
                         reading_time: DateTime.now().toString());
                     List result = await DB.db.selectHistory(items[index].id!);
-                    read = !result.isNotEmpty;
-                    if (read) {
-                      DB.db.insertHistory(history);
-                    } else {
-                      DB.db.updateHistory(history);
-                      print('更新数据');
-                    }
-
-                    // todo 如果有就更新数据
-                    // 收藏数据
-                    Get.to(() => essay(), arguments: {'item': items[index]});
+                    result.isNotEmpty
+                        ? DB.db.updateHistory(history)
+                        : DB.db.insertHistory(history);
+                    Get.to(essay(), arguments: {'item': items[index]});
                   },
                   child: Item(item: items[index]),
                 ));

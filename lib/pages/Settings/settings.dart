@@ -20,7 +20,7 @@ class settings extends StatefulWidget {
 
 class _settingsState extends State<settings> {
   final bool _value = Get.isDarkMode;
-  List<bool> _isSelected = [false, !Get.isDarkMode, Get.isDarkMode]; // 主题设置
+  List<bool> _isSelected = [true,false,false]; // 主题设置
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +53,8 @@ class _settingsState extends State<settings> {
     return ListView(children: [
       Padding(
           padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 50,
-              right: MediaQuery.of(context).size.width / 50),
+              left: Get.width / 50,
+              right: Get.width / 50),
           child: Column(children: [
             // 用户界面
             CustomCard(children: [
@@ -66,7 +66,8 @@ class _settingsState extends State<settings> {
                   _isSelected[value] = true;
                   if (value == 0) {
                     // todo 跟随系统实现
-                    Get.snackbar("跟随系统", "欢迎使用Snackbar");
+                    // Get.snackbar("跟随系统", "欢迎使用Snackbar");
+
                   } else if (value == 1) {
                     Get.changeTheme(ThemeData.light());
                   } else if (value == 2) {
@@ -130,10 +131,10 @@ class _settingsState extends State<settings> {
               )
             ]),
             SizedBox(
-              width: MediaQuery.of(context).size.width,
+              width: Get.width,
               height: 50,
               child: MaterialButton(
-                  color: _value ? Colors.black12 : Colors.white,
+                  color: Get.isDarkMode ? Colors.black12 : Colors.white,
                   elevation: 0,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))),

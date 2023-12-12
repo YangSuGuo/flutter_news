@@ -35,7 +35,7 @@ class DB {
 
   Future close() async => _db.close();
 
-  /// 创建
+  /// 创表
   void _onCreate(Database db, int newVersion) async {
     final batch = db.batch();
     // 收藏

@@ -35,8 +35,9 @@ class Item extends StatelessWidget {
                             child: Padding(
                           padding: const EdgeInsets.only(left: 5),
                           child: Text(item.hint ?? '',
-                              softWrap: true,
-                              maxLines: 3,
+                              softWrap: false,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                   color: Colors.grey, fontSize: 13.0)),
                         ))
@@ -49,7 +50,7 @@ class Item extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(2.0))),
             child: FadeInImage.assetNetwork(
               placeholder: 'assets/image/loading.gif',
-              image: item.image ?? '',
+              image: item.image!,
               fit: BoxFit.cover,
               width: 80,
               height: 80,
