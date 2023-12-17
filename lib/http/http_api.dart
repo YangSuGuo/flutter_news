@@ -102,40 +102,7 @@ class HttpApi {
     }
   }
 
-/*  // 长评论
-  static Future<List<dynamic>> getComments(int id) async {
-    try {
-      final response = await DioUtils.instance.dio
-          .get('${HttpApi.zhihu_body}$id${HttpApi.zhihu_comments}');
-      if (response.statusCode == 200) {
-        final data = json.decode(response.data);
-        final List<dynamic> comments = data['comments'];
-        return comments;
-      } else {
-        throw Exception('加载数据失败');
-      }
-    } catch (e) {
-      throw Exception('错误：$e');
-    }
-  }
-
-  //短评论
-  static Future<List<dynamic>> getShortComments(int id) async {
-    try {
-      final response = await DioUtils.instance.dio
-          .get('${HttpApi.zhihu_body}$id${HttpApi.zhihu_short_comments}');
-      if (response.statusCode == 200) {
-        final data = json.decode(response.data);
-        final List<dynamic> comments = data['comments'];
-        return comments;
-      } else {
-        throw Exception('加载数据失败');
-      }
-    } catch (e) {
-      throw Exception('错误：$e');
-    }
-  }*/
-
+  // 长评论
   static Future<List<CommentsData>> getComments(int id) async {
     try {
       final response = await DioUtils.instance.dio
@@ -154,6 +121,7 @@ class HttpApi {
     }
   }
 
+  // 短评论
   static Future<List<CommentsData>> getShortComments(int id) async {
     try {
       final response = await DioUtils.instance.dio

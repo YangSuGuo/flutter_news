@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomDialogs {
-  static void confirmationDialog(
-      {required BuildContext context,
+  static void confirmationDialog({
+      required BuildContext context,
       required String title,
       String? content,
       bool? cancel,

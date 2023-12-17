@@ -12,6 +12,7 @@ import 'Settings/settings.dart';
 // todo 可选 持久化主题状态【shared_preferences】
 // todo 文章列表显示日期
 // todo 消息离线推送
+// bug 在跟随系统状态下，无法进行切换主题
 
 class app extends StatefulWidget {
   const app({super.key});
@@ -23,7 +24,7 @@ class app extends StatefulWidget {
 class _appState extends State<app> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _buildAppbar(), body: _buildBody());
+    return Scaffold(appBar: _buildAppbar(), body: item());
   }
 
   /// 标题栏
@@ -54,7 +55,7 @@ class _appState extends State<app> {
     DateTime dateTime = DateTime.now();
     return Row(children: [
       Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,10 +76,5 @@ class _appState extends State<app> {
             decoration: BoxDecoration(color: Colors.grey),
           ))
     ]);
-  }
-
-  /// Body
-  Widget _buildBody() {
-    return item();
   }
 }

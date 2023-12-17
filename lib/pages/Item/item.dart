@@ -19,7 +19,7 @@ class item extends StatefulWidget {
 class _itemState extends State<item> {
   DateTime dateTime = DateTime.now(); // 时间
   List<StoriesData> items = []; // 知乎日报
-  bool read = false; // 阅读状态
+  // bool read = false; // 阅读状态
 
   @override
   void initState() {
@@ -33,11 +33,11 @@ class _itemState extends State<item> {
     try {
       final newItems = await HttpApi.getList();
       final oldItems = await HttpApi.getOldList(dateTime);
+      dateTime = dateTime.subtract(const Duration(days: 1));
       // todo 获取初始化的阅读状态
       setState(() {
         items = [...newItems, ...oldItems];
       });
-      dateTime = dateTime.subtract(const Duration(days: 1));
     } catch (e) {
       // todo 数据库缓存临时加载
       CustomDialogs.confirmationDialog(

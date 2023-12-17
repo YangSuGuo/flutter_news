@@ -31,8 +31,7 @@ class MyApp extends StatelessWidget {
             title: '知乎日报',
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
-            themeMode: ThemeMode.light,
-            // themeMode: ThemeMode.system,跟随系统
+            themeMode: ThemeMode.system,
             initialRoute: "/",
             defaultTransition: Transition.cupertino,
             transitionDuration: const Duration(milliseconds: 450),

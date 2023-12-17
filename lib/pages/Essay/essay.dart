@@ -45,6 +45,7 @@ class _essayState extends State<essay> with TickerProviderStateMixin {
       items = Get.arguments['item'];
       id = items.id!;
     });
+    // 评论 收藏
     InitialData(id);
     // 浏览器设置
     options = InAppWebViewGroupOptions(

@@ -154,7 +154,7 @@ class _settingsState extends State<settings> {
                   )),
             ),
             const SizedBox(height: 10),
-            const Text('当前版本：3.6.4（1270）', style: TextStyle(color: Colors.grey))
+            const Text('当前版本：1.3.4', style: TextStyle(color: Colors.grey))
           ]))
     ]);
   }

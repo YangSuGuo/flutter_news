@@ -15,10 +15,7 @@ class comments_page extends StatefulWidget {
 
 class _comments_pageState extends State<comments_page> {
   int id = 9766161; // 初始值 id
-  bool support = false; // 点赞状态
   late CommentInfoData comments; // 评论额外信息
-  // late List<CommentsData> longComments = []; // 长评
-  // late List<CommentsData> shortComments = []; // 短评
 
   @override
   void initState() {
@@ -30,15 +27,6 @@ class _comments_pageState extends State<comments_page> {
     // InitialData();
     print("获取传值:${Get.arguments["id"]}");
   }
-
-/*  Future<void> InitialData() async {
-    final longCommentsData = await HttpApi.getComments(id);
-    final shortCommentsData = await HttpApi.getShortComments(id);
-    setState(() {
-      longComments = longCommentsData;
-      shortComments = shortCommentsData;
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -75,52 +63,6 @@ class _comments_pageState extends State<comments_page> {
       ])
     ]);
   }
-
-/*  Widget _buildLong_Comments() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 10, bottom: 0),
-          child: Text(
-            '${comments.longComments} 条长评',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: longComments.length,
-          itemBuilder: (BuildContext context, int index) {
-            return CommentWidget(comment: longComments[index]);
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildShort_Comments() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 10, bottom: 0),
-          child: Text(
-            '${comments.shortComments} 条短评',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: shortComments.length,
-          itemBuilder: (BuildContext context, int index) {
-            return CommentWidget(comment: shortComments[index]);
-          },
-        ),
-      ],
-    );
-  }*/
 
   // 长评论
   Widget _buildLong_Comments() {

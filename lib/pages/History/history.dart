@@ -43,8 +43,7 @@ class _historyState extends State<history> {
       automaticallyImplyLeading: true,
       elevation: 0,
       title: const Text('历史记录'),
-      backgroundColor:
-          Get.isDarkMode ? const Color.fromRGBO(48, 48, 48, 1) : Colors.white12,
+      backgroundColor: Get.isDarkMode ? const Color.fromRGBO(48, 48, 48, 1) : Colors.white12,
       foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
       leading: IconButton(
         onPressed: () => Get.back(),

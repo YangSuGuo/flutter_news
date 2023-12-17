@@ -7,6 +7,8 @@ import '../pages/History/model/history_model.dart';
 import '../pages/Stars/model/stars_model.dart';
 import 'database/stars.dart';
 
+// todo 数据库更新逻辑
+
 class DB {
   DB._();
 
@@ -28,8 +30,7 @@ class DB {
   Future<Database> createDatabase() async {
     final String dbPath = await getDatabasesPath();
     final String path = join(dbPath, _databaseName);
-    final Database db =
-        await openDatabase(path, version: _version, onCreate: _onCreate);
+    final Database db = await openDatabase(path, version: _version, onCreate: _onCreate);
     return db;
   }
 
@@ -78,7 +79,6 @@ class DB {
   Future<bool> insertStars(StarsData starsData) async {
     final db = await database;
     final int result = await db.insert(Stars.tableName, starsData.toJson());
-    print(result);
     return result > 0;
   }
 
@@ -124,7 +124,6 @@ class DB {
   Future<bool> insertHistory(HistoryData historyData) async {
     final db = await database;
     final int result = await db.insert(History.tableName, historyData.toJson());
-    print(result);
     return result > 0;
   }
 
@@ -137,7 +136,6 @@ class DB {
       where: '${History.id} = ?',
       whereArgs: [historyData.id],
     );
-    print(result);
     return result > 0;
   }
 }
