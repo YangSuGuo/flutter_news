@@ -35,12 +35,6 @@ class CommentWidget extends StatelessWidget {
                   splashColor: Colors.transparent,
                 ))
           ]),
-          // 评论内容
-          Text(
-            comment.content ?? '',
-            textAlign: TextAlign.left,
-            softWrap: true,
-          ),
           // 回复
           if (comment.replyTo != null)
             Padding(
@@ -56,7 +50,7 @@ class CommentWidget extends StatelessWidget {
                     child: RichText(
                         softWrap: true,
                         text: TextSpan(
-                            text: '${comment.replyTo?.author}︰',
+                            text: '@ ${comment.replyTo?.author}︰',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
@@ -69,6 +63,13 @@ class CommentWidget extends StatelessWidget {
                                     fontWeight: FontWeight.normal,
                                   ))
                             ])))),
+          // 评论内容
+          SizedBox(height: 5,),
+          Text(
+            comment.content ?? '',
+            textAlign: TextAlign.left,
+            softWrap: true,
+          ),
           Row(children: [
             // 评论时间
             Text(
