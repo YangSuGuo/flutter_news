@@ -57,7 +57,7 @@ class HttpApi {
         final data = json.decode(response.data);
         final List<dynamic> dataList = data['stories'];
         final List<StoriesData> items =
-            dataList.map((json) => StoriesData.fromJson(json)).toList();
+        dataList.map((json) => StoriesData.fromJson(json)).toList();
         print('数据为: $formattedDate');
         return items;
       } else {

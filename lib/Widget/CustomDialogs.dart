@@ -29,7 +29,7 @@ class CustomDialogs {
                 actions: [
                   ButtonBar(
                       buttonMinWidth: buttonMinWidth
-                          ? Get.width / 3
+                          ? Get.width / 3.4
                           : Get.width,
                       alignment: MainAxisAlignment.center,
                       children: [

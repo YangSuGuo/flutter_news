@@ -16,7 +16,7 @@ class ThemeTile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: Get.width * 0.10442,
+        horizontal: Get.width * 0.1,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

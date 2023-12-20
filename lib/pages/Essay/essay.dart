@@ -153,6 +153,7 @@ class _essayState extends State<essay> with TickerProviderStateMixin {
             vsync: this, duration: const Duration(seconds: 1)),
         comments: comments,
         webViewController: webViewController,
+        // 收藏事件
         onStarChange: (newStarState) {
           final StarsData star = StarsData(
             id: id,
@@ -168,6 +169,7 @@ class _essayState extends State<essay> with TickerProviderStateMixin {
             stars = newStarState;
           });
         },
+        // 评论事件
         onPressed: () {
           if (comments!.comments != 0) {
             Get.to(const comments_page(),
