@@ -30,8 +30,17 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
             title: '知乎日报',
             theme: ThemeData.light(),
+          /*  ThemeData(
+              colorScheme: ColorScheme.fromSwatch(
+                  primarySwatch:Colors.blue,
+                  accentColor: Colors.blue,
+                  cardColor:Colors.white,
+                  backgroundColor:Colors.grey[50],
+                  brightness:Brightness.light
+              )
+            ),*/
             darkTheme: ThemeData.dark(),
-            themeMode: ThemeMode.system,
+            themeMode: ThemeMode.light,
             initialRoute: "/",
             defaultTransition: Transition.cupertino,
             transitionDuration: const Duration(milliseconds: 450),

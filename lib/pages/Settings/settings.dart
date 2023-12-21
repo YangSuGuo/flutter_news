@@ -20,7 +20,7 @@ class settings extends StatefulWidget {
 
 class _settingsState extends State<settings> {
   final bool _value = Get.isDarkMode;
-  List<bool> _isSelected = [true,false,false]; // 主题设置
+  List<bool> _isSelected = [true, false, false]; // 主题设置
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +52,13 @@ class _settingsState extends State<settings> {
   Widget _buildSettings() {
     return ListView(children: [
       Padding(
-          padding: EdgeInsets.only(
-              left: Get.width / 50,
-              right: Get.width / 50),
+          padding: EdgeInsets.only(left: Get.width / 50, right: Get.width / 50),
           child: Column(children: [
             // 用户界面
             CustomCard(children: [
               const CustomHeaderText(text: '界面'),
+              // todo 重构此组件，自己实现【有屏幕适配问题】
+              // todo 在md3下颜色为MD3默认颜色：紫色，MD2为蓝色
               ToggleButtons(
                 isSelected: _isSelected,
                 onPressed: (value) => setState(() {
@@ -67,7 +67,6 @@ class _settingsState extends State<settings> {
                   if (value == 0) {
                     // todo 跟随系统实现
                     // Get.snackbar("跟随系统", "欢迎使用Snackbar");
-
                   } else if (value == 1) {
                     Get.changeTheme(ThemeData.light());
                   } else if (value == 2) {

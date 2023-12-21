@@ -31,6 +31,7 @@ class _appState extends State<app> {
   AppBar _buildAppbar() {
     return AppBar(
       elevation: 0,
+      scrolledUnderElevation: 0,
       leadingWidth: 60,
       title: const Text('知乎日报',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
@@ -43,8 +44,7 @@ class _appState extends State<app> {
               tooltip: '设置',
             ))
       ],
-      backgroundColor:
-          Get.isDarkMode ? const Color.fromRGBO(48, 48, 48, 1) : Colors.white12,
+      backgroundColor: Get.isDarkMode ? const Color.fromRGBO(48, 48, 48, 1) : Colors.white12,
       foregroundColor: Get.isDarkMode ? Colors.white : Colors.black,
       leading: leading_time(),
     );

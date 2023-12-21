@@ -29,7 +29,7 @@ class _essayState extends State<essay> with TickerProviderStateMixin {
 
   /// 浏览器
   /// todo 添加加载图，避免闪屏！
-  /// todo 增加离线下载浏览
+  /// todo 重构文章详情，更改为下载浏览来优化阅读速度 https://news-at.zhihu.com/api/4/story/$id
   /// bug W/System  (23056): A resource failed to call response.body().close().
   final urlController = TextEditingController();
   final GlobalKey webViewKey = GlobalKey();
