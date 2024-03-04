@@ -7,10 +7,8 @@ import 'Settings/settings.dart';
 
 // todo 主题切换优化 ！
 // todo 利用布局构造器实现适配大尺寸
-// todo 可选 轮播图组件实现 ！！
 // todo 可选 已读文章id存入【数据库】or【shared_preferences】实现已读、未读状态管理
-// todo 可选 持久化主题状态【shared_preferences】
-// todo 文章列表显示日期
+// todo 文章列表显示日期,获取新列表索引长度，根据索引长度加载日期【变量日期-1】
 // todo 消息离线推送
 // bug 在跟随系统状态下，无法进行切换主题
 
